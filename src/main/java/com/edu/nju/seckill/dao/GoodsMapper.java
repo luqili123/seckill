@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Goods;
+
 import org.springframework.stereotype.Repository;
 
 @Repository

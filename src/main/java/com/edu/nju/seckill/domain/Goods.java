@@ -1,29 +1,30 @@
 package com.edu.nju.seckill.domain;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
-
 /**
  * @author lqllq
  */
 @ApiModel("普通商品对象实体")
 public class Goods implements Serializable {
+    @ApiModelProperty(value = "商品编号",required = true)
     private Long gid;
-
+    @ApiModelProperty(value = "商品名称",required = true)
     private String name;
-
+    @ApiModelProperty(value = "商品价格",required = true)
     private Double price;
-
-    private String type;
-
+    @ApiModelProperty(value = "导航编号",required = true)
+    private Integer nid;
+    @ApiModelProperty(value = "商品描述")
     private String description;
-
+    @ApiModelProperty(value = "商品图片地址")
     private String image;
-
+    @ApiModelProperty(value = "商品库存",required = true)
     private Integer count;
-
+    @ApiModelProperty(value = "上架时间",required = true)
     private Date displayTime;
 
     public Long getGid() {
@@ -50,12 +51,12 @@ public class Goods implements Serializable {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public Integer getNid() {
+        return nid;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNid(Integer nid) {
+        this.nid = nid;
     }
 
     public String getDescription() {

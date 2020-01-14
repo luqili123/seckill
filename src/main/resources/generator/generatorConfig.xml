@@ -80,7 +80,7 @@
 <!--               selectByExampleQueryId="false">-->
 <!--        </table>-->
         <table schema="seckill"
-               tableName="favorite"
+               tableName="navigation"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

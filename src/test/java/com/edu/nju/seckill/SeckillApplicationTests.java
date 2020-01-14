@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -21,6 +22,11 @@ class SeckillApplicationTests {
     @Test
     void contextLoads() {
         System.out.println(redisUtil.get("msg"));
+
+    }
+    @Test
+    public void testRandomName(){
+        System.out.println(UUID.randomUUID().toString().substring(0,8));
 
     }
 

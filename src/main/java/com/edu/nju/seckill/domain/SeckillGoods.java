@@ -11,14 +11,17 @@ import java.util.Date;
  */
 @ApiModel("秒杀商品对象实体")
 public class SeckillGoods implements Serializable {
+
     @ApiModelProperty(value = "秒杀商品编号",required = true)
     private Long sgid;
     @ApiModelProperty(value = "秒杀商品名称",required = true)
     private String name;
     @ApiModelProperty(value = "秒杀商品价格",required = true)
     private Double price;
-    @ApiModelProperty(value = "秒杀商品类型",required = true)
-    private String type;
+    @ApiModelProperty(value = "所属导航栏名称")
+    private String navName;
+    @ApiModelProperty(value = "所属导航栏条目英文名称",required = true)
+    private String navType;
     @ApiModelProperty(value = "秒杀商品描述")
     private String description;
     @ApiModelProperty(value = "秒杀商品图片地址")
@@ -58,12 +61,20 @@ public class SeckillGoods implements Serializable {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getNavName() {
+        return navName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNavName(String navName) {
+        this.navName = navName;
+    }
+
+    public String getNavType() {
+        return navType;
+    }
+
+    public void setNavType(String navType) {
+        this.navType = navType;
     }
 
     public String getDescription() {

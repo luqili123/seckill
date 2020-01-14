@@ -5,7 +5,8 @@
     <id column="sgid" property="sgid" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="nav_name" property="navName" jdbcType="VARCHAR" />
+    <result column="nav_type" property="navType" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
@@ -15,8 +16,8 @@
     <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sgid, name, price, type, description, image, count, remain_count, start_time, end_time, 
-    display_time
+    sgid, name, price, nav_name, nav_type, description, image, count, remain_count, start_time, 
+    end_time, display_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -30,13 +31,15 @@
   </delete>
   <insert id="insert" parameterType="com.edu.nju.seckill.domain.SeckillGoods" >
     insert into seckill_goods (sgid, name, price, 
-      type, description, image, 
-      count, remain_count, start_time, 
-      end_time, display_time)
+      nav_name, nav_type, description, 
+      image, count, remain_count, 
+      start_time, end_time, display_time
+      )
     values (#{sgid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{type,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{remainCount,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{displayTime,jdbcType=TIMESTAMP})
+      #{navName,jdbcType=VARCHAR}, #{navType,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{remainCount,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{displayTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.SeckillGoods" >
     insert into seckill_goods
@@ -50,8 +53,11 @@
       <if test="price != null" >
         price,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="navName != null" >
+        nav_name,
+      </if>
+      <if test="navType != null" >
+        nav_type,
       </if>
       <if test="description != null" >
         description,
@@ -85,8 +91,11 @@
       <if test="price != null" >
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+      <if test="navName != null" >
+        #{navName,jdbcType=VARCHAR},
+      </if>
+      <if test="navType != null" >
+        #{navType,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -120,8 +129,11 @@
       <if test="price != null" >
         price = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+      <if test="navName != null" >
+        nav_name = #{navName,jdbcType=VARCHAR},
+      </if>
+      <if test="navType != null" >
+        nav_type = #{navType,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -151,7 +163,8 @@
     update seckill_goods
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
-      type = #{type,jdbcType=VARCHAR},
+      nav_name = #{navName,jdbcType=VARCHAR},
+      nav_type = #{navType,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},

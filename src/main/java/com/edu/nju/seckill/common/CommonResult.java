@@ -91,6 +91,13 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
     }
 
+    /***
+     * 信息已经存在返回结果
+     */
+    public static <T> CommonResult<T> exit(T data){
+        return new CommonResult<T>(ResultCode.HASEXIT.getCode(), ResultCode.HASEXIT.getMessage(), data);
+    }
+
     public long getCode() {
         return code;
     }

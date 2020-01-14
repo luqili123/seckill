@@ -5,14 +5,14 @@
     <id column="gid" property="gid" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="nid" property="nid" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    gid, name, price, type, description, image, count, display_time
+    gid, name, price, nid, description, image, count, display_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -26,10 +26,10 @@
   </delete>
   <insert id="insert" parameterType="com.edu.nju.seckill.domain.Goods" >
     insert into goods (gid, name, price, 
-      type, description, image, 
+      nid, description, image, 
       count, display_time)
     values (#{gid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{type,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{nid,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{count,jdbcType=INTEGER}, #{displayTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Goods" >
@@ -44,8 +44,8 @@
       <if test="price != null" >
         price,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="nid != null" >
+        nid,
       </if>
       <if test="description != null" >
         description,
@@ -70,8 +70,8 @@
       <if test="price != null" >
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+      <if test="nid != null" >
+        #{nid,jdbcType=INTEGER},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -96,8 +96,8 @@
       <if test="price != null" >
         price = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+      <if test="nid != null" >
+        nid = #{nid,jdbcType=INTEGER},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
     update goods
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
-      type = #{type,jdbcType=VARCHAR},
+      nid = #{nid,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
