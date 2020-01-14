@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.domain;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 @ApiModel("订单对象实体")
 public class Order implements Serializable {
+    @ApiModelProperty(value = "订单编号",required = true)
     private Long oid;
 
     private Long uid;
