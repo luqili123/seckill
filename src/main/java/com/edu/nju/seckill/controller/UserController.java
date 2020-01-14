@@ -37,6 +37,7 @@ public class UserController {
         }
         //2.插入用户数据
         if(userService.add(user)){
+            //3.将用户信息存入redis中
             return CommonResult.success(true);
         }else {
             return CommonResult.failed("注册失败");
