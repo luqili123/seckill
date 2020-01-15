@@ -12,4 +12,8 @@ public interface UserService {
     public boolean hasNumber(String number);
 
     public boolean add(User user);
+
+
+    public User getUserByPhone(String phone);
+
 }

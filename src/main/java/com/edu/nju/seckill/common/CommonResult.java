@@ -95,7 +95,7 @@ public class CommonResult<T> {
      * 信息已经存在返回结果
      */
     public static <T> CommonResult<T> exit(T data){
-        return new CommonResult<T>(ResultCode.HASEXIT.getCode(), ResultCode.HASEXIT.getMessage(), data);
+        return new CommonResult<T>(ResultCode.HASEXIST.getCode(), ResultCode.HASEXIST.getMessage(), data);
     }
 
     public long getCode() {

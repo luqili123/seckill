@@ -3,6 +3,8 @@ package com.edu.nju.seckill.service.impl;
 import com.edu.nju.seckill.dao.UserMapper;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.UserService;
+import com.edu.nju.seckill.utils.JwtUtil;
+import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     BCryptPasswordEncoder encoder;
-
 
     /***
      * 判断该手机号是否已经存在（注册）
@@ -48,6 +49,23 @@ public class UserServiceImpl implements UserService {
         user.setRole(1);
         user.setDeleteFlag(0);
         //4.存入数据库
-        return  userMapper.insert(user)!=0;
+        if(userMapper.insert(user)!=0){
+            //5.将用户信息存入缓存中
+            //to do......
+           return true;
+        }
+        return  false;
     }
+
+    @Override
+    public User getUserByPhone(String phone) {
+        User user=userMapper.selectByPhone(phone);
+        if(user!=null&&user.getPassword()!=null) {
+            return user;
+        }else {
+            return null;
+        }
+    }
+
+
 }
