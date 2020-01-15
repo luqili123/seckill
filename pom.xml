@@ -56,6 +56,13 @@
             <scope>runtime</scope>
         </dependency>
 
+<!--        JJwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.8.3</version>
+        </dependency>
+
 <!--        &lt;!&ndash; 分页插件 &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>com.github.pagehelper</groupId>-->
