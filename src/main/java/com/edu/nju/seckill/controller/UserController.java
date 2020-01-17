@@ -73,7 +73,7 @@ public class UserController {
             //1.1密码匹配
             if(encoder.matches(password,user.getPassword())) {
                 //将用户信息存入redis,有效期为半小时
-                String token=jwtUtil.generate(phone);
+                String token=jwtUtil.generate(user);
                 redisUtil.saveUser(user,token,expire);
                 System.out.println("登录成功！");
                 return CommonResult.success(token);
