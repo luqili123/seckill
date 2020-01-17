@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,18 +22,13 @@ public class JwtUtil {
     private static final String secert="seckill";
 
     /***
-     * 过期时间
-     */
-    private static final long expire=1800000;
-
-    /***
      *  设置算法种类
      */
     private static final Algorithm ALGORITHM=Algorithm.HMAC256(secert);
 
 
     /***
-     * 生成token，携带用户电话和密码信息
+     * 生成token，携带用户电话信息
      * @param phone
      * @return
      */
@@ -47,10 +41,10 @@ public class JwtUtil {
                 .withSubject("login")
                 .withAudience("client")
                 .withClaim("phone",phone)
-                .withExpiresAt(new Date(System.currentTimeMillis()+expire))
                 .sign(ALGORITHM);
         return token;
     }
+
 
 
     /***
@@ -58,15 +52,17 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static HashMap<String, String > verifier(String token){
-        JWTVerifier jwtVerifier=JWT.require(ALGORITHM)
-                .build();
-        DecodedJWT decodedJWT=jwtVerifier.verify(token);
-        Map<String, Claim> map=decodedJWT.getClaims();
-        HashMap<String,String> hashMap=new HashMap<>();
-        for (Map.Entry<String, Claim> entry : map.entrySet()) {
-            hashMap.put(entry.getKey(),entry.getValue().asString());
-        }
-        return hashMap;
+    public static HashMap<String, String > verifier(String token) throws Exception{
+
+            JWTVerifier jwtVerifier=JWT.require(ALGORITHM)
+                    .build();
+            DecodedJWT decodedJWT=jwtVerifier.verify(token);
+            Map<String, Claim> map=decodedJWT.getClaims();
+            HashMap<String,String> hashMap=new HashMap<>();
+            for (Map.Entry<String, Claim> entry : map.entrySet()) {
+                hashMap.put(entry.getKey(),entry.getValue().asString());
+            }
+            return hashMap;
+
     }
 }

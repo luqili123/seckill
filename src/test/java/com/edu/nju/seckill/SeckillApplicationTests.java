@@ -23,34 +23,53 @@ import java.util.UUID;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 class SeckillApplicationTests {
+
     @Resource
     RedisUtil redisUtil;
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
     @Test
     void contextLoads() {
-//        System.out.println((User) redisUtil.hget("user","13901586395"));
-        User user= (User) redisUtil.hget("user","13901586395");
-        System.out.println(user.getPassword());
+
     }
     @Test
     public void testRandomName(){
         System.out.println(UUID.randomUUID().toString().substring(0,8));
-
     }
 
 
     @Test
     public void testRedis(){
+//        User user=new User();
+//        for(int i=0;i<10;i++) {
+//            user.setName(i+"");
+//            user.setPassword("123123");
+//            user.setPhone("15651879552");
+//            redisUtil.hset("user",i+"", user);
+//        }
+//        redisUtil.set("test","hello",100);
+//        System.out.println( redisUtil.getExpire("test"));
+//        redisUtil.hset("htest","1","hello",100);
+//        System.out.println(redisUtil.getExpire("htest"));
         User user=new User();
-        for(int i=0;i<10;i++) {
-            user.setName(i+"");
-            user.setPassword("123123");
-            user.setPhone("15651879552");
-            redisUtil.hset("user",i+"", user);
-        }
+        Map<String,Object> userMap=new HashMap<>();
+        userMap.put("uid",1);
+        userMap.put("name","lql");
+        userMap.put("password","123456");
+        userMap.put("email","sss");
+        userMap.put("addressId",1);
+        userMap.put("role",1);
+        userMap.put("deleteFlag",1);
 
+//        user.setUid((long) 1);
+        user.setName("lql");
+        user.setPassword("123123");
+        user.setPhone("15651879552");
+        redisUtil.saveUser(user,"user:2",180);
+        System.out.println(redisUtil.getExpire("user:2"));
+        System.out.println(redisUtil.getUser("user:2"));
     }
 
     @Test

@@ -92,4 +92,18 @@ public class User implements Serializable {
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", addressId=" + addressId +
+                ", role=" + role +
+                ", deleteFlag=" + deleteFlag +
+                '}';
+    }
 }

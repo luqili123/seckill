@@ -5,22 +5,19 @@ import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.UserService;
 import com.edu.nju.seckill.utils.JwtUtil;
 import com.edu.nju.seckill.utils.RedisUtil;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.DocFlavor;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author lql
@@ -38,59 +35,61 @@ public class UserController {
 
     @Autowired
     private RedisUtil redisUtil;
+
     @Autowired
     private JwtUtil jwtUtil;
 
+    /***
+     * 过期时间
+     */
+    private static final long expire=1800000;
 
-    @ApiOperation(value = "用户注册",notes = "传入User对象，存入pone以及password")
+
+    @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
     @PostMapping("/users/register")
     public CommonResult<Boolean> register(@RequestBody  User user){
-
-        //1.检查手机号是否已经被注册
-        if(userService.hasNumber(user.getPhone())){
-            return CommonResult.exit(false);
+        //1.查询数据库，看该手机号是否存在
+        if(userService.hasPhone(user.getPhone())){
+            return CommonResult.exist(false);
+        }else{
+            //2.数据库不存在，则插入用户数据
+            if(userService.add(user)){
+                return CommonResult.success(true);
+            }else {
+                return CommonResult.databaseError(false);
+            }
         }
-        //2.插入用户数据,并存入缓存
-        if(userService.add(user)){
-            return CommonResult.success(true);
-        }else {
-            return CommonResult.failed("注册失败");
-        }
-
     }
 
+
+    @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
     @PostMapping("/users/login")
     public CommonResult<String> login(@RequestParam(value = "phone",required = true) String phone
             , @RequestParam(value = "password",required = true) String password){
 
-        String token;
-        //1.先检查缓存中是否有该用户信息
-        if(redisUtil.hHasKey("user:"+phone,phone)){
-            User user= (User) redisUtil.hget("user:"+phone,phone);
-            //1.1若存在该用户,且密码匹配，则生成token,存入缓存，返回给前端
-            if(encoder.matches(password,user.getPassword())){
-                token=jwtUtil.generate(phone);
-                redisUtil.sSet("token",token);
+        //1.根据手机号码，查询数据库
+        User user=userService.getUserByPhone(phone);
+        if(user!=null){
+            //1.1密码匹配
+            if(encoder.matches(password,user.getPassword())) {
+                //将用户信息存入redis,有效期为半小时
+                String token=jwtUtil.generate(phone);
+                redisUtil.saveUser(user,token,expire);
+                System.out.println("登录成功！");
                 return CommonResult.success(token);
-            }else {
+            }else{
+                //1.2密码不匹配
                 return CommonResult.failed("密码错误");
             }
-        }else { //2若不存在，则前往数据库查询
-            User user=userService.getUserByPhone(phone);
-            //2.1若用户数据存在且密码匹配，则将该用户数据存入缓存，生成token
-            if(user!=null){
-                if(encoder.matches(password,user.getPassword())) {
-                    redisUtil.hset("user:" + phone, phone, user);
-                    token = jwtUtil.generate(user.getPhone());
-                    redisUtil.sSet("token", token);
-                    return CommonResult.success(token);
-                }else {
-                    return CommonResult.failed("密码错误");
-                }
-            }else {//2.2若数据库不存在，则返回错误
-                return CommonResult.failed("用户不存在");
-            }
+        }else {
+            //2.用户不存在
+            return CommonResult.unauthorized("用户不存在");
         }
+
     }
 
+    @GetMapping("/users/test")
+    public String test(){
+        return "test";
+    }
 }

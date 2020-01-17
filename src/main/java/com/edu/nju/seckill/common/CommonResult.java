@@ -94,8 +94,22 @@ public class CommonResult<T> {
     /***
      * 信息已经存在返回结果
      */
-    public static <T> CommonResult<T> exit(T data){
+    public static <T> CommonResult<T> exist(T data){
         return new CommonResult<T>(ResultCode.HASEXIST.getCode(), ResultCode.HASEXIST.getMessage(), data);
+    }
+
+    /***
+     * 数据库异常
+     */
+    public static <T> CommonResult<T> databaseError(T data){
+        return new CommonResult<T>(ResultCode.DATABASEERROR.getCode(), ResultCode.DATABASEERROR.getMessage(), data);
+    }
+
+    /***
+     * redis异常
+     */
+    public static <T> CommonResult<T> redisError(T data){
+        return new CommonResult<T>(ResultCode.REDISERROR.getCode(), ResultCode.REDISERROR.getMessage(), data);
     }
 
     public long getCode() {
