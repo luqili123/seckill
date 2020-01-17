@@ -60,6 +60,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 }
             }
         }else{
+
             throw new TokenException(CommonResult.unauthorized("token为空"));
         }
         return false;

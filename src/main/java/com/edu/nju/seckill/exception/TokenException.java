@@ -8,7 +8,6 @@ import com.edu.nju.seckill.common.CommonResult;
  */
 public class TokenException extends RuntimeException {
 
-
     private CommonResult<?> commonResult;
 
     public TokenException(CommonResult<?> commonResult) {
