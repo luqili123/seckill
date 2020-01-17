@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -24,14 +25,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private HttpServletRequest request;
+
     /***
      * 判断该手机号是否已经存在（注册）
-     * @param number
+     * @param phone
      * @return
      */
     @Override
-    public boolean hasNumber(String number) {
-        return userMapper.selectByPhone(number)==null?false:true;
+    public boolean hasPhone(String phone) {
+        return userMapper.selectByPhone(phone)==null?false:true;
     }
 
     /***

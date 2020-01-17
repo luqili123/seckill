@@ -8,12 +8,25 @@ import com.edu.nju.seckill.domain.User;
  */
 public interface UserService {
 
+    /***
+     * 查找数据库是否存在指定电话号码
+     * @param phone
+     * @return
+     */
+    public boolean hasPhone(String phone);
 
-    public boolean hasNumber(String number);
-
+    /***
+     * 向用户表添加一条用户信息
+     * @param user
+     * @return
+     */
     public boolean add(User user);
 
-
+    /***
+     * 根据手机号查找用户信息
+     * @param phone
+     * @return
+     */
     public User getUserByPhone(String phone);
 
 }

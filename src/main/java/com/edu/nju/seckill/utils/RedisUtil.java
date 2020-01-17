@@ -1,9 +1,11 @@
 package com.edu.nju.seckill.utils;
 
+import com.edu.nju.seckill.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -491,6 +493,68 @@ public class RedisUtil {
             e.printStackTrace();
             return 0;
         }
+    }
+
+
+
+    private static String uid="uid";
+    private static String name="name";
+    private static String password="password";
+    private static String email="email";
+    private static String phone="phone";
+    private static String addressId="addressId";
+    private static String role="role";
+    private static String deleteFlag="deleteFlag";
+    /**
+     *
+     * 将user对象存入redis,并设置过期时间
+     * @return
+     * @author lql
+     * @date 2020/1/17 16:08
+     */
+    public boolean saveUser(User user,String key,long time){
+        if(user!=null) {
+            Map<String, Object> userMap = new HashMap<>();
+            userMap.put(uid, user.getUid());
+            userMap.put(name, user.getName());
+            userMap.put(password, user.getPassword());
+            userMap.put(email, user.getEmail());
+            userMap.put(phone, user.getPhone());
+            userMap.put(addressId, user.getAddressId());
+            userMap.put(role, user.getRole());
+            userMap.put(deleteFlag, user.getDeleteFlag());
+            return hmset(key, userMap, time);
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     *
+     * 根据key，查找用户信息
+     * @return
+     * @author lql
+     * @date 2020/1/17 16:37
+     */
+    public User getUser(String key){
+        Map<Object, Object> userMap=hmget(key);
+        if(userMap!=null){
+            User user=new User();
+            if(userMap.get(uid)!=null){
+                user.setUid(Long.parseLong(userMap.get(uid)+""));
+            }
+            user.setName((String) userMap.get(name));
+            user.setPassword((String) userMap.get(password));
+            user.setPhone((String) userMap.get(phone));
+            user.setEmail((String) userMap.get(email));
+            user.setAddressId((Integer) userMap.get(addressId));
+            user.setRole((Integer) userMap.get(role));
+            user.setDeleteFlag((Integer) userMap.get(deleteFlag));
+            return user;
+        }else{
+            return null;
+        }
+
     }
 }
 
