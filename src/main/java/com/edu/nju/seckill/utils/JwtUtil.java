@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.edu.nju.seckill.domain.User;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +31,10 @@ public class JwtUtil {
 
     /***
      * 生成token，携带用户电话信息
-     * @param phone
+     * @param user
      * @return
      */
-    public  String generate(String phone){
+    public  String generate(User user){
         Map<String,Object> header=new HashMap<String, Object>(2) ;
         header.put("alg", "HS256");
         header.put("typ", "JWT");
@@ -40,7 +42,11 @@ public class JwtUtil {
                 .withHeader(header)
                 .withSubject("login")
                 .withAudience("client")
-                .withClaim("phone",phone)
+                .withClaim("name",user.getName())
+                .withClaim("phone",user.getPhone())
+                .withClaim("email",user.getEmail())
+                .withClaim("addressId",user.getAddressId())
+                .withClaim("role",user.getRole())
                 .sign(ALGORITHM);
         return token;
     }
