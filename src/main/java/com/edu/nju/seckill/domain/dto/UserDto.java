@@ -10,8 +10,8 @@ import javax.validation.constraints.Pattern;
  * @author lql
  * @date 2020/1/18 18:13
  */
-@ApiModel("用户登录dto")
-public class UserLogin {
+@ApiModel("用户dto")
+public class UserDto {
 
     @ApiModelProperty(value = "密码",required = true)
     @NotNull(message = "密码不能为空")
