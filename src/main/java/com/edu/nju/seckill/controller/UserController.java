@@ -2,6 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserDto;
 import com.edu.nju.seckill.domain.dto.UserToken;
 import com.edu.nju.seckill.service.UserService;
 import com.edu.nju.seckill.utils.JwtUtil;
@@ -11,18 +12,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -53,7 +50,7 @@ public class UserController {
 
     @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
     @PostMapping("/users/register")
-    public CommonResult<Boolean> register(@RequestBody  @Validated User user, BindingResult bindingResult){
+    public CommonResult<Boolean> register(@RequestBody  @Validated UserDto user, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return CommonResult.validateFailed("手机号格式错误");
@@ -75,7 +72,7 @@ public class UserController {
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
     @PostMapping("/users/login")
-    public CommonResult<UserToken> login(@RequestBody @Validated User user, BindingResult bindingResult){
+    public CommonResult<UserToken> login(@RequestBody @Validated UserDto userDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             List<ObjectError> list = bindingResult.getAllErrors();
@@ -86,16 +83,16 @@ public class UserController {
         }
 
         //1.根据手机号码，查询数据库
-        User userByPhone=userService.getUserByPhone(user.getPhone());
-        if(userByPhone!=null){
+        User user=userService.getUserByPhone(userDto.getPhone());
+        if(user!=null){
             //1.1密码匹配
-            if(encoder.matches(user.getPassword(),userByPhone.getPassword())) {
+            if(encoder.matches(userDto.getPassword(),user.getPassword())) {
                 //将用户信息存入redis,有效期为半小时
-                String token=jwtUtil.generate(userByPhone);
-                redisUtil.saveUser(userByPhone,token,expire);
+                String token=jwtUtil.generate(user);
+                redisUtil.saveUser(user,token,expire);
                 System.out.println("登录成功！");
                 UserToken userToken=new UserToken();
-                userToken.setUser(userByPhone);
+                userToken.setUser(user);
                 userToken.setToken(token);
                 return CommonResult.success(userToken);
             }else{
