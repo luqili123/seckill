@@ -111,6 +111,8 @@ public class UserController {
 
     @GetMapping("/users/test")
     public String test(){
+
+        System.out.println("hhhhh");
         return "test";
     }
 }
