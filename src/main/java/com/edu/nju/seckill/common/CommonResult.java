@@ -84,6 +84,14 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
     }
 
+
+    /**
+     * 未登录返回结果
+     */
+    public static <T> CommonResult<T> unauthorized() {
+        return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), null);
+    }
+
     /**
      * 未授权返回结果
      */
@@ -101,8 +109,8 @@ public class CommonResult<T> {
     /***
      * 数据库异常
      */
-    public static <T> CommonResult<T> databaseError(T data){
-        return new CommonResult<T>(ResultCode.DATABASE_ERROR.getCode(), ResultCode.DATABASE_ERROR.getMessage(), data);
+    public static <T> CommonResult<T> databaseError(){
+        return new CommonResult<T>(ResultCode.DATABASE_ERROR.getCode(), ResultCode.DATABASE_ERROR.getMessage(), null);
     }
 
 
