@@ -102,8 +102,8 @@ public class CommonResult<T> {
     /***
      * 信息已经存在返回结果
      */
-    public static <T> CommonResult<T> exist(T data){
-        return new CommonResult<T>(ResultCode.HAS_EXIST.getCode(), ResultCode.HAS_EXIST.getMessage(), data);
+    public static <T> CommonResult<T> exist(){
+        return new CommonResult<T>(ResultCode.HAS_EXIST.getCode(), ResultCode.HAS_EXIST.getMessage(), null);
     }
 
     /***
