@@ -61,7 +61,7 @@ public class UserController {
 
          //1.查询数据库，看该手机号是否存在
         if(userService.hasPhone(user.getPhone())){
-            return CommonResult.exist(false);
+            return CommonResult.exist();
         }else{
             //2.数据库不存在，则插入用户数据
             if(userService.add(user)){
