@@ -114,8 +114,6 @@ public class UserController {
 
         System.out.println("hhhhh");
         System.out.println("hhhhh");
-        System.out.println("hhhhh");
-        System.out.println("hhhhh");
         return "test";
     }
 }
