@@ -83,7 +83,7 @@ public class SwaggerConfig {
 
         //title,description,version,termsOfServiceUrl,DEFAULT_CONTACT,license,licenseUrl,Arraylist
         return new ApiInfo("SecKill API","今天又是努力学习的一天哦！","v1.0",
-                "localhost:8080",contact,"Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0",
+                "49.235.238.192:8888",contact,"Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0",
                 new ArrayList());
     }
 
