@@ -3,7 +3,8 @@
 <generatorConfiguration>
     <!-- 引入配置文件 -->
     <properties resource="application-dev.properties"/>
-    <classPathEntry location="D:/MavenRepository/repository/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar"/>
+<!--    <classPathEntry location="D:/MavenRepository/repository/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar"/>-->
+    <classPathEntry location="D:\maven\apache-maven-3.6.1-bin\maven-repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar"/>
     <!-- 一个数据库一个context -->
     <context id="context1" targetRuntime="MyBatis3">
 
