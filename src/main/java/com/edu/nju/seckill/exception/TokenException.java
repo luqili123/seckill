@@ -3,6 +3,7 @@ package com.edu.nju.seckill.exception;
 import com.edu.nju.seckill.common.CommonResult;
 
 /**
+ *
  * @author lql
  * @date 2020/1/17 13:42
  */

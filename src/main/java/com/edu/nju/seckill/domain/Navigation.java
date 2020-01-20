@@ -2,6 +2,8 @@ package com.edu.nju.seckill.domain;
 
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 
@@ -10,12 +12,17 @@ import java.io.Serializable;
  */
 @ApiModel("导航栏对象")
 public class Navigation implements Serializable {
+
+    @ApiModelProperty(value = "导航栏编号")
     private Integer nid;
 
+    @ApiModelProperty(value = "导航栏名称")
     private String name;
 
+    @ApiModelProperty(value = "导航栏类型")
     private String type;
 
+    @ApiModelProperty(value = "导航栏优先级")
     private Integer sort;
 
     public Integer getNid() {
