@@ -6,8 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +31,11 @@ class SeckillApplicationTests {
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
+    @Autowired
+    NavigationService navigationService;
+
+
 
     @Test
     void contextLoads() {
@@ -124,6 +131,12 @@ class SeckillApplicationTests {
         String pass="123456";
         String hash=encoder.encode(pass);
         System.out.println(encoder.matches(pass,hash));
+    }
+
+    @Test
+    public void testNavigation(){
+
+        System.out.println(navigationService.getAllNavItems());
     }
 
 }

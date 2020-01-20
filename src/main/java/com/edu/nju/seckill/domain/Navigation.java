@@ -3,12 +3,12 @@ package com.edu.nju.seckill.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 
-/**
- * @author lqllq
+/***
+ *
+ * @author lql
  */
 @ApiModel("导航栏对象")
 public class Navigation implements Serializable {
@@ -55,5 +55,15 @@ public class Navigation implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    @Override
+    public String toString() {
+        return "Navigation{" +
+                "nid=" + nid +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", sort=" + sort +
+                '}';
     }
 }

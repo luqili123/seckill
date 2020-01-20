@@ -1,14 +1,13 @@
 package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
-import com.edu.nju.seckill.domain.CarouselItems;
+import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
  * @author lql
  * @date 2020/1/11 20:25
  */
-@Controller
+@RestController
 @Api(tags = "普通商品控制类")
 public class GoodsController {
 

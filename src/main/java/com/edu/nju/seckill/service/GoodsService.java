@@ -1,6 +1,6 @@
 package com.edu.nju.seckill.service;
 
-import com.edu.nju.seckill.domain.CarouselItems;
+import com.edu.nju.seckill.domain.dto.CarouselItems;
 
 import java.util.List;
 

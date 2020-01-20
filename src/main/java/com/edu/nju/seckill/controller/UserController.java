@@ -43,13 +43,13 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     /***
-     * 过期时间
+     * 过期时间(秒)
      */
-    private static final long expire=1800000;
+    private static final long expire=1800;
 
 
     @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
-    @PostMapping("/users/register")
+    @PostMapping("/users/signUp")
     public CommonResult<Boolean> register(@RequestBody  @Validated UserDto userDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
