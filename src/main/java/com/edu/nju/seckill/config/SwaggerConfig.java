@@ -10,7 +10,9 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Swagger配置类
@@ -83,7 +85,9 @@ public class SwaggerConfig {
 
         //title,description,version,termsOfServiceUrl,DEFAULT_CONTACT,license,licenseUrl,Arraylist
 
-        return new ApiInfo("SecKill API","今天又是努力学习的一天哦！","v1.0",
+        return new ApiInfo("SecKill API",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+
+                        "今天又是努力学习的一天哦！","v1.0",
                 "49.235.238.192:8888",contact,"Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0",
 
                 new ArrayList());

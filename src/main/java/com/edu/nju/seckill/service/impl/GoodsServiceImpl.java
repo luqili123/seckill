@@ -1,9 +1,12 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.GoodsMapper;
+import com.edu.nju.seckill.domain.CarouselItems;
 import com.edu.nju.seckill.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -14,4 +17,14 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    /**
+     * 查找获取重点商品轮播图列表
+     * @return
+     */
+    @Override
+    public List<CarouselItems> getHotProductCarousel() {
+        return goodsMapper.selectHotProductCarousel();
+//        return null;
+    }
 }

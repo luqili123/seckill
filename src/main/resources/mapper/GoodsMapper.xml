@@ -11,6 +11,10 @@
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="CarouselItems" type="com.edu.nju.seckill.domain.CarouselItems">
+    <id column="gid" property="goods_id" jdbcType="BIGINT" />
+    <result column="image" property="imgUrl" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     gid, name, price, nid, description, image, count, display_time
   </sql>
@@ -125,4 +129,9 @@
       display_time = #{displayTime,jdbcType=TIMESTAMP}
     where gid = #{gid,jdbcType=BIGINT}
   </update>
+  <select id="selectHotProductCarousel" resultMap="CarouselItems">
+    select gid,image
+    from goods
+    order by count desc limit 5
+  </select>
 </mapper>
