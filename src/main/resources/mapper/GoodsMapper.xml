@@ -132,8 +132,12 @@
     where gid = #{gid,jdbcType=BIGINT}
   </update>
   <select id="selectHotProductCarousel" resultMap="CarouselItems">
-    select gid,image
-    from goods
-    order by count desc limit 5
+select goods.gid,image
+    from seckill.goods as goods,
+		(select gid as id,sum(count) as sale
+		from  seckill.order
+		group by gid) as sales
+    where goods.gid=sales.id
+    order by goods.count-sales.sale desc limit 5
   </select>
 </mapper>
