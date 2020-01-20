@@ -1,6 +1,6 @@
 package com.edu.nju.seckill.dao;
 
-import com.edu.nju.seckill.domain.CarouselItems;
+import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.Goods;
 
 import org.springframework.stereotype.Repository;
