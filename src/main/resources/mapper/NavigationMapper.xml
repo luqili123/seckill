@@ -16,7 +16,13 @@
     from navigation
     where nid = #{nid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    <select id="selectAll" resultType="com.edu.nju.seckill.domain.dto.NavigationDto">
+      select name,type from navigation
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from navigation
     where nid = #{nid,jdbcType=INTEGER}
   </delete>

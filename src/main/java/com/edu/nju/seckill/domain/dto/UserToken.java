@@ -5,13 +5,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lql
  * @date 2020/1/18 17:00
  */
 @ApiModel("用户和令牌dto")
-public class UserToken {
+public class UserToken implements Serializable {
 
     @ApiModelProperty(value = "用户对象",required = true)
     private User user;

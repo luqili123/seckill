@@ -5,13 +5,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * @author lql
  * @date 2020/1/18 18:13
  */
 @ApiModel("用户dto")
-public class UserDto {
+public class UserDto implements Serializable {
 
     @ApiModelProperty(value = "密码",required = true)
     @NotNull(message = "密码不能为空")

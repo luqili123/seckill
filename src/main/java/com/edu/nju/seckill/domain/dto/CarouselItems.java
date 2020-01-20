@@ -1,4 +1,4 @@
-package com.edu.nju.seckill.domain;
+package com.edu.nju.seckill.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

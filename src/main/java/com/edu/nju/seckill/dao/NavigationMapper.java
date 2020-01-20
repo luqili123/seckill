@@ -2,7 +2,10 @@ package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Navigation;
 
+import com.edu.nju.seckill.domain.dto.NavigationDto;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface NavigationMapper {
@@ -17,4 +20,6 @@ public interface NavigationMapper {
     int updateByPrimaryKeySelective(Navigation record);
 
     int updateByPrimaryKey(Navigation record);
+
+    List<NavigationDto> selectAll();
 }
