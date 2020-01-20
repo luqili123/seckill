@@ -29,6 +29,6 @@ public class GoodsController {
     @ApiOperation(value = "获取重点商品轮播图列表",notes = "返回轮播列表list")
     @GetMapping("/goods/carouselItems")
     public CommonResult<List<CarouselItems>> getHotProductCarousel(){
-        return CommonResult.success(goodsService.getHotProductCarousel(),"传递成功");
+        return CommonResult.success(goodsService.getHotProductCarousel(),"操作成功");
     }
 }
