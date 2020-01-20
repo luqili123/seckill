@@ -50,18 +50,18 @@ public class UserController {
 
     @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
     @PostMapping("/users/register")
-    public CommonResult<Boolean> register(@RequestBody  @Validated UserDto user, BindingResult bindingResult){
+    public CommonResult<Boolean> register(@RequestBody  @Validated UserDto userDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return CommonResult.validateFailed("手机号格式错误");
         }
 
          //1.查询数据库，看该手机号是否存在
-        if(userService.hasPhone(user.getPhone())){
+        if(userService.hasPhone(userDto.getPhone())){
             return CommonResult.exist();
         }else{
             //2.数据库不存在，则插入用户数据
-            if(userService.add(user)){
+            if(userService.add(userDto)){
                 return CommonResult.success(true);
             }else {
                 return CommonResult.databaseError();
