@@ -1,11 +1,15 @@
 package com.edu.nju.seckill.config;
 
 import com.edu.nju.seckill.component.JwtInterceptor;
+import com.edu.nju.seckill.component.UserArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -35,5 +39,19 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    /**
+     * 1/23新增参数解析器配置
+     * @param argumentResolvers
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(UserArgumentResolver());
+
+    }
+    private UserArgumentResolver UserArgumentResolver() {
+        UserArgumentResolver userArgumentResolver = new UserArgumentResolver();
+        return userArgumentResolver;
     }
 }
