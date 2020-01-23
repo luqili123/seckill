@@ -53,7 +53,8 @@ public class JwtInterceptor implements HandlerInterceptor {
             if(header.startsWith(StartWith)){
                 String token=header.substring(7);
                 //1.3 获取token之后，与redis数据进行对比，查看是否存在该token
-                if(redisUtil.hHasKey("user",token)){
+                if(redisUtil.hasKey(token)){
+                    System.out.println("匹配成功！");
                     return true;
                 }else {
                     throw new TokenException(CommonResult.unauthorized("token错误"));
