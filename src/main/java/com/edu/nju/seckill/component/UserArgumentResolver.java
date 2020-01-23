@@ -65,7 +65,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 String token = header.substring(7);
                 user = redisUtil.getUser(token);
             }
-        }
+        }else
+            throw new TokenException(CommonResult.unauthorized("header为空"));
         if(null==user){
 //            user=new User();
 //            user.setName("whn");
