@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface NavigationMapper {
+    
     int deleteByPrimaryKey(Integer nid);
 
     int insert(Navigation record);
@@ -22,4 +23,6 @@ public interface NavigationMapper {
     int updateByPrimaryKey(Navigation record);
 
     List<NavigationDto> selectAll();
+
+    String selectByType(String type);
 }
