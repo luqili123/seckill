@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.SeckillGoodsMapper;
+import com.edu.nju.seckill.domain.SeckillGoods;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Autowired
     private SeckillGoodsMapper seckillGoodsMapper;
+
+    @Override
+    public boolean insertSeckillGoods(SeckillGoods seckillGoods) {
+        return seckillGoodsMapper.insertSelective(seckillGoods)!=0;
+    }
 }

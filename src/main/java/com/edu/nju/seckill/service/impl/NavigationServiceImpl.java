@@ -24,4 +24,13 @@ public class NavigationServiceImpl implements NavigationService {
 
         return navigationMapper.selectAll() ;
     }
+
+    @Override
+    public String getNameByType(String type) {
+        String name=navigationMapper.selectByType(type);
+        if(!"".equals(name)){
+            return name;
+        }
+        return null;
+    }
 }
