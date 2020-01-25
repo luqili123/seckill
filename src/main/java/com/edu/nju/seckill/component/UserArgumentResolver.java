@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.component;
 
+
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+
 /**
  * 用户参数解析器 从head中通过token解析出User信息
  */
+
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     /***
