@@ -32,7 +32,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //声明拦截器对象和拦截器请求
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**","/error")
                 .excludePathPatterns("/users/login","/users/signUp");
 
     }
