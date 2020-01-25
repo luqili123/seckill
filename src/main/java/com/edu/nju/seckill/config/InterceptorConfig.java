@@ -21,6 +21,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Autowired
     private JwtInterceptor jwtInterceptor;
+    @Autowired
+    private UserArgumentResolver userArgumentResolver;
     /***
      * 注册拦截器
      * @param registry
@@ -49,11 +51,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(UserArgumentResolver());
+        argumentResolvers.add(userArgumentResolver);
 
     }
-    private UserArgumentResolver UserArgumentResolver() {
-        UserArgumentResolver userArgumentResolver = new UserArgumentResolver();
-        return userArgumentResolver;
-    }
+
 }
