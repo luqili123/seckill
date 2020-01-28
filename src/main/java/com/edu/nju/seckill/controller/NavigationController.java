@@ -34,6 +34,15 @@ public class NavigationController {
             return CommonResult.failed("没有导航栏");
         }
     }
+    @ApiOperation(value = "获取导航栏条目下的主要商品")
+    @GetMapping("/menu/tabItems")
+    public CommonResult<?> getNavTableItems(){
+        //1.查询所有分类
+        //2.查询所有商品
+        //3.按照分类，将商品信息添加到对应的分类数组中
 
+        return null;
+
+    }
 
 }

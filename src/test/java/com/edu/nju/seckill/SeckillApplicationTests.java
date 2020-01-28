@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.NavigationService;
+import com.edu.nju.seckill.service.SeckillGoodsService;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
@@ -35,6 +36,8 @@ class SeckillApplicationTests {
     @Autowired
     NavigationService navigationService;
 
+    @Autowired
+    SeckillGoodsService seckillGoodsService;
 
 
     @Test
@@ -137,6 +140,11 @@ class SeckillApplicationTests {
     public void testNavigation(){
 
         System.out.println(navigationService.getAllNavItems());
+    }
+
+    @Test
+    public void testSeckillGoodsResult(){
+        System.out.println(seckillGoodsService.getSeckillList());
     }
 
 }

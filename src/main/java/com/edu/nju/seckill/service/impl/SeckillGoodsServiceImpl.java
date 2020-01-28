@@ -2,9 +2,12 @@ package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.SeckillGoodsMapper;
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -19,5 +22,23 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
     @Override
     public boolean insertSeckillGoods(SeckillGoods seckillGoods) {
         return seckillGoodsMapper.insertSelective(seckillGoods)!=0;
+    }
+
+    @Override
+    public List<SeckillGoodsResult> getSeckillList() {
+        List<SeckillGoodsResult> seckillGoodsList=seckillGoodsMapper.selectSeckillList();
+        if(seckillGoodsList.size()>0){
+            return seckillGoodsList;
+        }
+            return null;
+    }
+
+    @Override
+    public SeckillGoods getSeckillBySgid(Long sgid) {
+        SeckillGoods seckillGoods=seckillGoodsMapper.selectByPrimaryKey(sgid);
+        if(seckillGoods!=null){
+            return seckillGoods;
+        }
+        return null;
     }
 }

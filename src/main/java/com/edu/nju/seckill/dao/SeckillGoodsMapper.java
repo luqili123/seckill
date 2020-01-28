@@ -1,7 +1,10 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface SeckillGoodsMapper {
@@ -18,4 +21,5 @@ public interface SeckillGoodsMapper {
 
     int updateByPrimaryKey(SeckillGoods record);
 
+    List<SeckillGoodsResult> selectSeckillList();
 }
