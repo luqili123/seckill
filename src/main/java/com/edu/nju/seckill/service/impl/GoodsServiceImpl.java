@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.GoodsMapper;
+import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,20 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.selectHotProductCarousel();
 //        return null;
     }
+
+    @Override
+    public boolean hasGoods(long gid) {
+
+        return goodsMapper.selectByPrimaryKey(gid)!=null;
+    }
+
+    @Override
+    public Goods getGoodsByGid(long gid) {
+        Goods goods=goodsMapper.selectByPrimaryKey(gid);
+        if(goods!=null){
+            return goods;
+        }
+        return null;
+    }
+
 }

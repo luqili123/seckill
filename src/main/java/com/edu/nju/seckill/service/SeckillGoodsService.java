@@ -1,6 +1,9 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -8,5 +11,9 @@ import com.edu.nju.seckill.domain.SeckillGoods;
  */
 public interface SeckillGoodsService {
 
-    public boolean insertSeckillGoods(SeckillGoods seckillGoods);
+     boolean insertSeckillGoods(SeckillGoods seckillGoods);
+
+    List<SeckillGoodsResult> getSeckillList();
+
+    SeckillGoods getSeckillBySgid(Long sgid);
 }

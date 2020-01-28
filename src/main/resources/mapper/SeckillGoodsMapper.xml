@@ -15,6 +15,18 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
   </resultMap>
+<!--  秒杀商品返回类的结果映射-->
+  <resultMap id="SeckillGoodsResult" type="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
+    <id column="sgid" property="sgid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="nav_name" property="navName" jdbcType="VARCHAR" />
+    <result column="nav_type" property="navType" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="remain_count" property="remainCount" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     sgid, name, price, nav_name, nav_type, description, image, count, remain_count, start_time, 
     end_time, display_time
@@ -24,6 +36,9 @@
     <include refid="Base_Column_List" />
     from seckill_goods
     where sgid = #{sgid,jdbcType=BIGINT}
+  </select>
+  <select id="selectSeckillList" resultMap="SeckillGoodsResult" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
+    select * from seckill_goods
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from seckill_goods
@@ -44,7 +59,7 @@
   <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.SeckillGoods" >
     insert into seckill_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-        name,price,nav_name,nav_type,
+        sgid,name,price,nav_name,nav_type,
       <if test="description != null" >
         description,
       </if>
@@ -61,8 +76,10 @@
       <if test="displayTime != null" >
         display_time,
       </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+        #{sgid,jdbcType=BIGINT},
         #{name,jdbcType=VARCHAR},
         #{price,jdbcType=DOUBLE},
         #{navName,jdbcType=VARCHAR},

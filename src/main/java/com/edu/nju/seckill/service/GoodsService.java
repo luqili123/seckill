@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.service;
 
+import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 
 import java.util.List;
@@ -14,5 +15,9 @@ public interface GoodsService {
      * @param
      * @return
      */
-    public List<CarouselItems> getHotProductCarousel();
+     List<CarouselItems> getHotProductCarousel();
+
+    boolean hasGoods(long gid);
+
+    Goods getGoodsByGid(long gid);
 }

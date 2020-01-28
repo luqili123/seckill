@@ -90,4 +90,18 @@ public class Goods implements Serializable {
     public void setDisplayTime(Date displayTime) {
         this.displayTime = displayTime;
     }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "gid=" + gid +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", nid=" + nid +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", count=" + count +
+                ", displayTime=" + displayTime +
+                '}';
+    }
 }

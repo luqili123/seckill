@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.NavigationMapper;
+import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.Navigation;
 import com.edu.nju.seckill.domain.dto.NavigationDto;
 import com.edu.nju.seckill.service.NavigationService;
@@ -33,4 +34,16 @@ public class NavigationServiceImpl implements NavigationService {
         }
         return null;
     }
+
+    @Override
+    public String[] getNameAndTypeByNid(Integer nid) {
+        Navigation navigation=navigationMapper.selectByPrimaryKey(nid);
+        if(navigation!=null){
+            String[] nameAndType={navigation.getName(),navigation.getType()};
+            return nameAndType;
+        }
+        return null;
+    }
+
+
 }

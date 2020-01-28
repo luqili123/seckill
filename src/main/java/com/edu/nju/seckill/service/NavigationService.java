@@ -14,4 +14,7 @@ public interface NavigationService {
     public List<NavigationDto> getAllNavItems();
 
     public String getNameByType(String type);
+
+    String[] getNameAndTypeByNid(Integer nid);
+
 }
