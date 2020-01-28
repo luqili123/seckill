@@ -1,16 +1,14 @@
 package com.edu.nju.seckill.controller;
 
-import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
-import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.service.FavoriteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author lql
@@ -25,8 +23,8 @@ public class FavoriteController {
 
     @ApiOperation(value = "get参数解析器测试",notes = "testGet")
     @GetMapping("/favorite/get")
-    public String getTest(User user,  @RequestParam String string){
-        return user.getName()+string;
+    public String getTest( User user){
+        return user.toString();
     }
 
     @ApiOperation(value = "post参数解析器测试",notes = "testPost")
