@@ -79,4 +79,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where fid = #{fid,jdbcType=INTEGER}
   </update>
+  <insert id="addFavorite" >
+    insert into seckill.favorite(gid,uid,create_time)
+    values(#{gid},#{uid},current_timestamp)
+  </insert>
+  <select id="findFavoriteByUidGid" resultType="java.lang.Integer">
+    select count(*)
+    from seckill.favorite
+    where gid=#{gid} and uid=#{uid}
+  </select>
 </mapper>
