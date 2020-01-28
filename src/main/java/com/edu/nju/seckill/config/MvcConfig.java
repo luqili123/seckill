@@ -12,19 +12,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 /**
+ * WebMvc配置类
  * @author lql
  * @date 2020/1/16 12:23
  */
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class MvcConfig implements WebMvcConfigurer {
 
-
+    /***
+     * 自定义拦截器
+     */
     @Autowired
     private JwtInterceptor jwtInterceptor;
+
+    /***
+     * 自定义参数解析器
+     */
     @Autowired
     private UserArgumentResolver userArgumentResolver;
+
+
     /***
-     * 注册拦截器
+     * 注册拦截器，设置拦截的请求
      * @param registry
      */
     @Override
@@ -46,7 +55,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 1/23新增参数解析器配置
+     * 新增参数解析器配置
      * @param argumentResolvers
      */
     @Override
