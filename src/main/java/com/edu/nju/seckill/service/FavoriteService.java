@@ -5,4 +5,12 @@ package com.edu.nju.seckill.service;
  * @date 2020/1/11 20:19
  */
 public interface FavoriteService {
+    /**
+    * @Description: 添加收藏夹
+    * @Param: [uid, gid]
+    * @return: boolean
+    * @Author: whn
+    * @Date: 2020/1/29
+    */
+    boolean addFavorite(long uid,long gid);
 }

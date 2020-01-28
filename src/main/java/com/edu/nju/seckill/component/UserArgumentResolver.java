@@ -17,7 +17,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
  * 用户参数解析器 从head中通过token解析出User信息
- * @author lqllq
+ * @author lqllq whn
  */
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {

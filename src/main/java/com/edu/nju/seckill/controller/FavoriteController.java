@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.controller;
 
+import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.FavoriteService;
 import io.swagger.annotations.Api;
@@ -31,5 +32,14 @@ public class FavoriteController {
     @PostMapping("/favorite/post")
     public String postTest(User user,  @RequestParam String string){
         return user.getName()+string;
+    }
+
+    @ApiOperation(value = "添加收藏夹",notes = "addFavorite")
+    @PostMapping("/favorite")
+    public CommonResult<String> addFavorite(User user, @RequestParam long gid){
+        if(favoriteService.addFavorite(user.getUid(),gid))
+            return CommonResult.success(null,"添加成功");
+        else
+            return CommonResult.failed("添加失败");
     }
 }
