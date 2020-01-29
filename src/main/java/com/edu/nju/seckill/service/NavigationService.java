@@ -1,7 +1,7 @@
 package com.edu.nju.seckill.service;
 
-import com.edu.nju.seckill.domain.Navigation;
-import com.edu.nju.seckill.domain.dto.NavigationDto;
+import com.edu.nju.seckill.domain.dto.NavigationResult;
+import com.edu.nju.seckill.domain.dto.TableItem;
 
 import java.util.List;
 
@@ -11,10 +11,15 @@ import java.util.List;
  */
 public interface NavigationService {
 
-    public List<NavigationDto> getAllNavItems();
+    public List<NavigationResult> getAllNavItems();
 
     public String getNameByType(String type);
 
     String[] getNameAndTypeByNid(Integer nid);
 
+    /***
+     * 获取获取所有商品的信息，并按类型分组
+     * @return
+     */
+    List<TableItem> getTableItems();
 }

@@ -1,7 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.User;
-import com.edu.nju.seckill.domain.dto.UserDto;
+import com.edu.nju.seckill.domain.dto.UserParam;
 
 /**
  * @author lql
@@ -21,7 +21,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public boolean add(UserDto user);
+    public boolean add(UserParam user);
 
     /***
      * 根据手机号查找用户信息

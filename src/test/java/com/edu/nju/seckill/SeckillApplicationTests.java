@@ -147,4 +147,13 @@ class SeckillApplicationTests {
         System.out.println(seckillGoodsService.getSeckillList());
     }
 
+    @Test
+    public void testGetTableItems(){
+        System.out.println(navigationService.getTableItems());
+    }
+
+    @Test
+    public void testselectSeckillList(){
+        System.out.println(seckillGoodsService.getSeckillList());
+    }
 }

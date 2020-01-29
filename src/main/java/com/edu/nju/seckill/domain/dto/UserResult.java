@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @date 2020/1/18 17:00
  */
 @ApiModel("用户和令牌dto")
-public class UserToken implements Serializable {
+public class UserResult implements Serializable {
 
     @ApiModelProperty(value = "用户对象",required = true)
     private User user;
