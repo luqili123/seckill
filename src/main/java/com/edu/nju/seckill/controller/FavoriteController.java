@@ -2,12 +2,15 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import com.edu.nju.seckill.service.FavoriteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -57,5 +60,19 @@ public class FavoriteController {
         }else {
             return CommonResult.failed("删除失败或无该记录");
         }
+    }
+    /**
+    * @Description: 通过keyword模糊查询收藏的商品信息
+    * @Param: [user, keyword]
+    * @return: com.edu.nju.seckill.common.CommonResult<com.edu.nju.seckill.domain.dto.FavoriteResult>
+    * @Author: whn
+    * @Date: 2020/1/30
+    */
+    @ApiOperation(value="从收藏夹通过keyword搜索",notes="searchFavoriteByKeyword")
+    @GetMapping(value = {"/favorite/list/{keyword}","/favorite/list"})
+    public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(User user, @PathVariable(required = false) String keyword){
+        if(null==keyword)
+            keyword="";
+        return CommonResult.success(favoriteService.searchFavoriteByKeyword(user.getUid(),keyword));
     }
 }

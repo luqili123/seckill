@@ -1,8 +1,11 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Favorite;
+import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface FavoriteMapper {
@@ -30,5 +33,5 @@ public interface FavoriteMapper {
     */
     int findFavoriteByUidGid(@Param("uid") long uid, @Param("gid") long gid);
 
-
+    List<FavoriteResult> searchFavoriteByKeyword(@Param("uid")long uid, @Param("keyword")String keyword);
 }

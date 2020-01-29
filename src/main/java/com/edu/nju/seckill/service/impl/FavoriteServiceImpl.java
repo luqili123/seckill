@@ -1,9 +1,12 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.FavoriteMapper;
+import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import com.edu.nju.seckill.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author lql
@@ -49,5 +52,10 @@ public class FavoriteServiceImpl implements FavoriteService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public List<FavoriteResult> searchFavoriteByKeyword(long uid, String keyword) {
+        return favoriteMapper.searchFavoriteByKeyword(uid,keyword);
     }
 }
