@@ -34,4 +34,20 @@ public class FavoriteServiceImpl implements FavoriteService {
                 return false;
         }
     }
+
+    /**
+    * @Description: 通过收藏夹主键fid删除收藏记录
+    * @Param: [fid]
+    * @return: java.lang.Boolean
+    * @Author: whn
+    * @Date: 2020/1/29
+    */
+    @Override
+    public Boolean deleteFavorite(int fid) {
+        int res = favoriteMapper.deleteFavorite(fid);
+        if (res > 0)
+            return true;
+        else
+            return false;
+    }
 }

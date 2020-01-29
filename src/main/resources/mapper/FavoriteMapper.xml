@@ -88,4 +88,8 @@
     from seckill.favorite
     where gid=#{gid} and uid=#{uid}
   </select>
+  <delete id="deleteFavorite" parameterType="java.lang.Integer">
+    delete from seckill.favorite
+    where fid=#{fid}
+  </delete>
 </mapper>

@@ -13,4 +13,9 @@ public interface FavoriteService {
     * @Date: 2020/1/29
     */
     boolean addFavorite(long uid,long gid);
+
+    /*
+        删除收藏记录
+     */
+    Boolean deleteFavorite(int fid);
 }

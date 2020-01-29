@@ -5,11 +5,9 @@ import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.FavoriteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author lql
@@ -41,6 +39,23 @@ public class FavoriteController {
             return CommonResult.success(null, "添加成功");
         }else {
             return CommonResult.failed("添加失败");
+        }
+    }
+
+    /**
+    * @Description: 通过收藏夹表主键fid删除收藏记录
+    * @Param: [fid] 存疑！原接口显示通过主键fid删除
+    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/1/29
+    */
+    @ApiOperation(value = "从收藏夹删除",notes = "addFavorite")
+    @DeleteMapping("/favorite/{fid}")
+    public CommonResult<String> deleteFavorite(@PathVariable int fid){
+        if(favoriteService.deleteFavorite(fid)) {
+            return CommonResult.success(null, "删除成功");
+        }else {
+            return CommonResult.failed("删除失败或无该记录");
         }
     }
 }
