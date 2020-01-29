@@ -18,25 +18,23 @@ public class SeckillGoodsResult implements Serializable {
     private Long sgid;
 
     @ApiModelProperty(value = "秒杀商品名称",required = true)
-    @NotNull(message = "name不能为空")
-    private String name;
-
-    @ApiModelProperty(value = "秒杀商品价格",required = true)
-    @NotNull(message = "不能为空")
-    private Double price;
-
-    @ApiModelProperty(value = "所属导航栏名称")
-    private String navName;
-
-    @ApiModelProperty(value = "所属导航栏条目英文名称",required = true)
-    @NotNull(message = "navType不能为空")
-    private String navType;
+    @NotNull(message = "goods_name")
+    private String goods_name;
 
     @ApiModelProperty(value = "秒杀商品描述")
-    private String description;
+    private String desc;
+
+    @ApiModelProperty(value = "商品原本价格",required = true)
+    @NotNull(message = "不能为空")
+    private Double goods_price;
+
+    @ApiModelProperty(value = "秒杀时商品价格",required = true)
+    @NotNull(message = "不能为空")
+    private Double seckill_price;
+
 
     @ApiModelProperty(value = "秒杀商品图片地址")
-    private String image;
+    private String imgUrl;
 
     @ApiModelProperty(value = "秒杀商品总数",required = true)
     @Min(value = 0,message = "库存必须大于0")
@@ -46,7 +44,7 @@ public class SeckillGoodsResult implements Serializable {
     @ApiModelProperty(value = "秒杀商品库存",required = true)
     @Min(value = 0,message = "库存必须大于0")
     @NotNull(message = "remainCount不能为空")
-    private Integer remainCount;
+    private Integer remain_count;
 
     public Long getSgid() {
         return sgid;
@@ -56,52 +54,44 @@ public class SeckillGoodsResult implements Serializable {
         this.sgid = sgid;
     }
 
-    public String getName() {
-        return name;
+    public String getGoods_name() {
+        return goods_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getNavName() {
-        return navName;
+    public Double getGoods_price() {
+        return goods_price;
     }
 
-    public void setNavName(String navName) {
-        this.navName = navName;
+    public void setGoods_price(Double goods_price) {
+        this.goods_price = goods_price;
     }
 
-    public String getNavType() {
-        return navType;
+    public Double getSeckill_price() {
+        return seckill_price;
     }
 
-    public void setNavType(String navType) {
-        this.navType = navType;
+    public void setSeckill_price(Double seckill_price) {
+        this.seckill_price = seckill_price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Integer getCount() {
@@ -112,26 +102,25 @@ public class SeckillGoodsResult implements Serializable {
         this.count = count;
     }
 
-    public Integer getRemainCount() {
-        return remainCount;
+    public Integer getRemain_count() {
+        return remain_count;
     }
 
-    public void setRemainCount(Integer remainCount) {
-        this.remainCount = remainCount;
+    public void setRemain_count(Integer remain_count) {
+        this.remain_count = remain_count;
     }
 
     @Override
     public String toString() {
         return "SeckillGoodsResult{" +
                 "sgid=" + sgid +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", navName='" + navName + '\'' +
-                ", navType='" + navType + '\'' +
-                ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
+                ", goods_name='" + goods_name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", goods_price=" + goods_price +
+                ", seckill_price=" + seckill_price +
+                ", imgUrl='" + imgUrl + '\'' +
                 ", count=" + count +
-                ", remainCount=" + remainCount +
+                ", remain_count=" + remain_count +
                 '}';
     }
 }

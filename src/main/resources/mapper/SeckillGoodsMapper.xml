@@ -15,17 +15,19 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
   </resultMap>
-<!--  秒杀商品返回类的结果映射-->
-  <resultMap id="SeckillGoodsResult" type="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
-    <id column="sgid" property="sgid" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="nav_name" property="navName" jdbcType="VARCHAR" />
-    <result column="nav_type" property="navType" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="image" property="image" jdbcType="VARCHAR" />
-    <result column="count" property="count" jdbcType="INTEGER" />
-    <result column="remain_count" property="remainCount" jdbcType="INTEGER" />
+<!--  秒杀商品列表结果映射-->
+  <resultMap id="SeckillGoodsList" type="com.edu.nju.seckill.domain.dto.SeckillGoodsList">
+    <id column="start_time" property="startTime"></id>
+    <id column="end_time" property="endTime"></id>
+    <collection property="seckillGoodsList" ofType="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
+      <id property="sgid" column="sgid"></id>
+      <result property="goods_name" column="name"></result>
+      <result property="desc" column="description"></result>
+      <result property="goods_price" column="price"></result>
+      <result property="imgUrl" column="image"></result>
+      <result property="count" column="count"></result>
+      <result property="remain_count" column="remain_count"></result>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     sgid, name, price, nav_name, nav_type, description, image, count, remain_count, start_time, 
@@ -37,9 +39,13 @@
     from seckill_goods
     where sgid = #{sgid,jdbcType=BIGINT}
   </select>
-  <select id="selectSeckillList" resultMap="SeckillGoodsResult" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
-    select * from seckill_goods
+  <select id="selectSeckillList" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="SeckillGoodsList">
+    select start_time,end_time,sgid,name,description,price,image,count,remain_count
+    from seckill_goods
+    group by start_time,end_time,sgid,name,description,price,image,count,remain_count;
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from seckill_goods
     where sgid = #{sgid,jdbcType=BIGINT}

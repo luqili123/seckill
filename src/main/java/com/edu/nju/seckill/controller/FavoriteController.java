@@ -37,9 +37,10 @@ public class FavoriteController {
     @ApiOperation(value = "添加收藏夹",notes = "addFavorite")
     @PostMapping("/favorite")
     public CommonResult<String> addFavorite(User user, @RequestParam long gid){
-        if(favoriteService.addFavorite(user.getUid(),gid))
-            return CommonResult.success(null,"添加成功");
-        else
+        if(favoriteService.addFavorite(user.getUid(),gid)) {
+            return CommonResult.success(null, "添加成功");
+        }else {
             return CommonResult.failed("添加失败");
+        }
     }
 }

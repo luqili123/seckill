@@ -1,9 +1,9 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.NavigationMapper;
-import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.Navigation;
-import com.edu.nju.seckill.domain.dto.NavigationDto;
+import com.edu.nju.seckill.domain.dto.NavigationResult;
+import com.edu.nju.seckill.domain.dto.TableItem;
 import com.edu.nju.seckill.service.NavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class NavigationServiceImpl implements NavigationService {
     private NavigationMapper navigationMapper;
 
     @Override
-    public List<NavigationDto> getAllNavItems() {
+    public List<NavigationResult> getAllNavItems() {
 
         return navigationMapper.selectAll() ;
     }
@@ -41,6 +41,15 @@ public class NavigationServiceImpl implements NavigationService {
         if(navigation!=null){
             String[] nameAndType={navigation.getName(),navigation.getType()};
             return nameAndType;
+        }
+        return null;
+    }
+
+    @Override
+    public List<TableItem> getTableItems() {
+        List<TableItem> tableItems= navigationMapper.selectTableItems();
+        if(tableItems!=null&&tableItems.size()>0){
+            return tableItems;
         }
         return null;
     }

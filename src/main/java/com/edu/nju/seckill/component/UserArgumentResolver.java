@@ -38,7 +38,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     private RedisUtil redisUtil;
 
     /**
-     * 判断是否进行参数解析：如果使用的注解使@CurrenUser,被注解的对象为User对象，则进行解析
+     * 判断是否进行参数解析：如果方法参数包含User对象，则进行解析
      * @param methodParameter
      * @return
      */

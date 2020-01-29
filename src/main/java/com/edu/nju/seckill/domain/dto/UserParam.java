@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @date 2020/1/18 18:13
  */
 @ApiModel("用户dto")
-public class UserDto implements Serializable {
+public class UserParam implements Serializable {
 
     @ApiModelProperty(value = "密码",required = true)
     @NotNull(message = "密码不能为空")

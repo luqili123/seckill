@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @date 2020/1/20 13:51
  */
 @ApiModel("导航栏dto")
-public class NavigationDto implements Serializable {
+public class NavigationResult implements Serializable {
     @ApiModelProperty(value = "导航栏名称")
     private String name;
 

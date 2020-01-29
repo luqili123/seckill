@@ -3,19 +3,15 @@ package com.edu.nju.seckill.controller;
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.SeckillGoods;
-import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
+import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.service.GoodsService;
 import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,13 +38,20 @@ public class SeckillGoodsController {
     @ApiOperation(value = "秒杀商品列表")
     @GetMapping("/seckill/list")
     public CommonResult<?> getSeckillGoods() {
-        List<SeckillGoodsResult> seckillGoodsList = seckillGoodsService.getSeckillList();
-        if (seckillGoodsList != null) {
-            return CommonResult.success(seckillGoodsList);
-        } else {
-            return CommonResult.failed("没有秒杀商品");
-        }
+     List<SeckillGoodsList> seckillGoodsLists=seckillGoodsService.getSeckillList();
+     if(seckillGoodsLists!=null){
+         return CommonResult.success(seckillGoodsLists);
+     }else{
+         return CommonResult.failed("没有秒杀商品！");
+     }
+
     }
+
+//    @PatchMapping("/seckill/{sgid}/{startTime}/{endTime}")
+//    public CommonResult<?> setStartAndEndTime(@PathVariable(value = "sgid") long sgid,@PathVariable(value = "startTime") Date startTime
+//            , @PathVariable(value = "endTime") Date endTime){
+//        return null;
+//    }
 
     @ApiOperation(value = "添加秒杀商品")
     @PostMapping("/seckill")

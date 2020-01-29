@@ -7,6 +7,17 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
   </resultMap>
+<!--自定义的TableItem结果集映射-->
+  <resultMap id="TableItem" type="com.edu.nju.seckill.domain.dto.TableItem">
+    <id property="type" column="type"></id>
+    <collection property="goodsResult" ofType="com.edu.nju.seckill.domain.dto.GoodsResult">
+      <id column="gid" property="goods_id"></id>
+      <result column="image" property="imageUrl"></result>
+      <result property="goods_name" column="name"></result>
+      <result property="goods_price" column="price"></result>
+    </collection>
+
+  </resultMap>
   <sql id="Base_Column_List" >
     nid, name, type, sort
   </sql>
@@ -17,20 +28,27 @@
     where nid = #{nid,jdbcType=INTEGER}
   </select>
 
-    <select id="selectAll" resultType="com.edu.nju.seckill.domain.dto.NavigationDto">
+    <select id="selectAll" resultType="com.edu.nju.seckill.domain.dto.NavigationResult">
       select name,type from navigation
     </select>
 
     <select id="selectByType" resultType="java.lang.String">
       select name from navigation where type =#{type}
     </select>
+  <select id="selectTableItems" resultType="com.edu.nju.seckill.domain.dto.TableItem" resultMap="TableItem">
+        select gid,name,image,price,type
+        from(select goods.gid ,goods.name,image,price,type from navigation as nav
+        left join goods using(nid) where nav.nid=goods.nid) as temp
+        group by type,gid,name,image,price
+  </select>
 
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from navigation
     where nid = #{nid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.edu.nju.seckill.domain.Navigation" >
+
     insert into navigation (nid, name, type, 
       sort)
     values (#{nid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
