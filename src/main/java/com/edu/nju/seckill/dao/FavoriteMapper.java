@@ -20,6 +20,7 @@ public interface FavoriteMapper {
 
     int addFavorite(@Param("uid") long uid, @Param("gid") long gid);
 
+    int deleteFavorite(Integer fid);
     /**
     * @Description: 通过uid gid查询收藏夹内是否已有该商品
     * @Param: [uid, gid]
@@ -28,4 +29,6 @@ public interface FavoriteMapper {
     * @Date: 2020/1/29
     */
     int findFavoriteByUidGid(@Param("uid") long uid, @Param("gid") long gid);
+
+
 }
