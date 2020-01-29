@@ -7,6 +7,11 @@
     <result column="uid" property="uid" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="FavoriteResult" type="com.edu.nju.seckill.domain.dto.FavoriteResult">
+    <result column="image" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="name" property="goods_name" jdbcType="VARCHAR" />
+    <result column="price" property="goods_price" jdbcType="DOUBLE" />
+  </resultMap>
   <sql id="Base_Column_List" >
     fid, gid, uid, create_time
   </sql>
@@ -92,4 +97,9 @@
     delete from seckill.favorite
     where fid=#{fid}
   </delete>
+  <select id="searchFavoriteByKeyword" resultMap="FavoriteResult">
+    SELECT a.image,a.name,a.price
+    from seckill.goods as a,seckill.favorite as b
+    where a.gid=b.gid and a.name like CONCAT('%','${keyword}','%') and b.uid=#{uid}
+  </select>
 </mapper>
