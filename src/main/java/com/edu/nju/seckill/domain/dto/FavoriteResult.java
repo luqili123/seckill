@@ -6,10 +6,29 @@ package com.edu.nju.seckill.domain.dto;
 * @Date: 2020/1/30
 */
 public class FavoriteResult {
+
+
+    Integer fid;
+    long gid;
     String imgUrl;
     String goods_name;
     double goods_price;
 
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
+    }
+
+    public long getGid() {
+        return gid;
+    }
+
+    public void setGid(long gid) {
+        this.gid = gid;
+    }
     public String getImgUrl() {
         return imgUrl;
     }

@@ -8,6 +8,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="FavoriteResult" type="com.edu.nju.seckill.domain.dto.FavoriteResult">
+    <id column="fid" property="fid" jdbcType="INTEGER"/>
+    <result column="gid" property="gid" jdbcType="BIGINT"/>
     <result column="image" property="imgUrl" jdbcType="VARCHAR" />
     <result column="name" property="goods_name" jdbcType="VARCHAR" />
     <result column="price" property="goods_price" jdbcType="DOUBLE" />
@@ -98,7 +100,7 @@
     where fid=#{fid}
   </delete>
   <select id="searchFavoriteByKeyword" resultMap="FavoriteResult">
-    SELECT a.image,a.name,a.price
+    SELECT b.fid,b.gid,a.image,a.name,a.price
     from seckill.goods as a,seckill.favorite as b
     where a.gid=b.gid and a.name like CONCAT('%','${keyword}','%') and b.uid=#{uid}
   </select>
