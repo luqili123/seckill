@@ -20,4 +20,10 @@ public interface SeckillGoodsService {
      * @return
      */
     List<SeckillGoodsList> getSeckillList();
+
+    /***
+     * 获取最近的秒杀商品列表
+     * @return
+     */
+    SeckillGoodsList getLatestSeckillGoods();
 }
