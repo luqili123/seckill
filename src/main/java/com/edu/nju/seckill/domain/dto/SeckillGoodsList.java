@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class SeckillGoodsList implements Serializable {
 
-    @ApiModelProperty(value = "相同时间开始和结束秒杀的商品列表")
+    @ApiModelProperty(value = "秒杀的商品列表")
     private List<SeckillGoodsResult> seckillGoodsList;
 
     @ApiModelProperty(value = "秒杀开始时间",required = true,example = "2020-01-20 02:42:35")

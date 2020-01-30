@@ -23,4 +23,6 @@ public interface SeckillGoodsMapper {
     int updateByPrimaryKey(SeckillGoods record);
 
     List<SeckillGoodsList> selectSeckillList();
+
+    SeckillGoodsList selectLatest();
 }

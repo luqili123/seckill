@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,11 +80,35 @@ public class SeckillGoodsController {
                 }
 
             }else {
+                //这里暂时简单处理，逻辑上，同样的商品可以多次成为秒杀商品
                 return CommonResult.failed("该商品已经是秒杀商品");
             }
 
         } else {
             return CommonResult.failed("商品已经下架或商品不存在！");
+        }
+    }
+
+    @ApiOperation("获取最近一期的秒杀商品列表")
+    @GetMapping("/seckill/slide")
+    public CommonResult<?> getLatestSeckillGoods(){
+        SeckillGoodsList seckillGoodsList=seckillGoodsService.getLatestSeckillGoods();
+        if(seckillGoodsList!=null){
+            return CommonResult.success(seckillGoodsList);
+        }
+        else {
+            return CommonResult.failed("没有秒杀商品！");
+        }
+
+    }
+
+    @GetMapping("/seckill/{sgid}")
+    public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid){
+        SeckillGoods seckillGoods=seckillGoodsService.getSeckillBySgid(sgid);
+        if(seckillGoods!=null){
+            return CommonResult.success(seckillGoods);
+        }else{
+            return CommonResult.failed("没有该秒杀商品");
         }
     }
 }

@@ -43,4 +43,13 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
         }
         return null;
     }
+
+    @Override
+    public SeckillGoodsList getLatestSeckillGoods() {
+        SeckillGoodsList seckillGoodsList=seckillGoodsMapper.selectLatest();
+        if(seckillGoodsList!=null){
+            return seckillGoodsList;
+        }
+        return null;
+    }
 }

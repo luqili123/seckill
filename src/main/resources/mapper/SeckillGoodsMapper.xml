@@ -29,6 +29,20 @@
       <result property="remain_count" column="remain_count"></result>
     </collection>
   </resultMap>
+
+  <resultMap id="LatestSeckillGoodsList" type="com.edu.nju.seckill.domain.dto.SeckillGoodsList">
+    <id column="start_time" property="startTime"></id>
+    <result column="end_time" property="endTime"></result>
+    <collection property="seckillGoodsList" ofType="com.edu.nju.seckill.domain.dto.SeckillGoodsResult">
+      <id property="sgid" column="sgid"></id>
+      <result property="goods_name" column="name"></result>
+      <result property="desc" column="description"></result>
+      <result property="goods_price" column="price"></result>
+      <result property="imgUrl" column="image"></result>
+      <result property="count" column="count"></result>
+      <result property="remain_count" column="remain_count"></result>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     sgid, name, price, nav_name, nav_type, description, image, count, remain_count, start_time, 
     end_time, display_time
@@ -44,9 +58,15 @@
     from seckill_goods
     group by start_time,end_time,sgid,name,description,price,image,count,remain_count;
   </select>
+    <select id="selectLatest" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">
+      select *
+      from seckill_goods as A,(select max(start_time) start_time from seckill_goods) as B
+      where A.start_time=B.start_time;
+
+    </select>
 
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from seckill_goods
     where sgid = #{sgid,jdbcType=BIGINT}
   </delete>

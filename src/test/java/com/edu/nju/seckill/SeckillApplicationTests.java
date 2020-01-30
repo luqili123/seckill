@@ -8,12 +8,13 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
+import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.OrderUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -154,6 +155,16 @@ class SeckillApplicationTests {
 
     @Test
     public void testselectSeckillList(){
-        System.out.println(seckillGoodsService.getSeckillList());
+
+//        System.out.println(seckillGoodsService.getSeckillList());
+        System.out.println(seckillGoodsService.getLatestSeckillGoods());
+    }
+    @Test
+    public void testSnowFlake(){
+        for (int i = 0; i < 30; i++) {
+            System.out.println(OrderIdUtils.getInstance().nextId());
+
+        }
+
     }
 }
