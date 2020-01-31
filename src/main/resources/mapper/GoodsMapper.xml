@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.edu.nju.seckill.dao.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Goods" >
-    <id column="gid" property="gid" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="nid" property="nid" jdbcType="INTEGER" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="image" property="image" jdbcType="VARCHAR" />
-    <result column="count" property="count" jdbcType="INTEGER" />
-    <result column="display_time" property="displayTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+<mapper namespace="com.edu.nju.seckill.dao.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Goods">
+        <id column="gid" property="gid" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="nid" property="nid" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="display_time" property="displayTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-  <resultMap id="CarouselItems" type="com.edu.nju.seckill.domain.dto.CarouselItems">
-    <id column="gid" property="goods_id" jdbcType="BIGINT" />
-    <result column="image" property="imgUrl" jdbcType="VARCHAR" />
-  </resultMap>
+    <resultMap id="CarouselItems" type="com.edu.nju.seckill.domain.dto.CarouselItems">
+        <id column="gid" property="goods_id" jdbcType="BIGINT"/>
+        <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <sql id="Base_Column_List" >
+    <resultMap id="GoodsListResult" type="com.edu.nju.seckill.domain.dto.GoodsListResult">
+        <id column="gid" property="gid" jdbcType="BIGINT"/>
+        <result column="name" property="goods_name" jdbcType="VARCHAR"/>
+        <result column="description" property="desc" jdbcType="VARCHAR"/>
+        <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+        <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
     gid, name, price, nid, description, image, count, display_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from goods
-    where gid = #{gid,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from goods
+        where gid = #{gid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from goods
     where gid = #{gid,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.edu.nju.seckill.domain.Goods" >
+    <insert id="insert" parameterType="com.edu.nju.seckill.domain.Goods">
     insert into goods (gid, name, price, 
       nid, description, image, 
       count, display_time)
@@ -38,89 +47,89 @@
       #{nid,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{count,jdbcType=INTEGER}, #{displayTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Goods" >
-    insert into goods
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="gid != null" >
-        gid,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="nid != null" >
-        nid,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="image != null" >
-        image,
-      </if>
-      <if test="count != null" >
-        count,
-      </if>
-      <if test="displayTime != null" >
-        display_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="gid != null" >
-        #{gid,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="nid != null" >
-        #{nid,jdbcType=INTEGER},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null" >
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="count != null" >
-        #{count,jdbcType=INTEGER},
-      </if>
-      <if test="displayTime != null" >
-        #{displayTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Goods" >
-    update goods
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="nid != null" >
-        nid = #{nid,jdbcType=INTEGER},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null" >
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
-      </if>
-      <if test="displayTime != null" >
-        display_time = #{displayTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where gid = #{gid,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Goods" >
+    <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Goods">
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gid != null">
+                gid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="nid != null">
+                nid,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="displayTime != null">
+                display_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gid != null">
+                #{gid,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="nid != null">
+                #{nid,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="displayTime != null">
+                #{displayTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Goods">
+        update goods
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="nid != null">
+                nid = #{nid,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="displayTime != null">
+                display_time = #{displayTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where gid = #{gid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Goods">
     update goods
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
@@ -131,8 +140,8 @@
       display_time = #{displayTime,jdbcType=TIMESTAMP}
     where gid = #{gid,jdbcType=BIGINT}
   </update>
-  <select id="selectHotProductCarousel" resultMap="CarouselItems">
-select goods.gid,image
+    <select id="selectHotProductCarousel" resultMap="CarouselItems">
+    select goods.gid,image
     from seckill.goods as goods,
 		(select gid as id,sum(count) as sale
 		from  seckill.order
@@ -140,4 +149,27 @@ select goods.gid,image
     where goods.gid=sales.id
     order by goods.count-sales.sale desc limit 5
   </select>
+    <select id="getGoodsList" resultMap="GoodsListResult">
+    select a.gid,a.name,a.description,a.price ,a.image,
+        (case when b.sales is null then 0 else b.sales end) as count
+    from seckill.goods as a left join
+        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
+    on a.gid=b.gid
+  </select>
+    <select id="getGoodsListBySales" resultMap="GoodsListResult">
+    select a.gid,a.name,a.description,a.price ,a.image,
+        (case when b.sales is null then 0 else b.sales end) as count
+    from seckill.goods as a left join
+        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
+    on a.gid=b.gid
+    order by count desc
+    </select>
+    <select id="getGoodsListByPrice" resultMap="GoodsListResult">
+    select a.gid,a.name,a.description,a.price ,a.image,
+        (case when b.sales is null then 0 else b.sales end) as count
+    from seckill.goods as a left join
+        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
+    on a.gid=b.gid
+    order by a.price asc
+    </select>
 </mapper>

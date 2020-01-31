@@ -2,6 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
+import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,5 +31,23 @@ public class GoodsController {
     @GetMapping("/goods/carouselItems")
     public CommonResult<List<CarouselItems>> getHotProductCarousel(){
         return CommonResult.success(goodsService.getHotProductCarousel(),"操作成功");
+    }
+
+    @ApiOperation(value="获取普通商品列表",notes = "返回商品表")
+    @GetMapping("/goods/list/show")
+    public CommonResult<List<GoodsListResult>>getGoodsList(){
+        return CommonResult.success(goodsService.getGoodsList(),"操作成功");
+    }
+
+    @ApiOperation(value="获取普通商品列表 按销量排序",notes = "返回商品表")
+    @GetMapping("/goods/list/count")
+    public CommonResult<List<GoodsListResult>>getGoodsListBySales(){
+        return CommonResult.success(goodsService.getGoodsListBySales(),"操作成功");
+    }
+
+    @ApiOperation(value="获取普通商品列表 按价格排序",notes = "返回商品表")
+    @GetMapping("/goods/list/price")
+    public CommonResult<List<GoodsListResult>>getGoodsListByPrice(){
+        return CommonResult.success(goodsService.getGoodsListByPrice(),"操作成功");
     }
 }
