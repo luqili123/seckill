@@ -3,6 +3,7 @@ package com.edu.nju.seckill.dao;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.Goods;
 
+import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,10 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
 
     List<CarouselItems> selectHotProductCarousel();
+
+    List<GoodsListResult> getGoodsList();
+
+    List<GoodsListResult> getGoodsListBySales();
+
+    List<GoodsListResult> getGoodsListByPrice();
 }
