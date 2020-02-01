@@ -26,6 +26,16 @@
         <result column="count" property="count" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="GoodsDetailResult" type="com.edu.nju.seckill.domain.dto.GoodsDetailResult">
+        <id column="gid" property="gid" jdbcType="BIGINT"/>
+        <result column="name" property="goods_name" jdbcType="VARCHAR"/>
+        <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+        <result column="description" property="desc" jdbcType="VARCHAR"/>
+        <result column="image" property="imgurl" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="rest" property="rest" jdbcType="INTEGER"/>
+        <result column="display_time" property="displaytime" jdbcType="TIMESTAMP"/>
+    </resultMap>
     <sql id="Base_Column_List">
     gid, name, price, nid, description, image, count, display_time
   </sql>
@@ -158,7 +168,20 @@
                 from seckill.navigation)as navi on good.nid=navi.nid where type = #{type}) as good
                 left join (SELECT gid, sum(count) as sales from seckill.order group by gid) as temp
                 on good.gid=temp.gid)
-    where good.name like CONCAT('%','${keyword}','%')
+    where good.name like CONCAT('%','${keyword}','%') or good.description like CONCAT('%','${keyword}','%')
     order by ${order}
   </select>
+    <select id="getGoodDetail" resultMap="GoodsDetailResult">
+    select goods.gid as gid,goods.name as name,goods.price as price,goods.description as description,
+        goods.image as image, goods.count-sales.count as rest, sales.count as count,goods.display_time
+    from
+    (select *
+        from seckill.goods
+        where gid=#{gid})as goods
+    left join
+    (select (case when gid is null then #{gid} else gid end)as gid,(case when sum(count) is null then 0 else sum(count) end)as count
+        from seckill.order
+        where gid =#{gid})as sales
+    on goods.gid=sales.gid
+    </select>
 </mapper>
