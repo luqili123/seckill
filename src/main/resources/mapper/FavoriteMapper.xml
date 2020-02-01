@@ -102,6 +102,7 @@
   <select id="searchFavoriteByKeyword" resultMap="FavoriteResult">
     SELECT b.fid,b.gid,a.image,a.name,a.price
     from seckill.goods as a,seckill.favorite as b
-    where a.gid=b.gid and a.name like CONCAT('%','${keyword}','%') and b.uid=#{uid}
+    where a.gid=b.gid and (a.name like CONCAT('%','${keyword}','%') or a.description like CONCAT('%','${keyword}','%'))
+    and b.uid=#{uid}
   </select>
 </mapper>

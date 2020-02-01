@@ -4,6 +4,7 @@ import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.dto.FavoriteResult;
+import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.service.GoodsService;
 import io.swagger.annotations.Api;
@@ -56,5 +57,16 @@ public class GoodsController {
             return CommonResult.success(res,"操作成功");
         else
             return CommonResult.failed("无数据");
+    }
+
+    @ApiOperation(value = "通过gid获取显示商品详情",notes = "返回轮播列表list")
+    @GetMapping("/goods/show/{gid}")
+    public CommonResult<List<GoodsDetailResult>> getGoodDetail(@PathVariable long gid){
+        List<GoodsDetailResult> res=goodsService.getGoodDetail(gid);
+        if(res.size()>0)
+            return CommonResult.success(res,"操作成功");
+        else{
+            return CommonResult.failed("无此商品");
+        }
     }
 }
