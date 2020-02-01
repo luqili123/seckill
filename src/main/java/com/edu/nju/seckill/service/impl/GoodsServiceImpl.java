@@ -40,28 +40,15 @@ public class GoodsServiceImpl implements GoodsService {
         return null;
     }
 
+
+
     /**
      * 获取商品列表
      */
     @Override
-    public List<GoodsListResult> getGoodsList() {
-        return goodsMapper.getGoodsList();
+    public List<GoodsListResult> getGoodsList(String type, String orderby, String keyword) {
+        return goodsMapper.getGoodsList(type,orderby,keyword);
     }
 
-    /**
-     * 获取商品列表 按销量排序 （降序）
-     */
-    @Override
-    public List<GoodsListResult> getGoodsListBySales() {
-        return goodsMapper.getGoodsListBySales();
-    }
-
-    /**
-     * 获取商品列表 按价格排序 （升序）
-     */
-    @Override
-    public List<GoodsListResult> getGoodsListByPrice() {
-        return goodsMapper.getGoodsListByPrice();
-    }
 
 }

@@ -1,13 +1,16 @@
 package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
+import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
+import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,21 +36,25 @@ public class GoodsController {
         return CommonResult.success(goodsService.getHotProductCarousel(),"操作成功");
     }
 
-    @ApiOperation(value="获取普通商品列表",notes = "返回商品表")
-    @GetMapping("/goods/list/show")
-    public CommonResult<List<GoodsListResult>>getGoodsList(){
-        return CommonResult.success(goodsService.getGoodsList(),"操作成功");
-    }
-
-    @ApiOperation(value="获取普通商品列表 按销量排序",notes = "返回商品表")
-    @GetMapping("/goods/list/count")
-    public CommonResult<List<GoodsListResult>>getGoodsListBySales(){
-        return CommonResult.success(goodsService.getGoodsListBySales(),"操作成功");
-    }
-
-    @ApiOperation(value="获取普通商品列表 按价格排序",notes = "返回商品表")
-    @GetMapping("/goods/list/price")
-    public CommonResult<List<GoodsListResult>>getGoodsListByPrice(){
-        return CommonResult.success(goodsService.getGoodsListByPrice(),"操作成功");
+    @ApiOperation(value="获取普通商品列表按type分类 以orderby排序 以keyword搜索",notes="返回商品表")
+    @GetMapping(value = {"/goods/{type}/list/{orderby}/search/{keyword}",
+                        "/goods/{type}/search/{keyword}",
+                        "/goods/{type}/list/{orderby}",
+                        "/goods/{type}"})
+    public CommonResult<List<GoodsListResult>> getGoodsListByPrice(
+            @PathVariable String type,
+            @PathVariable(required = false) String keyword,
+            @PathVariable(required = false) String orderby){
+        if(null==keyword)
+            keyword="";
+        if(null==orderby)
+            orderby="gid";
+        else if(orderby.equals("salecount"))
+            orderby="count";
+        List<GoodsListResult> res=goodsService.getGoodsList(type,orderby,keyword);
+        if(res.size()>0)
+            return CommonResult.success(res,"操作成功");
+        else
+            return CommonResult.failed("无数据");
     }
 }
