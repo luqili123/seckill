@@ -73,6 +73,10 @@ public class FavoriteController {
     public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(User user, @PathVariable(required = false) String keyword){
         if(null==keyword)
             keyword="";
-        return CommonResult.success(favoriteService.searchFavoriteByKeyword(user.getUid(),keyword));
+        List<FavoriteResult> res=favoriteService.searchFavoriteByKeyword(user.getUid(),keyword);
+        if(res.size()>0)
+            return CommonResult.success(res);
+        else
+            return CommonResult.failed("无对应收藏商品");
     }
 }
