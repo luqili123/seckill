@@ -27,23 +27,6 @@ public interface GoodsService {
     * @Author: whn
     * @Date: 2020/1/31
     */
-    List<GoodsListResult> getGoodsList();
+    List<GoodsListResult> getGoodsList(String type,String orderby,String keyword);
 
-    /**
-    * @Description: 获取商品列表（按销量排序）
-    * @Param: []
-    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsListResult>
-    * @Author: whn
-    * @Date: 2020/2/1
-    */
-    List<GoodsListResult> getGoodsListBySales();
-
-    /**
-    * @Description: 获取商品列表（按价格排序）
-    * @Param: []
-    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsListResult>
-    * @Author: whn
-    * @Date: 2020/2/1
-    */
-    List<GoodsListResult> getGoodsListByPrice();
 }

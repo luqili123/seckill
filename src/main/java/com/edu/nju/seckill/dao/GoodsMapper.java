@@ -4,6 +4,7 @@ import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.Goods;
 
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,9 +25,6 @@ public interface GoodsMapper {
 
     List<CarouselItems> selectHotProductCarousel();
 
-    List<GoodsListResult> getGoodsList();
+    List<GoodsListResult> getGoodsList(@Param("type") String type, @Param("order") String orderby, @Param("keyword") String keyword);
 
-    List<GoodsListResult> getGoodsListBySales();
-
-    List<GoodsListResult> getGoodsListByPrice();
 }

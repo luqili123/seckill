@@ -150,26 +150,15 @@
     order by goods.count-sales.sale desc limit 5
   </select>
     <select id="getGoodsList" resultMap="GoodsListResult">
-    select a.gid,a.name,a.description,a.price ,a.image,
-        (case when b.sales is null then 0 else b.sales end) as count
-    from seckill.goods as a left join
-        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
-    on a.gid=b.gid
+    select good.gid as gid ,good.name as name,good.price as price ,good.description as description ,good.image as image ,(case when temp.sales is null then 0 else temp.sales end) as count
+    from((select good.gid as gid ,good.name as name,good.price as price ,good.description as description ,good.image as image ,good.count as count
+            from seckill.goods as good
+            left join
+                (select nid,type
+                from seckill.navigation)as navi on good.nid=navi.nid where type = #{type}) as good
+                left join (SELECT gid, sum(count) as sales from seckill.order group by gid) as temp
+                on good.gid=temp.gid)
+    where good.name like CONCAT('%','${keyword}','%')
+    order by ${order}
   </select>
-    <select id="getGoodsListBySales" resultMap="GoodsListResult">
-    select a.gid,a.name,a.description,a.price ,a.image,
-        (case when b.sales is null then 0 else b.sales end) as count
-    from seckill.goods as a left join
-        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
-    on a.gid=b.gid
-    order by count desc
-    </select>
-    <select id="getGoodsListByPrice" resultMap="GoodsListResult">
-    select a.gid,a.name,a.description,a.price ,a.image,
-        (case when b.sales is null then 0 else b.sales end) as count
-    from seckill.goods as a left join
-        (SELECT gid, sum(count) as sales from seckill.order group by gid) as b
-    on a.gid=b.gid
-    order by a.price asc
-    </select>
 </mapper>
