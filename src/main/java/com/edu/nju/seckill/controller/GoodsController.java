@@ -37,18 +37,18 @@ public class GoodsController {
     }
 
     @ApiOperation(value="获取普通商品列表按type分类 以orderby排序 以keyword搜索",notes="返回商品表")
-    @GetMapping(value = {"/goods/{type}/list/{orderby}/search/{keyword}",
-                        "/goods/{type}/search/{keyword}",
-                        "/goods/{type}/list/{orderby}",
-                        "/goods/{type}"})
+    @GetMapping(value = {"/goods/{type}/list/{orderby}/{keyword}",
+                        "/goods/{type}/list/{orderby}"})
     public CommonResult<List<GoodsListResult>> getGoodsListByPrice(
             @PathVariable String type,
             @PathVariable(required = false) String keyword,
-            @PathVariable(required = false) String orderby){
+            @PathVariable String orderby){
         if(null==keyword)
             keyword="";
-        if(null==orderby)
+        //前端默认值为default
+        if("default".equals(orderby))
             orderby="gid";
+        //前端传输salescount 但数据库中为count字段
         else if(orderby.equals("salecount"))
             orderby="count";
         List<GoodsListResult> res=goodsService.getGoodsList(type,orderby,keyword);
