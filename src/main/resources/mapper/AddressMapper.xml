@@ -9,10 +9,19 @@
     <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
     <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
   </resultMap>
+  <!-- 收货地址列表映射!-->
+  <resultMap id="GetAddressResult" type="com.edu.nju.seckill.domain.dto.GetAddressResult">
+    <id column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiver_phone" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     aid, uid, postcode, address, receiver_name, receiver_phone
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="GetAddressResult" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from address
@@ -103,4 +112,14 @@
       receiver_phone = #{receiverPhone,jdbcType=VARCHAR}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
+  <insert id="addAddress">
+    insert into seckill.address(uid,postcode,address,receiver_name,receiver_phone)
+    values(#{uid},#{postcode},#{address},#{receiver_name},#{receiver_phone})
+  </insert>
+  <select id="getAddress" resultMap="GetAddressResult">
+    SELECT aid as aid,uid as uid,postcode as postcode , address as address, receiver_name as receiver_name,
+    receiver_phone as receiver_phone
+    FROM seckill.address
+    where uid=#{uid}
+  </select>
 </mapper>
