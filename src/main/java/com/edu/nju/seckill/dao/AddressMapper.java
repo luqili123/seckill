@@ -1,7 +1,11 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Address;
+import com.edu.nju.seckill.domain.dto.GetAddressResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AddressMapper {
@@ -17,4 +21,10 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+
+    int addAddress(@Param("uid") Long uid,@Param("postcode")String postcode,
+                   @Param("address") String address,@Param("receiver_name")String receiver_name,
+                   @Param("receiver_phone")String receiver_phone);
+
+    List<GetAddressResult> getAddress(@Param("uid") Long uid);
 }
