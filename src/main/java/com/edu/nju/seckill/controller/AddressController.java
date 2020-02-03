@@ -36,7 +36,7 @@ public class AddressController {
     */
     @ApiOperation(value = "添加收货地址")
     @PostMapping("/address/add")
-    public CommonResult<String> addAddress(User user, @Validated AddressOperationParam param, BindingResult bindingResult){
+    public CommonResult<String> addAddress(User user, @Validated @RequestBody AddressOperationParam param, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             String errorInfo="";
             List<ObjectError> list = bindingResult.getAllErrors();
@@ -80,7 +80,7 @@ public class AddressController {
     */
     @ApiOperation(value = "修改收货地址")
     @PostMapping("address/update/{aid}")
-    public CommonResult<String> updateAddress(User user,@PathVariable Integer aid,@Validated AddressOperationParam param,BindingResult bindingResult){
+    public CommonResult<String> updateAddress(User user,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             String errorInfo="";
             List<ObjectError> list = bindingResult.getAllErrors();
