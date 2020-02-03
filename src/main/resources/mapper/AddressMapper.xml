@@ -127,4 +127,8 @@
     set postcode=#{postcode},address=#{address},receiver_name=#{receiver_name},receiver_phone=#{receiver_phone}
     where aid=#{aid} and uid=#{uid}
   </update>
+  <delete id="deleteAddress">
+    delete from seckill.address
+    where aid=#{aid} and uid =#{uid}
+  </delete>
 </mapper>

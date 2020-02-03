@@ -71,6 +71,13 @@ public class AddressController {
     }
 
 
+    /**
+    * @Description: 修改收货地址
+    * @Param: [user, aid, param, bindingResult]
+    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/2/3
+    */
     @ApiOperation(value = "修改收货地址")
     @PostMapping("address/update/{aid}")
     public CommonResult<String> updateAddress(User user,@PathVariable Integer aid,@Validated AddressOperationParam param,BindingResult bindingResult){
@@ -87,5 +94,21 @@ public class AddressController {
             return CommonResult.success(null,"修改成功");
         else
             return CommonResult.failed("修改失败");
+    }
+
+    /**
+    * @Description: 删除收货地址
+    * @Param: [user, aid]
+    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/2/3
+    */
+    @ApiOperation(value="删除收货地址")
+    @DeleteMapping("/address/delete/{aid}")
+    public CommonResult<String> deleteAddress(User user,@PathVariable Integer aid){
+        if(addressService.deleteAddress(aid,user.getUid()))
+            return CommonResult.success(null,"删除成功");
+        else
+            return CommonResult.failed("删除失败或不存在该地址id");
     }
 }
