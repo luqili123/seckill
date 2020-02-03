@@ -28,5 +28,23 @@ public interface AddressService {
      */
     public List<GetAddressResult> getAddress(Long uid);
 
+    /**
+     * 修改收货地址
+     * @param aid
+     * @param uid
+     * @param postcode
+     * @param address
+     * @param receiver_name
+     * @param receiver_phone
+     * @return
+     */
     public boolean updateAddress(Integer aid,Long uid, String postcode,String address,String receiver_name,String receiver_phone);
+
+    /**
+     * 删除收货地址
+     * @param aid
+     * @param uid
+     * @return
+     */
+    public boolean deleteAddress(Integer aid,Long uid);
 }

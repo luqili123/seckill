@@ -31,4 +31,6 @@ public interface AddressMapper {
     int updateAddress(@Param("aid") Integer aid,@Param("uid") Long uid,@Param("postcode")String postcode,
                       @Param("address") String address,@Param("receiver_name")String receiver_name,
                       @Param("receiver_phone")String receiver_phone);
+
+    int deleteAddress(@Param("aid") Integer aid,@Param("uid") Long uid);
 }

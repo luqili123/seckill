@@ -49,9 +49,32 @@ public class AddressServiceImpl implements AddressService {
         return addressMapper.getAddress(uid);
     }
 
+    /**
+    * @Description: 修改收货地址
+    * @Param: [aid, uid, postcode, address, receiver_name, receiver_phone]
+    * @return: boolean
+    * @Author: whn
+    * @Date: 2020/2/3
+    */
     @Override
     public boolean updateAddress(Integer aid, Long uid, String postcode, String address, String receiver_name, String receiver_phone) {
         int res=addressMapper.updateAddress(aid,uid,postcode,address,receiver_name,receiver_phone);
+        if(res>0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+    * @Description: 删除收货地址
+    * @Param: [aid, uid]
+    * @return: boolean
+    * @Author: whn
+    * @Date: 2020/2/3
+    */
+    @Override
+    public boolean deleteAddress(Integer aid, Long uid) {
+        int res=addressMapper.deleteAddress(aid,uid);
         if(res>0)
             return true;
         else
