@@ -27,4 +27,8 @@ public interface AddressMapper {
                    @Param("receiver_phone")String receiver_phone);
 
     List<GetAddressResult> getAddress(@Param("uid") Long uid);
+
+    int updateAddress(@Param("aid") Integer aid,@Param("uid") Long uid,@Param("postcode")String postcode,
+                      @Param("address") String address,@Param("receiver_name")String receiver_name,
+                      @Param("receiver_phone")String receiver_phone);
 }

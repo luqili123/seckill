@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 * @Date: 2020/2/3
 */
 @ApiModel(value = "新增地址前端参数实体")
-public class AddAddressParam {
+public class AddressOperationParam {
 
     public String getPostcode() {
         return postcode;

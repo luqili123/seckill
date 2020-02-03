@@ -2,6 +2,7 @@ package com.edu.nju.seckill.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 
 /**
 * @Description: 获取地址后端返回结果
@@ -19,10 +20,26 @@ public class GetAddressResult {
     private String postcode;
     @ApiModelProperty(value = "地址信息")
     private String address;
-    @ApiModelProperty(value = "收货人姓名")
+    @ApiModelProperty("收货人姓名")
     private String receiver_name;
-    @ApiModelProperty(value = "收货人手机号")
+    @ApiModelProperty("收货人号码")
     private String receiver_phone;
+
+    public String getReceiver_name() {
+        return receiver_name;
+    }
+
+    public void setReceiver_name(String receiver_name) {
+        this.receiver_name = receiver_name;
+    }
+
+    public String getReceiver_phone() {
+        return receiver_phone;
+    }
+
+    public void setReceiver_phone(String receiver_phone) {
+        this.receiver_phone = receiver_phone;
+    }
 
     public Integer getAid() {
         return aid;
@@ -56,20 +73,5 @@ public class GetAddressResult {
         this.address = address;
     }
 
-    public String getReceiverName() {
-        return receiver_name;
-    }
-
-    public void setReceiverName(String receiver_name) {
-        this.receiver_name = receiver_name;
-    }
-
-    public String getReceiverPhone() {
-        return receiver_phone;
-    }
-
-    public void setReceiverPhone(String receiver_phone) {
-        this.receiver_phone = receiver_phone;
-    }
 
 }

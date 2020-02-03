@@ -1,7 +1,7 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.AddressMapper;
-import com.edu.nju.seckill.domain.dto.AddAddressParam;
+import com.edu.nju.seckill.domain.dto.AddressOperationParam;
 import com.edu.nju.seckill.domain.dto.GetAddressResult;
 import com.edu.nju.seckill.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,9 @@ public class AddressServiceImpl implements AddressService {
      * @Date: 2020/2/3
      */
     @Override
-    public boolean addAddress(Long uid, AddAddressParam param) {
-        int res = addressMapper.addAddress(uid, param.getPostcode(), param.getAddress(),
-                param.getReceiver_name(), param.getReceiver_phone());
+    public boolean addAddress(Long uid, String postcode,String address,String receiver_name,String receiver_phone) {
+        int res = addressMapper.addAddress(uid, postcode, address,
+                receiver_name, receiver_phone);
         if (res > 0)
             return true;
         else
@@ -47,5 +47,14 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<GetAddressResult> getAddress(Long uid) {
         return addressMapper.getAddress(uid);
+    }
+
+    @Override
+    public boolean updateAddress(Integer aid, Long uid, String postcode, String address, String receiver_name, String receiver_phone) {
+        int res=addressMapper.updateAddress(aid,uid,postcode,address,receiver_name,receiver_phone);
+        if(res>0)
+            return true;
+        else
+            return false;
     }
 }
