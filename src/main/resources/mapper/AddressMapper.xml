@@ -122,4 +122,9 @@
     FROM seckill.address
     where uid=#{uid}
   </select>
+  <update id="updateAddress">
+    update seckill.address
+    set postcode=#{postcode},address=#{address},receiver_name=#{receiver_name},receiver_phone=#{receiver_phone}
+    where aid=#{aid} and uid=#{uid}
+  </update>
 </mapper>
