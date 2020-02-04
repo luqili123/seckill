@@ -10,7 +10,7 @@
 <!--自定义的TableItem结果集映射-->
   <resultMap id="TableItem" type="com.edu.nju.seckill.domain.dto.TableItem">
     <id property="type" column="type"></id>
-    <collection property="goodsResult" ofType="com.edu.nju.seckill.domain.dto.GoodsResult">
+    <collection property="goodsResults" ofType="com.edu.nju.seckill.domain.dto.GoodsResult">
       <id column="gid" property="goods_id"></id>
       <result column="image" property="imageUrl"></result>
       <result property="goods_name" column="name"></result>

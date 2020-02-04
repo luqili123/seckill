@@ -1,8 +1,8 @@
 package com.edu.nju.seckill.component;
 
-
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.exception.TokenException;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
      */
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        boolean flag=methodParameter.getParameterType().isAssignableFrom(User.class);
+        boolean flag=methodParameter.getParameterType().isAssignableFrom(CurrentUser.class);
         return flag;
 
     }
@@ -63,20 +63,23 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                                   ModelAndViewContainer modelAndViewContainer,
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory) throws TokenException {
-        User user=null;
+        CurrentUser currentUser=null;
         String header=nativeWebRequest.getHeader(Authorization);
         if(header!=null&&!"".equals(header)){
             if(header.startsWith(StartWith)) {
+                currentUser=new CurrentUser();
                 String token = header.substring(7);
-                user = redisUtil.getUser(token);
-                System.out.println(user);
+                System.out.println(token);
+                currentUser.setToken(token);
+                currentUser.setUser(redisUtil.getUser(token));
+                System.out.println(currentUser);
             }
         }else {
             throw new TokenException(CommonResult.unauthorized("header为空"));
         }
-        if(null==user){
+        if(null==currentUser){
             throw new TokenException(CommonResult.unauthorized("token错误没有获取用户信息"));
         }
-        return user;
+        return currentUser;
     }
 }

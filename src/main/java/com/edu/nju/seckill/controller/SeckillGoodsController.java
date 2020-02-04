@@ -102,7 +102,7 @@ public class SeckillGoodsController {
 
     }
 
-    @GetMapping("/seckill/{sgid}")
+    @GetMapping("/seckill/show/{sgid}")
     public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid){
         SeckillGoods seckillGoods=seckillGoodsService.getSeckillBySgid(sgid);
         if(seckillGoods!=null){
