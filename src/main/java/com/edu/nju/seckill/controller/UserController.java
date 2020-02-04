@@ -2,6 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.domain.dto.UserResult;
 import com.edu.nju.seckill.service.UserService;
@@ -107,9 +108,32 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/logout")
+    public CommonResult<?> logout(CurrentUser currentUser){
+        //1.先判断用户是否已经登录
+        if(currentUser!=null){
+            //若已经登录，则退出登录
+            try{
+                redisUtil.del(currentUser.getToken());
+                return CommonResult.success(false);
+            }catch (Exception e){
+                return CommonResult.validateFailed("token不存在");
+            }
+        }else {
+            //若没有登录，则提示没有登录
+            return CommonResult.validateFailed("请登录！");
+        }
+
+
+
+
+
+    }
     @GetMapping("/users/test/{token}")
     public String test(@PathVariable(value = "token") String token){
         User user=redisUtil.getUser(token);
         return user.toString();
     }
+
+
 }

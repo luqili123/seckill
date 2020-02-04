@@ -15,7 +15,7 @@ public class TableItem implements Serializable {
     @ApiModelProperty(value = "商品的类型")
     private String type;
     @ApiModelProperty(value = "商品的其他信息，包括gid，name，imageUrl，price")
-    private List<GoodsResult> goodsResult;
+    private List<GoodsResult> goodsResults;
 
     public String getType() {
         return type;
@@ -26,18 +26,18 @@ public class TableItem implements Serializable {
     }
 
     public List<GoodsResult> getGoodsResults() {
-        return goodsResult;
+        return goodsResults;
     }
 
     public void setGoodsResults(List<GoodsResult> goodsResults) {
-        this.goodsResult = goodsResults;
+        this.goodsResults = goodsResults;
     }
 
     @Override
     public String toString() {
         return "TableItem{" +
                 "type='" + type + '\'' +
-                ", goodsResults=" + goodsResult +
+                ", goodsResults=" + goodsResults +
                 '}';
     }
 }

@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @ApiModel(value = "商品返回对象")
 public class GoodsResult implements Serializable {
+
     @ApiModelProperty(value = "商品编号",required = true)
     private Long goods_id;
     @ApiModelProperty(value = "商品名称",required = true)

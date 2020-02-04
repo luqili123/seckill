@@ -38,13 +38,15 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         //声明拦截器对象和拦截器请求
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**","/error")
                 .excludePathPatterns("/users/login","/users/signUp"
-                        ,"/menu/tabItems","/menu/navItems","/goods/**","/seckill/list","/seckill/slide");
-
+                        ,"/menu/tabItems","/menu/navItems"
+                        ,"/goods/**"
+                        ,"/seckill/list","/seckill/slide","/seckill/{sgid}");
     }
 
     @Override

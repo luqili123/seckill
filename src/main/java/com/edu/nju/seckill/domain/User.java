@@ -16,13 +16,13 @@ import java.io.Serializable;
 @ApiModel("用户对象实体")
 public class User implements Serializable {
 
-    @ApiModelProperty(value = "用户编号",required = true)
+    @ApiModelProperty(value = "用户编号")
     private Long uid;
 
-    @ApiModelProperty(value = "用户名",required = true)
+    @ApiModelProperty(value = "用户名")
     private String name;
 
-    @ApiModelProperty(value = "密码",required = true)
+    @ApiModelProperty(value = "密码")
     @NotNull(message = "密码不能为空")
     private String password;
 
@@ -41,12 +41,12 @@ public class User implements Serializable {
     @Min(value = 1,message = "地址编号错误")
     private Integer addressId;
 
-    @ApiModelProperty(value = "用户角色",required = true)
+    @ApiModelProperty(value = "用户角色")
     @Min(value = 0,message = "非法角色")
     @Max(value = 2,message = "非法角色")
     private Integer role;
 
-    @ApiModelProperty(value = "词条是否被删除",required = true)
+    @ApiModelProperty(value = "词条是否被删除")
     @Min(value = 0,message = "非法deleteFlag")
     @Max(value = 1,message = "非法deleteFlag")
     private Integer deleteFlag;
