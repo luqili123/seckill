@@ -73,5 +73,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean updatePwd(UserParam userParam) {
+        return  userMapper.updatePwd(userParam)==1;
+    }
+
 
 }

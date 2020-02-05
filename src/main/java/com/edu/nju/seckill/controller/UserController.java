@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -108,6 +110,7 @@ public class UserController {
 
     }
 
+    @ApiOperation(value = "用户退出登录")
     @GetMapping("/user/logout")
     public CommonResult<?> logout(CurrentUser currentUser){
         //1.先判断用户是否已经登录
@@ -125,15 +128,66 @@ public class UserController {
         }
 
 
-
-
-
     }
     @GetMapping("/users/test/{token}")
     public String test(@PathVariable(value = "token") String token){
         User user=redisUtil.getUser(token);
         return user.toString();
     }
+
+    @ApiOperation(value = "使用手机号密码，修改密码")
+    @PostMapping("/user/sendpwd")
+    public CommonResult<?> changePwdWithPwd(@RequestBody UserParam userParam,CurrentUser currentUser){
+        //改进：数据库和redis都要操作成功，这里应该加事务防止部分成功,若失败则抛出全局异常
+        if(currentUser!=null) {
+            String encodePwd=encoder.encode(userParam.getPassword());
+            if(encoder.matches(userParam.getPassword(),currentUser.getUser().getPassword())){
+                return CommonResult.validateFailed("不能和原始密码相同！");
+            }else{
+                try{
+                    //新密码加密
+                    userParam.setPassword(encodePwd);
+                    //修改数据库密码
+                    if(userService.updatePwd(userParam)){
+                        //删除redis缓存
+                        redisUtil.del(currentUser.getToken());
+                        return CommonResult.success("修改成功！");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return CommonResult.failed("操作失败，请稍后再试!");
+                }
+            }
+
+        }else {
+            return CommonResult.unauthorized("未登录!");
+        }
+        return CommonResult.unauthorized();
+    }
+
+    @ApiOperation(value = "根据手机号，发送验证码短信")
+    @PostMapping("/user/chkCode")
+    public CommonResult<?> sendMessage(@RequestBody String phone){
+        if(userService.hasPhone(phone)){
+            //发送验证码
+            return CommonResult.success("发送成功！");
+        }else {
+            return CommonResult.validateFailed("手机号码未注册或不存在");
+        }
+    }
+
+    @ApiOperation(value = "验证验证码是否正确")
+    @PostMapping("/user/verify")
+    public CommonResult<?> verify(@RequestBody String phone,@RequestBody String chkCode){
+        return CommonResult.success("输入正确");
+    }
+
+
+
+
+
+
+
 
 
 }
