@@ -7,6 +7,8 @@ import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.service.GoodsService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,16 @@ public class GoodsController {
     }
 
     @ApiOperation(value="获取普通商品列表按type分类 以orderby排序 以keyword搜索",notes="返回商品表")
-    @GetMapping(value = {"/goods/{type}/list/{orderby}/{keyword}",
-                        "/goods/{type}/list/{orderby}"})
+    @GetMapping(value = {"/goods/{type}/list/{orderby}/{pageNum}/{pageSize}/{keyword}",
+                        "/goods/{type}/list/{orderby}/{pageNum}/{pageSize}"})
     public CommonResult<List<GoodsListResult>> getGoodsListByPrice(
             @PathVariable String type,
             @PathVariable(required = false) String keyword,
+            @PathVariable Integer pageNum,
+            @PathVariable Integer pageSize,
             @PathVariable String orderby){
+        Page page = PageHelper.startPage(pageNum,pageSize,true);
+        Object obj=page.getTotal();
         if(null==keyword)
             keyword="";
         //前端默认值为default
