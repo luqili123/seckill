@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserParam;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,4 +20,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int updatePwd(UserParam userParam);
 }

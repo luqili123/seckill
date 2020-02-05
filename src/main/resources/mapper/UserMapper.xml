@@ -130,6 +130,11 @@
       delete_flag = #{deleteFlag,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=BIGINT}
   </update>
+  <update id="updatePwd" parameterType="com.edu.nju.seckill.domain.dto.UserParam">
+    update user
+    set   password=#{password}
+    where phone=#{phone}
+  </update>
 
 
 </mapper>

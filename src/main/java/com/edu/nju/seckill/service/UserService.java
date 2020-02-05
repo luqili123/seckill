@@ -30,4 +30,10 @@ public interface UserService {
      */
     public User getUserByPhone(String phone);
 
+    /***
+     * 更新用户密码
+     * @param userParam
+     * @return
+     */
+    boolean updatePwd(UserParam userParam);
 }

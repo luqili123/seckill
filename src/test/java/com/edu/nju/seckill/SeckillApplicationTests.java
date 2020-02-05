@@ -6,8 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
+import com.edu.nju.seckill.service.UserService;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
@@ -39,6 +41,9 @@ class SeckillApplicationTests {
 
     @Autowired
     SeckillGoodsService seckillGoodsService;
+
+    @Autowired
+    UserService userService;
 
 
     @Test
@@ -163,8 +168,15 @@ class SeckillApplicationTests {
     public void testSnowFlake(){
         for (int i = 0; i < 30; i++) {
             System.out.println(OrderIdUtils.getInstance().nextId());
-
         }
+    }
+    @Test
+    public void testChangePwd(){
+        UserParam userParam=new UserParam();
+        userParam.setPhone("15651879552");
+        userParam.setPassword(encoder.encode("1234567"));
+
+        System.out.println(userService.updatePwd(userParam));
 
     }
 }
