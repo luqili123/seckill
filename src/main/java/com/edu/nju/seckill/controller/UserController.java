@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -136,7 +137,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "使用手机号密码，修改密码")
-    @PostMapping("/user/sendpwd")
+    @PatchMapping("/user/sendpwd")
     public CommonResult<?> changePwdWithPwd(@RequestBody UserParam userParam,CurrentUser currentUser){
         //改进：数据库和redis都要操作成功，这里应该加事务防止部分成功,若失败则抛出全局异常
         if(currentUser!=null) {
