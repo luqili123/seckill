@@ -3,6 +3,7 @@ package com.edu.nju.seckill.controller;
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.AddressOperationParam;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.GetAddressResult;
 import com.edu.nju.seckill.service.AddressService;
 import io.swagger.annotations.Api;
@@ -36,7 +37,8 @@ public class AddressController {
     */
     @ApiOperation(value = "添加收货地址")
     @PostMapping("/address/add")
-    public CommonResult<String> addAddress(User user, @Validated @RequestBody AddressOperationParam param, BindingResult bindingResult){
+    public CommonResult<String> addAddress(CurrentUser currentUser, @Validated @RequestBody AddressOperationParam param, BindingResult bindingResult){
+        User user=currentUser.getUser();
         if(bindingResult.hasErrors()){
             String errorInfo="";
             List<ObjectError> list = bindingResult.getAllErrors();
@@ -61,7 +63,8 @@ public class AddressController {
     */
     @ApiOperation(value = "获取收货地址列表")
     @GetMapping("/address/list")
-    public CommonResult<List<GetAddressResult>> getAddress(User user){
+    public CommonResult<List<GetAddressResult>> getAddress(CurrentUser currentUser){
+        User user=currentUser.getUser();
         List<GetAddressResult> res = addressService.getAddress(user.getUid());
         if(res.size()>0)
             return CommonResult.success(res,"获取收货地址成功");
@@ -80,7 +83,8 @@ public class AddressController {
     */
     @ApiOperation(value = "修改收货地址")
     @PostMapping("address/update/{aid}")
-    public CommonResult<String> updateAddress(User user,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param,BindingResult bindingResult){
+    public CommonResult<String> updateAddress(CurrentUser currentUser,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param,BindingResult bindingResult){
+        User user=currentUser.getUser();
         if(bindingResult.hasErrors()){
             String errorInfo="";
             List<ObjectError> list = bindingResult.getAllErrors();
@@ -105,7 +109,8 @@ public class AddressController {
     */
     @ApiOperation(value="删除收货地址")
     @DeleteMapping("/address/delete/{aid}")
-    public CommonResult<String> deleteAddress(User user,@PathVariable Integer aid){
+    public CommonResult<String> deleteAddress(CurrentUser currentUser,@PathVariable Integer aid){
+        User user=currentUser.getUser();
         if(addressService.deleteAddress(aid,user.getUid()))
             return CommonResult.success(null,"删除成功");
         else

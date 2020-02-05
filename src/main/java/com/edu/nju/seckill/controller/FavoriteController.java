@@ -2,6 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.FavoriteResult;
 import com.edu.nju.seckill.service.FavoriteService;
 import io.swagger.annotations.Api;
@@ -37,7 +38,8 @@ public class FavoriteController {
 
     @ApiOperation(value = "添加收藏夹",notes = "addFavorite")
     @PostMapping("/favorite")
-    public CommonResult<String> addFavorite(User user, @RequestParam long gid){
+    public CommonResult<String> addFavorite(CurrentUser currentUser, @RequestParam long gid){
+        User user=currentUser.getUser();
         if(favoriteService.addFavorite(user.getUid(),gid)) {
             return CommonResult.success(null, "添加成功");
         }else {
@@ -47,7 +49,7 @@ public class FavoriteController {
 
     /**
     * @Description: 通过收藏夹表主键fid删除收藏记录
-    * @Param: [fid] 存疑！原接口显示通过主键fid删除
+    * @Param: [fid]
     * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
     * @Author: whn
     * @Date: 2020/1/29
@@ -70,7 +72,8 @@ public class FavoriteController {
     */
     @ApiOperation(value="从收藏夹通过keyword搜索",notes="searchFavoriteByKeyword")
     @GetMapping(value = {"/favorite/list/{keyword}","/favorite/list"})
-    public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(User user, @PathVariable(required = false) String keyword){
+    public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(CurrentUser currentUser, @PathVariable(required = false) String keyword){
+        User user=currentUser.getUser();
         if(null==keyword)
             keyword="";
         List<FavoriteResult> res=favoriteService.searchFavoriteByKeyword(user.getUid(),keyword);
