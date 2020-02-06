@@ -29,7 +29,6 @@ public class User implements Serializable {
     @ApiModelProperty(value = "邮箱")
     @Email(message = "邮箱格式错误"
             ,regexp = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$")
-
     private String email;
 
     @ApiModelProperty(value = "电话号码")

@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
@@ -173,10 +174,19 @@ class SeckillApplicationTests {
     @Test
     public void testChangePwd(){
         UserParam userParam=new UserParam();
-        userParam.setPhone("15651879552");
-        userParam.setPassword(encoder.encode("1234567"));
+        userParam.setPhone("1565187952");
+        userParam.setPassword(encoder.encode("123456"));
 
         System.out.println(userService.updatePwd(userParam));
+    }
+
+    @Test
+    public void testupdateInfo(){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setName("lql");
+        userInfo.setEmail("1036110216@qq.com");
+        userInfo.setPhone("15651879552");
+        System.out.println( userService.updateInfo(userInfo));
 
     }
 }

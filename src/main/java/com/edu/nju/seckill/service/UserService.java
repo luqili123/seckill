@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 
 /**
@@ -36,4 +37,11 @@ public interface UserService {
      * @return
      */
     boolean updatePwd(UserParam userParam);
+
+    /***
+     * 更新用户名和邮箱
+     * @param userInfo
+     * @return
+     */
+    boolean updateInfo(UserInfo userInfo);
 }

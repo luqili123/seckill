@@ -3,6 +3,7 @@ package com.edu.nju.seckill.controller;
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
+import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.domain.dto.UserResult;
 import com.edu.nju.seckill.service.UserService;
@@ -54,7 +55,7 @@ public class UserController {
 
 
     @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
-    @PostMapping("/users/signUp")
+    @PostMapping("/user/signUp")
     public CommonResult<Boolean> register(@RequestBody  @Validated UserParam userParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -76,7 +77,7 @@ public class UserController {
 
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
-    @PostMapping("/users/login")
+    @PostMapping("/user/login")
     public CommonResult<UserResult> login(@RequestBody @Validated UserParam userParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -130,15 +131,15 @@ public class UserController {
 
 
     }
-    @GetMapping("/users/test/{token}")
+    @GetMapping("/user/test/{token}")
     public String test(@PathVariable(value = "token") String token){
         User user=redisUtil.getUser(token);
         return user.toString();
     }
 
-    @ApiOperation(value = "使用手机号密码，修改密码")
-    @PatchMapping("/user/sendpwd")
-    public CommonResult<?> changePwdWithPwd(@RequestBody UserParam userParam,CurrentUser currentUser){
+    @ApiOperation(value = "修改密码")
+    @PatchMapping("/user/resetpwd")
+    public CommonResult<?> changePwdWthPwd(@RequestBody UserParam userParam,CurrentUser currentUser){
         //改进：数据库和redis都要操作成功，这里应该加事务防止部分成功,若失败则抛出全局异常
         if(currentUser!=null) {
             String encodePwd=encoder.encode(userParam.getPassword());
@@ -153,6 +154,8 @@ public class UserController {
                         //删除redis缓存
                         redisUtil.del(currentUser.getToken());
                         return CommonResult.success("修改成功！");
+                    }else {
+                        return CommonResult.validateFailed();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -163,7 +166,7 @@ public class UserController {
         }else {
             return CommonResult.unauthorized("未登录!");
         }
-        return CommonResult.unauthorized();
+
     }
 
     @ApiOperation(value = "根据手机号，发送验证码短信")
@@ -180,15 +183,64 @@ public class UserController {
     @ApiOperation(value = "验证验证码是否正确")
     @PostMapping("/user/verify")
     public CommonResult<?> verify(@RequestBody String phone,@RequestBody String chkCode){
-        return CommonResult.success("输入正确");
+        return CommonResult.success("输入正确！");
+    }
+
+    @ApiOperation("重置密码,这是个危险方法，后面解决")
+    @PatchMapping("/user/sendpwd")
+    public CommonResult<?> resetPassword(@RequestBody UserParam userParam,CurrentUser currentUser){
+        try{
+            //1.修改数据库
+            if(userService.updatePwd(userParam)){
+                if(redisUtil.hasKey(currentUser.getToken())){
+                    //2.删除redis缓存
+                    redisUtil.del(currentUser.getToken());
+                }
+                return CommonResult.success("修改成功！");
+
+            }else {
+                return CommonResult.validateFailed();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return CommonResult.failed();
+        }
     }
 
 
+    @ApiOperation("修改用户信息（邮箱，昵称）")
+    @PatchMapping("/user/info")
+    public CommonResult<?> resetPassword(@RequestBody @Validated UserInfo userInfo, CurrentUser currentUser, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            //可删
+            List<ObjectError> list = bindingResult.getAllErrors();
+            for (ObjectError error : list) {
+                System.out.println(error.toString());
+            }
+            return CommonResult.validateFailed("格式错误");
+        }
+        if(currentUser!=null){
+            userInfo.setPhone(currentUser.getUser().getPhone());
+            if(userService.updateInfo(userInfo)){
+                currentUser.getUser().setEmail(userInfo.getEmail());
+                currentUser.getUser().setName(userInfo.getName());
+                //生成新token
+                String token=jwtUtil.generate(currentUser.getUser());
+                redisUtil.saveUser(currentUser.getUser(),token,expire);
+                if(redisUtil.hasKey(currentUser.getToken())){
+                    redisUtil.del(currentUser.getToken());
+                }
+                currentUser.setToken(token);
+                return CommonResult.success(token);
+            }else {
+                return CommonResult.validateFailed();
+            }
+        }else {
+            return CommonResult.unauthorized();
+        }
 
-
-
-
-
+    }
 
 
 }
