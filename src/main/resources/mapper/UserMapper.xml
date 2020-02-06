@@ -135,6 +135,13 @@
     set   password=#{password}
     where phone=#{phone}
   </update>
+  <update id="updateInfo" parameterType="com.edu.nju.seckill.domain.dto.UserInfo">
+    update user
+    set
+        name = #{name,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR}
+    where phone=#{phone}
+  </update>
 
 
 </mapper>

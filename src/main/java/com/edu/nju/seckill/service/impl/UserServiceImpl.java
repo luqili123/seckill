@@ -2,6 +2,7 @@ package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.UserMapper;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    @Autowired
-    private HttpServletRequest request;
 
     /***
      * 判断该手机号是否已经存在（注册）
@@ -76,6 +75,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updatePwd(UserParam userParam) {
         return  userMapper.updatePwd(userParam)==1;
+    }
+
+    @Override
+    public boolean updateInfo(UserInfo userInfo) {
+        return userMapper.updateInfo(userInfo)==1;
     }
 
 
