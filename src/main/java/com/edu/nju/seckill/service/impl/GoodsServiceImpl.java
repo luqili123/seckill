@@ -5,6 +5,7 @@ import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
+import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
 import com.edu.nju.seckill.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,17 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodsDetailResult> getGoodDetail(long gid) {
         return goodsMapper.getGoodDetail(gid);
+    }
+
+
+    /**
+     * 商品分类搜索--首页
+     * @param keyword
+     * @return
+     */
+    @Override
+    public List<GoodsSearchResult> searchGoodsForIndex(String keyword) {
+        return goodsMapper.searchGoodsForIndex(keyword);
     }
 
 
