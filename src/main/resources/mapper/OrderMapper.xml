@@ -18,6 +18,16 @@
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="seckill_flag" property="seckillFlag" jdbcType="INTEGER" />
   </resultMap>
+  <!-- searchOrder映射-->
+  <resultMap id="SearchOrder" type="com.edu.nju.seckill.domain.dto.OrderSearchResult">
+    <id column="gid" property="goods_id" jdbcType="BIGINT"/>
+    <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+    <result column="name" property="goods_name" jdbcType="VARCHAR"/>
+    <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+    <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR"/>
+    <result column="count" property="order_number" jdbcType="INTEGER"/>
+    <result column="create_time" property="create_name" jdbcType="TIMESTAMP"/>
+  </resultMap>
   <sql id="Base_Column_List" >
     oid, uid, gid, receiver_phone, receiver_name, address, postcode, count, price, create_time, 
     pay_time, pay_type, send_time, status, seckill_flag
@@ -207,4 +217,17 @@
       seckill_flag = #{seckillFlag,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=BIGINT}
   </update>
+  <select id="searchOrder" resultMap="SearchOrder">
+    select orders.gid ,goods.image ,goods.name ,
+           orders.price ,orders.receiver_name,
+           orders.count ,orders.create_time
+    from seckill.goods as goods
+        right join
+         (SELECT gid , price,receiver_name,count,create_time FROM seckill.order
+            where uid =#{uid}) as orders
+        on goods.gid=orders.gid
+    where
+        goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
+
+  </select>
 </mapper>
