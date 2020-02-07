@@ -50,4 +50,13 @@ public interface GoodsService {
     * @Date: 2020/2/7
     */
     List<GoodsSearchResult> searchGoodsForIndex(String keyword);
+    
+    /**
+    * @Description: 商品搜索-获取首页商品搜索框的搜索提示
+    * @Param: [keyword]
+    * @return: java.util.List<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/2/8
+    */
+    List<String> getGoodsIndexTips(String keyword);
 }

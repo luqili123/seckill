@@ -206,4 +206,9 @@
     left join seckill.navigation as navi
     on navi.nid=good.nid
     </select>
+    <select id="getGoodsIndexTips" resultType="java.lang.String">
+        SELECT name FROM seckill.goods
+        where name like CONCAT('%','${keyword}','%')
+        limit 8
+    </select>
 </mapper>
