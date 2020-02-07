@@ -8,6 +8,7 @@ import com.edu.nju.seckill.domain.dto.GetAddressResult;
 import com.edu.nju.seckill.service.AddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -82,7 +83,7 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value = "修改收货地址")
-    @PostMapping("address/update/{aid}")
+    @PostMapping("/address/update/{aid}")
     public CommonResult<String> updateAddress(CurrentUser currentUser,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param,BindingResult bindingResult){
         User user=currentUser.getUser();
         if(bindingResult.hasErrors()){
@@ -115,5 +116,23 @@ public class AddressController {
             return CommonResult.success(null,"删除成功");
         else
             return CommonResult.failed("删除失败或不存在该地址id");
+    }
+
+    /**
+    * @Description: 修改默认收货地址
+    * @Param: [currentUser, aid]
+    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/2/7
+    */
+    @ApiOperation(value = "设置默认地址")
+    @PutMapping("/address/default")
+    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser, @RequestParam Integer aid){
+        User user=currentUser.getUser();
+        Long uid=user.getUid();
+        if(addressService.updateDefaultAddress(uid,aid))
+            return CommonResult.success("修改成功");
+        else
+            return CommonResult.failed("修改失败");
     }
 }

@@ -28,9 +28,16 @@ public interface AddressMapper {
 
     List<GetAddressResult> getAddress(@Param("uid") Long uid);
 
+    /*
+        该uid是否属于该aid
+     */
+    int isBelongToCurrentUser(@Param("uid") Long uid,@Param("aid") Integer aid);
+
     int updateAddress(@Param("aid") Integer aid,@Param("uid") Long uid,@Param("postcode")String postcode,
                       @Param("address") String address,@Param("receiver_name")String receiver_name,
                       @Param("receiver_phone")String receiver_phone);
 
     int deleteAddress(@Param("aid") Integer aid,@Param("uid") Long uid);
+
+    int updateDefaultAddress(@Param("uid") Long uid,@Param("aid") Integer aid);
 }

@@ -47,4 +47,13 @@ public interface AddressService {
      * @return
      */
     public boolean deleteAddress(Integer aid,Long uid);
+    
+    /**
+    * @Description: 设置默认地址
+    * @Param: [uid, aid]
+    * @return: boolean
+    * @Author: whn
+    * @Date: 2020/2/7
+    */
+    public boolean updateDefaultAddress(Long uid,Integer aid);
 }
