@@ -49,13 +49,7 @@ public class OrderSearchResult {
         this.order_number = order_number;
     }
 
-    public Date getCreate_name() {
-        return create_name;
-    }
 
-    public void setCreate_name(Date create_name) {
-        this.create_name = create_name;
-    }
 
     @ApiModelProperty("gid")
     Long goods_id;
@@ -67,8 +61,17 @@ public class OrderSearchResult {
     String receiver_name;
     @ApiModelProperty("购买数量")
     Integer order_number;
-    @ApiModelProperty("订单创建时间")
-    Date create_name;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @ApiModelProperty("订单状态")
+    Integer status;
 
     public String getGoods_name() {
         return goods_name;
