@@ -36,6 +36,19 @@
         <result column="rest" property="rest" jdbcType="INTEGER"/>
         <result column="display_time" property="displaytime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <!--    searchGoodsForIndex 商品搜索列表 首页分类用-->
+    <resultMap id="SearchGoodsForIndex" type="com.edu.nju.seckill.domain.dto.GoodsSearchResult">
+        <result column="name" property="type_zh" jdbcType="VARCHAR"/>
+        <result column="type" property="type_en" jdbcType="VARCHAR"/>
+        <collection property="list" ofType="com.edu.nju.seckill.domain.dto.GoodsSearchList">
+            <id column="gid" property="goods_id" jdbcType="BIGINT"/>
+            <result column="names" property="goods_name" jdbcType="VARCHAR"/>
+            <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+            <result column="description" property="goods_desc" jdbcType="VARCHAR"/>
+            <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
     <sql id="Base_Column_List">
     gid, name, price, nid, description, image, count, display_time
   </sql>
@@ -183,5 +196,14 @@
         from seckill.order
         where gid =#{gid})as sales
     on goods.gid=sales.gid
+    </select>
+    <select id="searchGoodsForIndex" resultMap="SearchGoodsForIndex">
+    select good.gid,good.name as names,good.price,good.description,navi.type,navi.name
+    from
+        (select gid,name,price,description,image,nid
+        from seckill.goods
+        where name like CONCAT('%','${keyword}','%') or description like CONCAT('%','${keyword}','%') )as good
+    left join seckill.navigation as navi
+    on navi.nid=good.nid
     </select>
 </mapper>

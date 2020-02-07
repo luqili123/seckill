@@ -2,10 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.User;
-import com.edu.nju.seckill.domain.dto.CarouselItems;
-import com.edu.nju.seckill.domain.dto.FavoriteResult;
-import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
-import com.edu.nju.seckill.domain.dto.GoodsListResult;
+import com.edu.nju.seckill.domain.dto.*;
 import com.edu.nju.seckill.service.GoodsService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -16,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -42,7 +41,7 @@ public class GoodsController {
     @ApiOperation(value="获取普通商品列表按type分类 以orderby排序 以keyword搜索",notes="返回商品表")
     @GetMapping(value = {"/goods/{type}/list/{orderby}/{pageNum}/{pageSize}/{keyword}",
                         "/goods/{type}/list/{orderby}/{pageNum}/{pageSize}"})
-    public CommonResult<List<GoodsListResult>> getGoodsListByPrice(
+    public CommonResult<List<GoodsListResult>> getGoodsList(
             @PathVariable String type,
             @PathVariable(required = false) String keyword,
             @PathVariable Integer pageNum,
@@ -74,5 +73,20 @@ public class GoodsController {
         else{
             return CommonResult.failed("无此商品");
         }
+    }
+
+    @ApiOperation(value = "商品搜索-获取商城首页商品列表。参数（可选）：keyword")
+    @GetMapping({"/goods/list/{keyword}","/goods/list"})
+    public CommonResult<Map> searchGoodForIndex(
+            @PathVariable(required = false) String keyword){
+        Map<String,List<GoodsSearchResult>> map=new HashMap<>();
+        if(null==keyword)
+            keyword="";
+        List<GoodsSearchResult> res=goodsService.searchGoodsForIndex(keyword);
+        map.put("list",res);
+        if(res.size()>0)
+            return CommonResult.success(map,"操作成功");
+        else
+            return CommonResult.failed("无数据");
     }
 }

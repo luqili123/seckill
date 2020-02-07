@@ -5,6 +5,7 @@ import com.edu.nju.seckill.domain.Goods;
 
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
+import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +30,6 @@ public interface GoodsMapper {
     List<GoodsListResult> getGoodsList(@Param("type") String type, @Param("order") String orderby, @Param("keyword") String keyword);
 
     List<GoodsDetailResult> getGoodDetail(@Param("gid") Long gid);
+
+    List<GoodsSearchResult> searchGoodsForIndex(String keyword);
 }

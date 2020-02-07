@@ -4,6 +4,7 @@ import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
+import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
 
 import java.util.List;
 
@@ -39,4 +40,14 @@ public interface GoodsService {
     * @Date: 2020/2/1
     */
     List<GoodsDetailResult> getGoodDetail(long gid);
+
+    
+    /**
+    * @Description: 首页搜索商品（按分类）
+    * @Param: [keyword]
+    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsSearchResult>
+    * @Author: whn
+    * @Date: 2020/2/7
+    */
+    List<GoodsSearchResult> searchGoodsForIndex(String keyword);
 }
