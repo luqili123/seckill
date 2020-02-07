@@ -89,4 +89,15 @@ public class GoodsController {
         else
             return CommonResult.failed("无数据");
     }
+
+    @ApiOperation(value = "商品搜索-获取首页商品搜索框的搜索提示")
+    @GetMapping(value = {"/goods/tips/{keyword}","/goods/tips"})
+    public CommonResult<Map> getGoodsIndexTips(@PathVariable(required = false)String keyword){
+        if(null==keyword)
+            return CommonResult.success(null,"操作成功数据为空");
+        List<String> list=goodsService.getGoodsIndexTips(keyword);
+        Map<String,List> map=new HashMap<>();
+        map.put("results",list);
+        return CommonResult.success(map,"操作成功");
+    }
 }

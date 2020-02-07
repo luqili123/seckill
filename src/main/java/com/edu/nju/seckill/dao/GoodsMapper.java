@@ -32,4 +32,6 @@ public interface GoodsMapper {
     List<GoodsDetailResult> getGoodDetail(@Param("gid") Long gid);
 
     List<GoodsSearchResult> searchGoodsForIndex(String keyword);
+
+    List<String> getGoodsIndexTips(String keyword);
 }

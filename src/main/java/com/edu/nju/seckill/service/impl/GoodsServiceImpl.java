@@ -72,5 +72,17 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.searchGoodsForIndex(keyword);
     }
 
+    /**
+    * @Description: 商品搜索-获取首页商品搜索框的搜索提示
+    * @Param: [keyword]
+    * @return: java.util.List<java.lang.String>
+    * @Author: whn
+    * @Date: 2020/2/8
+    */
+    @Override
+    public List<String> getGoodsIndexTips(String keyword) {
+        return goodsMapper.getGoodsIndexTips(keyword);
+    }
+
 
 }
