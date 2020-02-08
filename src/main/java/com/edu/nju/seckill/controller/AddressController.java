@@ -109,7 +109,7 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value="删除收货地址")
-    @DeleteMapping("/address/delete/{aid}")
+    @DeleteMapping("/address/deleteaddress/{aid}")
     public CommonResult<String> deleteAddress(CurrentUser currentUser,@PathVariable Integer aid){
         User user=currentUser.getUser();
         if(addressService.deleteAddress(aid,user.getUid()))
