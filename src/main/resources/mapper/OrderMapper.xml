@@ -42,18 +42,20 @@
     delete from order
     where oid = #{oid,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.edu.nju.seckill.domain.Order" >
-    insert into order (oid, uid, gid, receiver_phone, 
-      receiver_name, address, postcode, 
-      count, price, create_time, 
-      pay_time, pay_type, send_time, 
+   insert into seckill.order (oid, uid, gid, receiver_phone,
+      receiver_name, address, postcode,
+      count, price, create_time,
+      pay_time, pay_type, send_time,
       status, seckill_flag)
-    values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{gid,jdbcType=BIGINT}, #{receiverPhone,jdbcType=VARCHAR}, 
-      #{receiverName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{seckillFlag,jdbcType=INTEGER})
+    values (#{oid}, #{uid}, #{gid}, #{receiverPhone},
+      #{receiverName}, #{address}, #{postcode},
+      #{count}, #{price}, #{createTime},
+      #{payTime}, #{payType}, #{sendTime},
+      #{status}, #{seckillFlag})
   </insert>
+
   <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Order" >
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -151,6 +153,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Order" >
     update order
     <set >

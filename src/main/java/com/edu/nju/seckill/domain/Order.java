@@ -1,7 +1,9 @@
 package com.edu.nju.seckill.domain;
 
+import com.edu.nju.seckill.domain.dto.OrderParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.omg.CORBA.ORB;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -61,6 +63,28 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "订单是否为秒杀订单（0代表不是，1代表是）",required = true)
 
     private Integer seckillFlag;
+
+
+    public Order() {
+    }
+
+    public Order(OrderParam orderParam,long uid,long oid) {
+        this.oid=oid;
+        this.uid=uid;
+        this.gid=orderParam.getGid();
+        this.receiverName=orderParam.getReceiverName();
+        this.receiverPhone=orderParam.getReceiverPhone();
+        this.address=orderParam.getAddress();
+        this.postcode=orderParam.getPostcode();
+        this.count=orderParam.getCount();
+        this.price=orderParam.getPrice();
+        this.createTime=new Date(System.currentTimeMillis());
+        this.payTime=null;
+        this.payType=null;
+        this.sendTime=null;
+        this.status=1;//代付款
+        this.seckillFlag=1;//秒杀商品
+    }
 
     public Long getOid() {
         return oid;
@@ -180,5 +204,26 @@ public class Order implements Serializable {
 
     public void setSeckillFlag(Integer seckillFlag) {
         this.seckillFlag = seckillFlag;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oid=" + oid +
+                ", uid=" + uid +
+                ", gid=" + gid +
+                ", receiverPhone='" + receiverPhone + '\'' +
+                ", receiverName='" + receiverName + '\'' +
+                ", address='" + address + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", count=" + count +
+                ", price=" + price +
+                ", createTime=" + createTime +
+                ", payTime=" + payTime +
+                ", payType='" + payType + '\'' +
+                ", sendTime=" + sendTime +
+                ", status=" + status +
+                ", seckillFlag=" + seckillFlag +
+                '}';
     }
 }

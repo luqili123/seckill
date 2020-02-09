@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.service;
 
+import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface OrderService {
     * @Date: 2020/2/7
     */
     List<OrderSearchResult> searchOrder(Long uid, String keyword);
+
+    /***
+     * 创建订单
+     * @param order
+     */
+    boolean createOrder(Order order);
 }
