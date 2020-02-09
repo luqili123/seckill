@@ -2,6 +2,7 @@ package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +10,10 @@ import java.util.List;
 
 @Repository
 public interface OrderMapper {
+
     int deleteByPrimaryKey(Long oid);
 
-    int insert(Order record);
+    int insert(Order order);
 
     int insertSelective(Order record);
 
@@ -22,4 +24,5 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     List<OrderSearchResult> searchOrder(@Param("uid") Long uid, @Param("keyword") String keyword);
+
 }

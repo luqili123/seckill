@@ -5,16 +5,20 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.edu.nju.seckill.dao.OrderMapper;
+import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.service.NavigationService;
+import com.edu.nju.seckill.service.OrderService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import com.edu.nju.seckill.service.UserService;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.OrderUtils;
@@ -46,6 +50,11 @@ class SeckillApplicationTests {
     @Autowired
     UserService userService;
 
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    OrderMapper orderMapper;
 
     @Test
     void contextLoads() {
@@ -188,5 +197,30 @@ class SeckillApplicationTests {
         userInfo.setPhone("15651879552");
         System.out.println( userService.updateInfo(userInfo));
 
+    }
+
+    @Test
+    public void testCreateOrder(){
+        OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
+        Long oid= orderIdUtils.nextId();
+        System.out.println(oid);
+        Order order=new Order();
+        order.setOid(oid);
+        order.setUid(6L);
+        order.setGid(11L);
+        order.setReceiverName("lql");
+        order.setReceiverPhone("1312");
+        order.setAddress("12312");
+        order.setCount(1);
+        order.setPrice(1000.1d);
+        order.setCreateTime(new Date(System.currentTimeMillis()));
+        order.setStatus(1);
+        order.setSeckillFlag(0);
+        order.setPayTime(null);
+        order.setPayType("1");
+        order.setPostcode("123");
+        order.setSendTime(null);
+        System.out.println(order);
+        orderMapper.insert(order);
     }
 }
