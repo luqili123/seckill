@@ -63,6 +63,7 @@
       from seckill_goods as A,(select max(start_time) start_time from seckill_goods) as B
       where A.start_time=B.start_time;
 
+      where A.start_time=B.start_time;
     </select>
 
 
