@@ -206,21 +206,33 @@ class SeckillApplicationTests {
         System.out.println(oid);
         Order order=new Order();
         order.setOid(oid);
-        order.setUid(6L);
-        order.setGid(11L);
+        order.setUid(11L);
+        order.setGid(14L);
         order.setReceiverName("lql");
-        order.setReceiverPhone("1312");
-        order.setAddress("12312");
+        order.setReceiverPhone("12332112323");
+        order.setAddress("江苏省南京市南京大学");
         order.setCount(1);
         order.setPrice(1000.1d);
         order.setCreateTime(new Date(System.currentTimeMillis()));
-        order.setStatus(1);
+        order.setStatus(5);
         order.setSeckillFlag(0);
         order.setPayTime(null);
-        order.setPayType("1");
+        order.setPayType(null);
         order.setPostcode("123");
         order.setSendTime(null);
         System.out.println(order);
-        orderMapper.insert(order);
+        System.out.println(orderMapper.insert(order));
+
+    }
+//    @Test
+//    public void testDeleteOrder(){
+//
+//        System.out.println(orderService.deleteByOid(1226506380121870336l));
+//    }
+
+    @Test
+    public void testGetOrderByStatus(){
+        System.out.println( orderService.getOrderByStatus(1));
+
     }
 }
