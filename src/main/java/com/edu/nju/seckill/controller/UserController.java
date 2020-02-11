@@ -78,7 +78,8 @@ public class UserController {
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
     @PostMapping("/user/login")
-    public CommonResult<UserResult> login(@RequestBody @Validated UserParam userParam, BindingResult bindingResult){
+    public CommonResult<UserResult> login(@RequestBody @Validated UserParam userParam
+            , BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             List<ObjectError> list = bindingResult.getAllErrors();
@@ -190,7 +191,9 @@ public class UserController {
     @PatchMapping("/user/sendpwd")
     public CommonResult<?> resetPassword(@RequestBody UserParam userParam,CurrentUser currentUser){
         try{
+
             //1.修改数据库
+            userParam.setPassword(encoder.encode(userParam.getPassword()));
             if(userService.updatePwd(userParam)){
                 if(redisUtil.hasKey(currentUser.getToken())){
                     //2.删除redis缓存
@@ -211,7 +214,8 @@ public class UserController {
 
     @ApiOperation("修改用户信息（邮箱，昵称）")
     @PatchMapping("/user/info")
-    public CommonResult<?> resetPassword(@RequestBody @Validated UserInfo userInfo, CurrentUser currentUser, BindingResult bindingResult){
+    public CommonResult<?> resetPassword(@RequestBody @Validated UserInfo userInfo, CurrentUser currentUser
+            , BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             //可删
             List<ObjectError> list = bindingResult.getAllErrors();

@@ -24,4 +24,26 @@ public interface OrderService {
      * @param order
      */
     boolean createOrder(Order order);
+
+    /***
+     * 根据订单号删除订单
+     * @param oid
+     * @return
+     */
+    boolean deleteByOid(long oid);
+
+    /***
+     * 查询订单详情
+     * @param oid
+     * @return
+     */
+    Order getOrderInfo(long oid);
+
+    /***
+     * 按状态查询订单
+     * @param status
+     * @return
+     */
+    List<Order> getOrderByStatus(int status);
+
 }

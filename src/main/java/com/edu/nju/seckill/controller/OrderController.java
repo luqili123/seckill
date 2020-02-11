@@ -6,6 +6,7 @@ import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.OrderParam;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
+import com.edu.nju.seckill.domain.dto.OrderStatusResult;
 import com.edu.nju.seckill.service.OrderService;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -13,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,16 +48,19 @@ public class OrderController {
     @GetMapping({"/order/list/{keyword}","/order/list"})
     public CommonResult<Map> searchOrder(CurrentUser currentUser,
                                          @PathVariable(required = false) String keyword) {
-        if (null == keyword)
+        if (null == keyword) {
             keyword = "";
+        }
         User user = currentUser.getUser();
         List<OrderSearchResult> res = orderService.searchOrder(user.getUid(), keyword);
         Map<String,List> map=new HashMap<>();
         map.put("ordItems",res);
-        if (res.size() > 0)
+        if (res.size() > 0) {
             return CommonResult.success(map, "操作成功");
-        else
+        }
+        else {
             return CommonResult.failed("无有效订单数据");
+        }
     }
 
     @ApiOperation("创建秒杀订单")
@@ -75,8 +80,49 @@ public class OrderController {
             return CommonResult.validateFailed();
         }
 
+    }
+    @ApiOperation("根据oid删除订单")
+    @DeleteMapping("/order/{oid}")
+    public CommonResult<?> deleteOrder(@PathVariable(name = "oid",required = true) long oid){
 
+        if(orderService.deleteByOid(oid)){
+            return CommonResult.success("删除成功！");
+        }else {
+            return CommonResult.validateFailed("该订单已被删除！");
+        }
+    }
+    @ApiOperation("根据oid获取订单详情")
+    @GetMapping("/order/info/{oid}")
+    public CommonResult<?> getOrderInfo(@PathVariable(name = "oid") long oid){
 
+        Order order=orderService.getOrderInfo(oid);
+        if(order!=null){
+            return CommonResult.success(order);
+        }else{
+            return CommonResult.failed("订单已被删除或订单不存在！");
+        }
+    }
+    @GetMapping("/order/status/{status}/{keyword}")
+    public CommonResult<?> getOrderByStatus(@PathVariable(value = "status") int status
+    ,@PathVariable(value = "keyword",required = false) long oid,CurrentUser currentUser){
+            if(oid<1000){
+                //查询一组
+                List<Order> orders=orderService.getOrderByStatus(status);
+                if(orders!=null){
+                    return CommonResult.success(new OrderStatusResult(orders));
+                }else {
+                    return CommonResult.validateFailed("订单不存在!");
+                }
+
+            }else {
+                //只查询单个
+                Order order=orderService.getOrderInfo(oid);
+                if(order!=null){
+                    return CommonResult.success(order);
+                }else {
+                    return CommonResult.validateFailed("订单不存在！");
+                }
+            }
 
     }
 }

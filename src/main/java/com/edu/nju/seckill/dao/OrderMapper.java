@@ -25,4 +25,5 @@ public interface OrderMapper {
 
     List<OrderSearchResult> searchOrder(@Param("uid") Long uid, @Param("keyword") String keyword);
 
+    List<Order> selectByStatus(int status);
 }

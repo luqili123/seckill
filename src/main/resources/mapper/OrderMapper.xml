@@ -35,11 +35,11 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from order
+    from seckill.order
     where oid = #{oid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from order
+    delete from seckill.order
     where oid = #{oid,jdbcType=BIGINT}
   </delete>
 
@@ -57,7 +57,7 @@
   </insert>
 
   <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Order" >
-    insert into order
+    insert into seckill.order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="oid != null" >
         oid,
@@ -155,7 +155,7 @@
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Order" >
-    update order
+    update seckill.order
     <set >
       <if test="uid != null" >
         uid = #{uid,jdbcType=BIGINT},
@@ -203,7 +203,7 @@
     where oid = #{oid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Order" >
-    update order
+    update seckill.order
     set uid = #{uid,jdbcType=BIGINT},
       gid = #{gid,jdbcType=BIGINT},
       receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
@@ -233,4 +233,10 @@
         goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
 
   </select>
+    <select id="selectByStatus" resultType="com.edu.nju.seckill.domain.Order">
+      select
+      <include refid="Base_Column_List" />
+      from seckill.order
+      where status = #{status}
+    </select>
 </mapper>

@@ -36,4 +36,27 @@ public class OrderServiceImpl implements OrderService {
     public boolean createOrder(Order order) {
         return orderMapper.insert(order)==1;
     }
+
+    @Override
+    public boolean deleteByOid(long oid) {
+        return orderMapper.deleteByPrimaryKey(oid)==1;
+    }
+
+    @Override
+    public Order getOrderInfo(long oid) {
+        Order order=orderMapper.selectByPrimaryKey(oid);
+        if(order!=null){
+            return order;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> getOrderByStatus(int status) {
+        List<Order> orders=orderMapper.selectByStatus(status);
+        if(orders!=null&&orders.size()>0){
+            return orders;
+        }
+        return null;
+    }
 }
