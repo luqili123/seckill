@@ -61,8 +61,7 @@
     <select id="selectLatest" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">
       select *
       from seckill_goods as A,(select max(start_time) start_time from seckill_goods) as B
-      where A.start_time=B.start_time,;
-
+      where A.start_time=B.start_time;
     </select>
 
 
