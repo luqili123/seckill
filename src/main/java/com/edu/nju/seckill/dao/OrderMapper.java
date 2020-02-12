@@ -23,7 +23,11 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    List<OrderSearchResult> searchOrder(@Param("uid") Long uid, @Param("keyword") String keyword);
+    List<OrderSearchResult> searchOrder(@Param("uid") Long uid, @Param("status") Integer status,
+                                        @Param("keyword") String keyword);
+
+    List<OrderSearchResult> searchOrderViaStatus(@Param("uid") Long uid, @Param("status") Integer status,
+                                        @Param("keyword") String keyword);
 
     List<Order> selectByStatus(int status);
 }

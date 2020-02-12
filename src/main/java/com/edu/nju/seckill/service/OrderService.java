@@ -12,12 +12,12 @@ import java.util.List;
 public interface OrderService {
     /**
     * @Description: 搜索用户订单 通过可选参数keyword进行搜索
-    * @Param: [uid, keyword]
+    * @Param: [uid, status订单状态,keyword]
     * @return: java.util.List<com.edu.nju.seckill.domain.dto.OrderSearchResult>
     * @Author: whn
-    * @Date: 2020/2/7
+    * @Date: 2020/2/12
     */
-    List<OrderSearchResult> searchOrder(Long uid, String keyword);
+    List<OrderSearchResult> searchOrder(Long uid, int status,String keyword);
 
     /***
      * 创建订单
