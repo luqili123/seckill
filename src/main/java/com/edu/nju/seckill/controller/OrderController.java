@@ -2,8 +2,10 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.OrderParam;
+import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.service.OrderService;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import io.swagger.annotations.Api;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -27,31 +32,31 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    /**
-//    * @Description: 订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单
-//    * @Param: [currentUser, keyword]
-//    * @return: com.edu.nju.seckill.common.CommonResult<java.util.Map>
-//    * @Author: whn
-//    * @Date: 2020/2/7
-//    */
-//    @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
-//    @GetMapping({"/order/list/{keyword}","/order/list"})
-//    public CommonResult<Map> searchOrder(CurrentUser currentUser,
-//                                         @PathVariable(required = false) String keyword) {
-//        if (null == keyword) {
-//            keyword = "";
-//        }
-//        User user = currentUser.getUser();
-//        List<OrderSearchResult> res = orderService.searchOrder(user.getUid(), keyword);
-//        Map<String,List> map=new HashMap<>();
-//        map.put("ordItems",res);
-//        if (res.size() > 0) {
-//            return CommonResult.success(map, "操作成功");
-//        }
-//        else {
-//            return CommonResult.failed("无有效订单数据");
-//        }
-//    }
+    /**
+    * @Description: 订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单
+    * @Param: [currentUser, keyword]
+    * @return: com.edu.nju.seckill.common.CommonResult<java.util.Map>
+    * @Author: whn
+    * @Date: 2020/2/7
+    */
+    @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
+    @GetMapping({"/order/list/{keyword}","/order/list"})
+    public CommonResult<Map> searchOrder(CurrentUser currentUser,
+                                         @PathVariable(required = false) String keyword) {
+        if (null == keyword) {
+            keyword = "";
+        }
+        User user = currentUser.getUser();
+        List<OrderSearchResult> res = orderService.searchOrder(user.getUid(), keyword);
+        Map<String,List> map=new HashMap<>();
+        map.put("ordItems",res);
+        if (res.size() > 0) {
+            return CommonResult.success(map, "操作成功");
+        }
+        else {
+            return CommonResult.failed("无有效订单数据");
+        }
+    }
 
     @ApiOperation("创建秒杀订单")
     @PostMapping("/order/create")
@@ -91,30 +96,5 @@ public class OrderController {
         }else{
             return CommonResult.failed("订单已被删除或订单不存在！");
         }
-    }
-    @GetMapping(value = {"/order/list/{status}","/order/list/{status}/{keyword}"})
-    public CommonResult<?> getOrderByStatus(@PathVariable(value = "status") int status
-    ,@PathVariable(value = "keyword",required = false) long oid,CurrentUser currentUser){
-        System.out.println(oid);
-        return null;
-//            if(oid<1000){
-//                //查询一组
-//                List<Order> orders=orderService.getOrderByStatus(status);
-//                if(orders!=null){
-//                    return CommonResult.success(new OrderStatusResult(orders));
-//                }else {
-//                    return CommonResult.validateFailed("订单不存在!");
-//                }
-//
-//            }else {
-//                //只查询单个
-//                Order order=orderService.getOrderInfo(oid);
-//                if(order!=null){
-//                    return CommonResult.success(order);
-//                }else {
-//                    return CommonResult.validateFailed("订单不存在！");
-//                }
-//            }
-
     }
 }

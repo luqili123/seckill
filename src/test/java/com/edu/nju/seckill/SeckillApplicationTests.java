@@ -174,6 +174,7 @@ class SeckillApplicationTests {
 //        System.out.println(seckillGoodsService.getSeckillList());
         System.out.println(seckillGoodsService.getLatestSeckillGoods());
     }
+
     @Test
     public void testSnowFlake(){
         for (int i = 0; i < 30; i++) {
@@ -199,31 +200,31 @@ class SeckillApplicationTests {
 
     }
 
-    @Test
-    public void testCreateOrder(){
-        OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
-        Long oid= orderIdUtils.nextId();
-        System.out.println(oid);
-        Order order=new Order();
-        order.setOid(oid);
-        order.setUid(11L);
-        order.setGid(14L);
-        order.setReceiverName("lql");
-        order.setReceiverPhone("12332112323");
-        order.setAddress("江苏省南京市南京大学");
-        order.setCount(1);
-        order.setPrice(1000.1d);
-        order.setCreateTime(new Date(System.currentTimeMillis()));
-        order.setStatus(5);
-        order.setSeckillFlag(0);
-        order.setPayTime(null);
-        order.setPayType(null);
-        order.setPostcode("123");
-        order.setSendTime(null);
-        System.out.println(order);
-        System.out.println(orderMapper.insert(order));
-
-    }
+//    @Test
+//    public void testCreateOrder(){
+//        OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
+//        Long oid= orderIdUtils.nextId();
+//        System.out.println(oid);
+//        Order order=new Order();
+//        order.setOid(oid);
+//        order.setUid(11L);
+//        order.setGid(14L);
+//        order.setReceiverName("lql");
+//        order.setReceiverPhone("12332112323");
+//        order.setAddress("江苏省南京市南京大学");
+//        order.setCount(1);
+//        order.setPrice(1000.1d);
+//        order.setCreateTime(new Date(System.currentTimeMillis()));
+//        order.setStatus(5);
+//        order.setSeckillFlag(0);
+//        order.setPayTime(null);
+//        order.setPayType(null);
+//        order.setPostcode("123");
+//        order.setSendTime(null);
+//        System.out.println(order);
+//        System.out.println(orderMapper.insert(order));
+//
+//    }
 //    @Test
 //    public void testDeleteOrder(){
 //
