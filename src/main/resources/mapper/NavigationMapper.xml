@@ -29,7 +29,9 @@
   </select>
 
     <select id="selectAll" resultType="com.edu.nju.seckill.domain.dto.NavigationResult">
-      select name,type from navigation
+      select name,type
+      from navigation
+      order by sort
     </select>
 
     <select id="selectByType" resultType="java.lang.String">
