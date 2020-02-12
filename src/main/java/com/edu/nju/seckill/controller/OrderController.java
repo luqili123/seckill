@@ -40,14 +40,15 @@ public class OrderController {
     * @Date: 2020/2/7
     */
     @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
-    @GetMapping({"/order/list/{keyword}","/order/list"})
+    @GetMapping({"/order/list/{status}/{keyword}","/order/list/{status}"})
     public CommonResult<Map> searchOrder(CurrentUser currentUser,
+                                         @PathVariable int status,
                                          @PathVariable(required = false) String keyword) {
         if (null == keyword) {
             keyword = "";
         }
         User user = currentUser.getUser();
-        List<OrderSearchResult> res = orderService.searchOrder(user.getUid(), keyword);
+        List<OrderSearchResult> res = orderService.searchOrder(user.getUid(),status, keyword);
         Map<String,List> map=new HashMap<>();
         map.put("ordItems",res);
         if (res.size() > 0) {
@@ -58,6 +59,13 @@ public class OrderController {
         }
     }
 
+    /**
+    * @Description:
+    * @Param: [currentUser, orderParam]
+    * @return: com.edu.nju.seckill.common.CommonResult<?>
+    * @Author: lql
+    * @Date: 2020/2/12
+    */
     @ApiOperation("创建秒杀订单")
     @PostMapping("/order/create")
     public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam){

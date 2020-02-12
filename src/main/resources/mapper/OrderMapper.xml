@@ -227,11 +227,23 @@
     from seckill.goods as goods
         right join
          (SELECT gid , price,receiver_name,count,status FROM seckill.order
-            where uid =#{uid}) as orders
+            where uid =#{uid} ) as orders
         on goods.gid=orders.gid
     where
         goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
 
+  </select>
+  <select id="searchOrderViaStatus" resultMap="SearchOrder">
+    select orders.gid ,goods.image ,goods.name ,
+           orders.price ,orders.receiver_name,
+           orders.count ,orders.status
+    from seckill.goods as goods
+        right join
+         (SELECT gid , price,receiver_name,count,status FROM seckill.order
+            where uid =#{uid} and status =#{status}) as orders
+        on goods.gid=orders.gid
+    where
+        goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
   </select>
     <select id="selectByStatus" resultType="com.edu.nju.seckill.domain.Order">
       select

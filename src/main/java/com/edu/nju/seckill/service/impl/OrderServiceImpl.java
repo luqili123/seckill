@@ -21,16 +21,23 @@ public class OrderServiceImpl implements OrderService {
 
 
     /**
-    * @Description: 搜索用户订单 通过可选参数keyword进行搜索
-    * @Param: [uid, keyword]
+    * @Description: 通过状态以及关键字搜索订单
+    * @Param: [uid, status, keyword]
     * @return: java.util.List<com.edu.nju.seckill.domain.dto.OrderSearchResult>
     * @Author: whn
-    * @Date: 2020/2/7
+    * @Date: 2020/2/12
     */
     @Override
-    public List<OrderSearchResult> searchOrder(Long uid, String keyword) {
-        return orderMapper.searchOrder(uid,keyword);
+    public List<OrderSearchResult> searchOrder(Long uid, int status, String keyword) {
+        if(status==5)
+            //返回所有数据
+            return orderMapper.searchOrder(uid,status,keyword);
+        else
+            //通过status筛选
+            return orderMapper.searchOrderViaStatus(uid,status,keyword);
     }
+    
+    
 
     @Override
     public boolean createOrder(Order order) {
