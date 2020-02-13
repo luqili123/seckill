@@ -25,4 +25,6 @@ public interface SeckillGoodsMapper {
     List<SeckillGoodsList> selectSeckillList();
 
     SeckillGoodsList selectLatest();
+
+    SeckillGoodsList selectFuture();
 }

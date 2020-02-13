@@ -22,14 +22,14 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Override
     public boolean insertSeckillGoods(SeckillGoods seckillGoods) {
-        return seckillGoodsMapper.insertSelective(seckillGoods)!=0;
+        return seckillGoodsMapper.insertSelective(seckillGoods) != 0;
     }
 
 
     @Override
     public SeckillGoods getSeckillBySgid(Long sgid) {
-        SeckillGoods seckillGoods=seckillGoodsMapper.selectByPrimaryKey(sgid);
-        if(seckillGoods!=null){
+        SeckillGoods seckillGoods = seckillGoodsMapper.selectByPrimaryKey(sgid);
+        if (seckillGoods != null) {
             return seckillGoods;
         }
         return null;
@@ -37,8 +37,8 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Override
     public List<SeckillGoodsList> getSeckillList() {
-        List<SeckillGoodsList> seckillGoodsLists=seckillGoodsMapper.selectSeckillList();
-        if(seckillGoodsLists!=null&&seckillGoodsLists.size()>0){
+        List<SeckillGoodsList> seckillGoodsLists = seckillGoodsMapper.selectSeckillList();
+        if (seckillGoodsLists != null && seckillGoodsLists.size() > 0) {
             return seckillGoodsLists;
         }
         return null;
@@ -46,10 +46,17 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Override
     public SeckillGoodsList getLatestSeckillGoods() {
-        SeckillGoodsList seckillGoodsList=seckillGoodsMapper.selectLatest();
-        if(seckillGoodsList!=null){
+        //获取结束时间没有超过当前时间的商品
+        SeckillGoodsList seckillGoodsList = seckillGoodsMapper.selectLatest();
+        if (seckillGoodsList != null) {
             return seckillGoodsList;
+        } else {
+            //若当前没有秒杀活动，就返回未来会开始的秒杀
+            seckillGoodsList = seckillGoodsMapper.selectFuture();
+            if (seckillGoodsList != null) {
+                return seckillGoodsList;
+            }
+            return null;
         }
-        return null;
     }
 }

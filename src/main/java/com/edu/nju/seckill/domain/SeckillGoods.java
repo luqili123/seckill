@@ -25,9 +25,13 @@ public class SeckillGoods implements Serializable {
     @NotNull(message = "name不能为空")
     private String name;
 
-    @ApiModelProperty(value = "秒杀商品价格",required = true)
+    @ApiModelProperty(value = "商品价格",required = true)
     @NotNull(message = "不能为空")
     private Double price;
+
+    @ApiModelProperty(value = "秒杀商品价格",required = true)
+    @NotNull(message = "不能为空")
+    private Double seckillPrice;
 
     @ApiModelProperty(value = "所属导航栏名称")
     private String navName;
@@ -73,8 +77,11 @@ public class SeckillGoods implements Serializable {
     }
 
     public SeckillGoods(Long sgid, @NotNull(message = "name不能为空") String name,
-                        @NotNull(message = "不能为空") Double price, String navName,
-                        @NotNull(message = "navType不能为空") String navType, String description,
+                        @NotNull(message = "不能为空") Double price,
+                        @NotNull(message = "不能为空") Double seckillPrice,
+                        String navName,
+                        @NotNull(message = "navType不能为空") String navType,
+                        String description,
                         String image,
                         @Min(value = 0, message = "库存必须大于0") @NotNull(message = "Count不能为空") Integer count,
                         @Min(value = 0, message = "库存必须大于0") @NotNull(message = "remainCount不能为空") Integer remainCount,
@@ -83,6 +90,7 @@ public class SeckillGoods implements Serializable {
         this.sgid = sgid;
         this.name = name;
         this.price = price;
+        this.seckillPrice=seckillPrice;
         this.navName = navName;
         this.navType = navType;
         this.description = description;
@@ -116,6 +124,14 @@ public class SeckillGoods implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getSeckillPrice() {
+        return seckillPrice;
+    }
+
+    public void setSeckillPrice(Double seckillPrice) {
+        this.seckillPrice = seckillPrice;
     }
 
     public String getNavName() {
@@ -196,6 +212,7 @@ public class SeckillGoods implements Serializable {
                 "sgid=" + sgid +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", seckillPrice=" + seckillPrice +
                 ", navName='" + navName + '\'' +
                 ", navType='" + navType + '\'' +
                 ", description='" + description + '\'' +
