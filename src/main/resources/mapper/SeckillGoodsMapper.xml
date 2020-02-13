@@ -66,11 +66,13 @@
       select *
       from seckill_goods
       where start_time &lt; (select now()) and end_time>(select now())
+      limit 5
     </select>
   <select id="selectFuture" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">
     select *
     from seckill_goods as A,(select  min(start_time) start_time from seckill_goods where start_time>(select now())) as B
-    where A.start_time=B.start_time;
+    where A.start_time=B.start_time
+    limit 5
   </select>
 
 
