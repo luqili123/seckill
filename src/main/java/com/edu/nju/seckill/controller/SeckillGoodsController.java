@@ -36,16 +36,17 @@ public class SeckillGoodsController {
     @Autowired
     private GoodsService goodsService;
 
+
     @ApiOperation(value = "秒杀商品列表")
     @GetMapping("/seckill/list")
     public CommonResult<?> getSeckillGoods() {
+    //过时不显示
      List<SeckillGoodsList> seckillGoodsLists=seckillGoodsService.getSeckillList();
      if(seckillGoodsLists!=null){
          return CommonResult.success(seckillGoodsLists);
      }else{
          return CommonResult.failed("没有秒杀商品！");
      }
-
     }
 
 //    @PatchMapping("/seckill/{sgid}/{startTime}/{endTime}")
@@ -56,7 +57,7 @@ public class SeckillGoodsController {
 
     @ApiOperation(value = "添加秒杀商品")
     @PostMapping("/seckill")
-    public CommonResult<?> addSeckillGoods(@RequestParam Long gid) {
+    public CommonResult<?> addSeckillGoods(@RequestParam Long gid,@RequestParam double seckillPrice) {
         //根据gid对象，查询数据库，验证goods是否存在
         Goods goods=goodsService.getGoodsByGid(gid);
         if (goods!=null) {
@@ -70,7 +71,7 @@ public class SeckillGoodsController {
                 }
                 //2.给秒杀商品对象赋值
                 seckillGoods = new SeckillGoods(goods.getGid(),
-                        goods.getName(), goods.getPrice(), navNameAndType[0],
+                        goods.getName(), goods.getPrice(),seckillPrice,navNameAndType[0],
                         navNameAndType[1], goods.getDescription(), goods.getImage(),
                         goods.getCount(), goods.getCount(), null, null, new Date(System.currentTimeMillis()));
                 if (seckillGoodsService.insertSeckillGoods(seckillGoods)) {
@@ -101,7 +102,7 @@ public class SeckillGoodsController {
         }
 
     }
-
+    @ApiOperation("显示秒杀商品详情")
     @GetMapping("/seckill/show/{sgid}")
     public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid){
         SeckillGoods seckillGoods=seckillGoodsService.getSeckillBySgid(sgid);

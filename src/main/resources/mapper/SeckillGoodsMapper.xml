@@ -5,6 +5,7 @@
     <id column="sgid" property="sgid" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="seckill_price" property="seckillPrice" jdbcType="DOUBLE" />
     <result column="nav_name" property="navName" jdbcType="VARCHAR" />
     <result column="nav_type" property="navType" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -24,6 +25,7 @@
       <result property="goods_name" column="name"></result>
       <result property="desc" column="description"></result>
       <result property="goods_price" column="price"></result>
+      <result property="seckill_price" column="seckill_price"></result>
       <result property="imgUrl" column="image"></result>
       <result property="count" column="count"></result>
       <result property="remain_count" column="remain_count"></result>
@@ -38,13 +40,14 @@
       <result property="goods_name" column="name"></result>
       <result property="desc" column="description"></result>
       <result property="goods_price" column="price"></result>
+      <result property="seckill_price" column="seckill_price"></result>
       <result property="imgUrl" column="image"></result>
       <result property="count" column="count"></result>
       <result property="remain_count" column="remain_count"></result>
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
-    sgid, name, price, nav_name, nav_type, description, image, count, remain_count, start_time, 
+    sgid, name, price,seckill_price, nav_name, nav_type, description, image, count, remain_count, start_time,
     end_time, display_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -56,16 +59,22 @@
   <select id="selectSeckillList" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="SeckillGoodsList">
     select start_time,end_time,sgid,name,description,price,image,count,remain_count
     from seckill_goods
+    where start_time>(select now())
     group by start_time,end_time,sgid,name,description,price,image,count,remain_count;
   </select>
     <select id="selectLatest" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">
       select *
-      from seckill_goods as A,(select max(start_time) start_time from seckill_goods) as B
-      where A.start_time=B.start_time;
+      from seckill_goods
+      where start_time &lt; (select now()) and end_time>(select now())
     </select>
+  <select id="selectFuture" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">
+    select *
+    from seckill_goods as A,(select  min(start_time) start_time from seckill_goods where start_time>(select now())) as B
+    where A.start_time=B.start_time;
+  </select>
 
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from seckill_goods
     where sgid = #{sgid,jdbcType=BIGINT}
   </delete>

@@ -172,7 +172,8 @@ class SeckillApplicationTests {
     public void testselectSeckillList(){
 
 //        System.out.println(seckillGoodsService.getSeckillList());
-        System.out.println(seckillGoodsService.getLatestSeckillGoods());
+//        System.out.println(seckillGoodsService.getLatestSeckillGoods());
+        System.out.println(seckillGoodsService.getSeckillBySgid(7l));
     }
 
     @Test
@@ -183,20 +184,20 @@ class SeckillApplicationTests {
     }
     @Test
     public void testChangePwd(){
-        UserParam userParam=new UserParam();
-        userParam.setPhone("1565187952");
-        userParam.setPassword(encoder.encode("123456"));
-
-        System.out.println(userService.updatePwd(userParam));
+//        UserParam userParam=new UserParam();
+//        userParam.setPhone("1565187952");
+//        userParam.setPassword(encoder.encode("123456"));
+//
+//        System.out.println(userService.updatePwd(userParam));
     }
 
     @Test
     public void testupdateInfo(){
-        UserInfo userInfo=new UserInfo();
-        userInfo.setName("lql");
-        userInfo.setEmail("1036110216@qq.com");
-        userInfo.setPhone("15651879552");
-        System.out.println( userService.updateInfo(userInfo));
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setName("lql");
+//        userInfo.setEmail("1036110216@qq.com");
+//        userInfo.setPhone("15651879552");
+//        System.out.println( userService.updateInfo(userInfo));
 
     }
 
