@@ -41,14 +41,6 @@ public class OrderSearchResult {
         this.receiver_name = receiver_name;
     }
 
-    public Long getOrder_number() {
-        return order_id;
-    }
-
-    public void setOrder_number(Long order_number) {
-        this.order_id = order_number;
-    }
-
 
 
     @ApiModelProperty("gid")
@@ -61,6 +53,15 @@ public class OrderSearchResult {
     Double goods_price;
     @ApiModelProperty("收货人")
     String receiver_name;
+
+    public Long getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(Long order_id) {
+        this.order_id = order_id;
+    }
+
     @ApiModelProperty("订单号")
     Long order_id;
     @ApiModelProperty("支付方式")

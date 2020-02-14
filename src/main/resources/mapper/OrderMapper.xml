@@ -28,7 +28,7 @@
     <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR"/>
     <result column="count" property="count" jdbcType="INTEGER"/>
     <result column="status" property="status" jdbcType="INTEGER"/>
-    <result column="pay_type" property="pay_type" jdbcType="VERCHAR"/>
+    <result column="pay_type" property="pay_type" jdbcType="VARCHAR"/>
 
   </resultMap>
   <sql id="Base_Column_List" >
