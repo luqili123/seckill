@@ -41,12 +41,12 @@ public class OrderSearchResult {
         this.receiver_name = receiver_name;
     }
 
-    public Integer getOrder_number() {
-        return order_number;
+    public Long getOrder_number() {
+        return order_id;
     }
 
-    public void setOrder_number(Integer order_number) {
-        this.order_number = order_number;
+    public void setOrder_number(Long order_number) {
+        this.order_id = order_number;
     }
 
 
@@ -55,12 +55,38 @@ public class OrderSearchResult {
     Long goods_id;
     @ApiModelProperty("图片路径")
     String imgUrl;
+    @ApiModelProperty("商品名")
+    String goods_name;
     @ApiModelProperty("商品价格")
     Double goods_price;
     @ApiModelProperty("收货人")
     String receiver_name;
+    @ApiModelProperty("订单号")
+    Long order_id;
+    @ApiModelProperty("支付方式")
+    String pay_type;
+    @ApiModelProperty("订单状态")
+    Integer status;
     @ApiModelProperty("购买数量")
-    Integer order_number;
+    Integer count;
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+
+
+    public String getPay_type() {
+        return pay_type;
+    }
+
+    public void setPay_type(String pay_type) {
+        this.pay_type = pay_type;
+    }
+
 
     public Integer getStatus() {
         return status;
@@ -70,8 +96,6 @@ public class OrderSearchResult {
         this.status = status;
     }
 
-    @ApiModelProperty("订单状态")
-    Integer status;
 
     public String getGoods_name() {
         return goods_name;
@@ -81,8 +105,7 @@ public class OrderSearchResult {
         this.goods_name = goods_name;
     }
 
-    @ApiModelProperty("商品名")
-    String goods_name;
+
 
 
 }
