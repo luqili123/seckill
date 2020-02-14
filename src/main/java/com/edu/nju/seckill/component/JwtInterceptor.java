@@ -45,6 +45,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws TokenException {
+        if(request.getMethod().equals("OPTIONS")){
+            return true;
+        }
         //1.获取请求头
         String header=request.getHeader(Authorization);
         //1.1包含token，则进行解析
