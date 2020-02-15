@@ -2,6 +2,7 @@ package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.OrderMapper;
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrderInfo(String oid) {
-        Order order=orderMapper.selectByPrimaryKey(oid);
+    public OrderInfoResult getOrderInfo(Long uid,String oid) {
+        OrderInfoResult order=orderMapper.selectOrderDetailInfo(uid,oid);
         if(order!=null){
             return order;
         }

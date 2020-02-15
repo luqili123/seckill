@@ -1,52 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.edu.nju.seckill.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Order" >
-    <id column="oid" property="oid" jdbcType="VARCHAR" />
-    <result column="uid" property="uid" jdbcType="BIGINT" />
-    <result column="gid" property="gid" jdbcType="BIGINT" />
-    <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
-    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
-    <result column="count" property="count" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
-    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="seckill_flag" property="seckillFlag" jdbcType="INTEGER" />
-  </resultMap>
-  <!-- searchOrder映射-->
-  <resultMap id="SearchOrder" type="com.edu.nju.seckill.domain.dto.OrderSearchResult">
-    <id column="oid" property="order_id" jdbcType="VARCHAR"/>
-    <result column="gid" property="goods_id" jdbcType="BIGINT" />
-    <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
-    <result column="name" property="goods_name" jdbcType="VARCHAR"/>
-    <result column="price" property="goods_price" jdbcType="DOUBLE"/>
-    <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR"/>
-    <result column="count" property="count" jdbcType="INTEGER"/>
-    <result column="status" property="status" jdbcType="INTEGER"/>
-    <result column="pay_type" property="pay_type" jdbcType="VARCHAR"/>
-
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.edu.nju.seckill.dao.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Order">
+        <id column="oid" property="oid" jdbcType="VARCHAR"/>
+        <result column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="gid" property="gid" jdbcType="BIGINT"/>
+        <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="postcode" property="postcode" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="seckill_flag" property="seckillFlag" jdbcType="INTEGER"/>
+    </resultMap>
+    <!-- searchOrder映射-->
+    <resultMap id="SearchOrder" type="com.edu.nju.seckill.domain.dto.OrderSearchResult">
+        <id column="oid" property="order_id" jdbcType="VARCHAR"/>
+        <result column="gid" property="goods_id" jdbcType="BIGINT"/>
+        <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="name" property="goods_name" jdbcType="VARCHAR"/>
+        <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+        <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="pay_type" property="pay_type" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- 订单详情页映射-->
+    <resultMap id="OrderInfoResult" type="com.edu.nju.seckill.domain.dto.OrderInfoResult">
+        <id column="oid" property="oid" jdbcType="VARCHAR"/>
+        <result column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="gid" property="goods_id" jdbcType="BIGINT"/>
+        <result column="receiver_phone" property="receiver_phone" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiver_name" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="postcode" property="postcode" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="price" property="goods_price" jdbcType="DOUBLE"/>
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="pay_time" jdbcType="TIMESTAMP"/>
+        <result column="pay_type" property="pay_type" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="seckill_flag" property="seckill_flag" jdbcType="INTEGER"/>
+        <result column="name" property="goods_name" jdbcType="VARCHAR"/>
+        <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     oid, uid, gid, receiver_phone, receiver_name, address, postcode, count, price, create_time, 
     pay_time, pay_type, send_time, status, seckill_flag
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from seckill.order
-    where oid = #{oid,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from seckill.order
+        where oid = #{oid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from seckill.order
     where oid = #{oid,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.edu.nju.seckill.domain.Order" >
+    <insert id="insert" parameterType="com.edu.nju.seckill.domain.Order">
    insert into seckill.order (oid, uid, gid, receiver_phone,
       receiver_name, address, postcode,
       count, price, create_time,
@@ -59,153 +78,153 @@
       #{status}, #{seckillFlag})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Order" >
-    insert into seckill.order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="oid != null" >
-        oid,
-      </if>
-      <if test="uid != null" >
-        uid,
-      </if>
-      <if test="gid != null" >
-        gid,
-      </if>
-      <if test="receiverPhone != null" >
-        receiver_phone,
-      </if>
-      <if test="receiverName != null" >
-        receiver_name,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="postcode != null" >
-        postcode,
-      </if>
-      <if test="count != null" >
-        count,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="payTime != null" >
-        pay_time,
-      </if>
-      <if test="payType != null" >
-        pay_type,
-      </if>
-      <if test="sendTime != null" >
-        send_time,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="seckillFlag != null" >
-        seckill_flag,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="oid != null" >
-        #{oid,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=BIGINT},
-      </if>
-      <if test="gid != null" >
-        #{gid,jdbcType=BIGINT},
-      </if>
-      <if test="receiverPhone != null" >
-        #{receiverPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="receiverName != null" >
-        #{receiverName,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="postcode != null" >
-        #{postcode,jdbcType=VARCHAR},
-      </if>
-      <if test="count != null" >
-        #{count,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null" >
-        #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payType != null" >
-        #{payType,jdbcType=VARCHAR},
-      </if>
-      <if test="sendTime != null" >
-        #{sendTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="seckillFlag != null" >
-        #{seckillFlag,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+    <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Order">
+        insert into seckill.order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oid != null">
+                oid,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="gid != null">
+                gid,
+            </if>
+            <if test="receiverPhone != null">
+                receiver_phone,
+            </if>
+            <if test="receiverName != null">
+                receiver_name,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="postcode != null">
+                postcode,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="seckillFlag != null">
+                seckill_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oid != null">
+                #{oid,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=BIGINT},
+            </if>
+            <if test="gid != null">
+                #{gid,jdbcType=BIGINT},
+            </if>
+            <if test="receiverPhone != null">
+                #{receiverPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverName != null">
+                #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="seckillFlag != null">
+                #{seckillFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Order" >
-    update seckill.order
-    <set >
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=BIGINT},
-      </if>
-      <if test="gid != null" >
-        gid = #{gid,jdbcType=BIGINT},
-      </if>
-      <if test="receiverPhone != null" >
-        receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="receiverName != null" >
-        receiver_name = #{receiverName,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="postcode != null" >
-        postcode = #{postcode,jdbcType=VARCHAR},
-      </if>
-      <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null" >
-        pay_time = #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payType != null" >
-        pay_type = #{payType,jdbcType=VARCHAR},
-      </if>
-      <if test="sendTime != null" >
-        send_time = #{sendTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="seckillFlag != null" >
-        seckill_flag = #{seckillFlag,jdbcType=INTEGER},
-      </if>
-    </set>
-    where oid = #{oid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Order" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Order">
+        update seckill.order
+        <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=BIGINT},
+            </if>
+            <if test="gid != null">
+                gid = #{gid,jdbcType=BIGINT},
+            </if>
+            <if test="receiverPhone != null">
+                receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverName != null">
+                receiver_name = #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="seckillFlag != null">
+                seckill_flag = #{seckillFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where oid = #{oid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Order">
     update seckill.order
     set uid = #{uid,jdbcType=BIGINT},
       gid = #{gid,jdbcType=BIGINT},
@@ -223,7 +242,7 @@
       seckill_flag = #{seckillFlag,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=VARCHAR}
   </update>
-  <select id="searchOrder" resultMap="SearchOrder">
+    <select id="searchOrder" resultMap="SearchOrder">
     select orders.oid,orders.gid ,goods.image ,goods.name ,
            orders.price ,orders.receiver_name,
            orders.count ,orders.status,orders.pay_type
@@ -236,7 +255,7 @@
         goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
 
   </select>
-  <select id="searchOrderViaStatus" resultMap="SearchOrder">
+    <select id="searchOrderViaStatus" resultMap="SearchOrder">
     select orders.oid,orders.gid ,goods.image ,goods.name ,
            orders.price ,orders.receiver_name,
            orders.count ,orders.status,orders.pay_type
@@ -249,9 +268,16 @@
         goods.name like CONCAT('%','${keyword}','%') or goods.description like CONCAT('%','${keyword}','%')
   </select>
     <select id="selectByStatus" resultType="com.edu.nju.seckill.domain.Order">
-      select
-      <include refid="Base_Column_List" />
-      from seckill.order
-      where status = #{status}
+        select
+        <include refid="Base_Column_List"/>
+        from seckill.order
+        where status = #{status}
     </select>
+    <select id="selectOrderDetailInfo" resultMap="OrderInfoResult">
+    select *
+    from
+    (SELECT * FROM seckill.order where uid = #{uid} and oid =#{oid}) as a
+    left join ( select gid,name,image from seckill.goods ) as b
+    on a.gid=b.gid
+  </select>
 </mapper>
