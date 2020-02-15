@@ -54,16 +54,17 @@ public class OrderSearchResult {
     @ApiModelProperty("收货人")
     String receiver_name;
 
-    public Long getOrder_id() {
+
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(Long order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 
     @ApiModelProperty("订单号")
-    Long order_id;
+    String order_id;
     @ApiModelProperty("支付方式")
     String pay_type;
     @ApiModelProperty("订单状态")

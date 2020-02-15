@@ -11,13 +11,13 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
-    int deleteByPrimaryKey(Long oid);
+    int deleteByPrimaryKey(String oid);
 
     int insert(Order order);
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(Long oid);
+    Order selectByPrimaryKey(String oid);
 
     int updateByPrimaryKeySelective(Order record);
 

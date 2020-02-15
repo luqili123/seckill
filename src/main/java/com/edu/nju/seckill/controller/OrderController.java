@@ -73,7 +73,7 @@ public class OrderController {
         OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
         Long oid= orderIdUtils.nextId();
         if(oid!=null&&currentUser.getUser().getUid()!=null&&orderParam!=null){
-            Order order=new Order(orderParam,currentUser.getUser().getUid(),oid);
+            Order order=new Order(orderParam,currentUser.getUser().getUid(),oid.toString());
             if( orderService.createOrder(order)){
                 return CommonResult.success("订单创建成功！");
             }else {
@@ -86,7 +86,7 @@ public class OrderController {
     }
     @ApiOperation("根据oid删除订单")
     @DeleteMapping("/order/{oid}")
-    public CommonResult<?> deleteOrder(@PathVariable(name = "oid",required = true) long oid){
+    public CommonResult<?> deleteOrder(@PathVariable(name = "oid",required = true) String oid){
 
         if(orderService.deleteByOid(oid)){
             return CommonResult.success("删除成功！");
@@ -96,7 +96,7 @@ public class OrderController {
     }
     @ApiOperation("根据oid获取订单详情")
     @GetMapping("/order/info/{oid}")
-    public CommonResult<?> getOrderInfo(@PathVariable(name = "oid") long oid){
+    public CommonResult<?> getOrderInfo(@PathVariable(name = "oid") String oid){
 
         Order order=orderService.getOrderInfo(oid);
         if(order!=null){

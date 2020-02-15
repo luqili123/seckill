@@ -16,7 +16,15 @@ import java.util.Date;
 public class Order implements Serializable {
 
     @ApiModelProperty(value = "订单编号",required = true)
-    private Long oid;
+    private String oid;
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
     @ApiModelProperty(value = "用户编号",required = true)
     private Long uid;
@@ -68,7 +76,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(OrderParam orderParam,long uid,long oid) {
+    public Order(OrderParam orderParam,long uid,String oid) {
         this.oid=oid;
         this.uid=uid;
         this.gid=orderParam.getGid();
@@ -86,13 +94,6 @@ public class Order implements Serializable {
         this.seckillFlag=1;//秒杀商品
     }
 
-    public Long getOid() {
-        return oid;
-    }
-
-    public void setOid(Long oid) {
-        this.oid = oid;
-    }
 
     public Long getUid() {
         return uid;
