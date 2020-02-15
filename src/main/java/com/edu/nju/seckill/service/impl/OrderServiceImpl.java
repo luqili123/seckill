@@ -45,12 +45,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean deleteByOid(long oid) {
+    public boolean deleteByOid(String oid) {
         return orderMapper.deleteByPrimaryKey(oid)==1;
     }
 
     @Override
-    public Order getOrderInfo(long oid) {
+    public Order getOrderInfo(String oid) {
         Order order=orderMapper.selectByPrimaryKey(oid);
         if(order!=null){
             return order;

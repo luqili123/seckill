@@ -30,14 +30,14 @@ public interface OrderService {
      * @param oid
      * @return
      */
-    boolean deleteByOid(long oid);
+    boolean deleteByOid(String oid);
 
     /***
      * 查询订单详情
      * @param oid
      * @return
      */
-    Order getOrderInfo(long oid);
+    Order getOrderInfo(String oid);
 
     /***
      * 按状态查询订单
