@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public interface OrderService {
      * @param oid
      * @return
      */
-    Order getOrderInfo(String oid);
+    OrderInfoResult getOrderInfo(Long uid,String oid);
 
     /***
      * 按状态查询订单

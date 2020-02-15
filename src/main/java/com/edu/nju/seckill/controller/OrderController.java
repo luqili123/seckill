@@ -4,6 +4,7 @@ import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
+import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderParam;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.service.OrderService;
@@ -96,11 +97,13 @@ public class OrderController {
     }
     @ApiOperation("根据oid获取订单详情")
     @GetMapping("/order/info/{oid}")
-    public CommonResult<?> getOrderInfo(@PathVariable(name = "oid") String oid){
-
-        Order order=orderService.getOrderInfo(oid);
+    public CommonResult<?> getOrderInfo(CurrentUser user,@PathVariable(name = "oid") String oid){
+        Long uid=user.getUser().getUid();
+        Map<String ,OrderInfoResult> map=new HashMap<>();
+        OrderInfoResult order=orderService.getOrderInfo(uid,oid);
         if(order!=null){
-            return CommonResult.success(order);
+            map.put("ordItemsInfo",order);
+            return CommonResult.success(map,"操作成功");
         }else{
             return CommonResult.failed("订单已被删除或订单不存在！");
         }

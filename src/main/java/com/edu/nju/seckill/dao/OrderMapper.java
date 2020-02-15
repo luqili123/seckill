@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,6 @@ public interface OrderMapper {
                                         @Param("keyword") String keyword);
 
     List<Order> selectByStatus(int status);
+
+    OrderInfoResult selectOrderDetailInfo(@Param("uid") Long uid,@Param("oid") String oid);
 }
