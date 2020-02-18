@@ -127,7 +127,7 @@ public class AddressController {
     */
     @ApiOperation(value = "设置默认地址")
     @PutMapping("/address/default")
-    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser, @RequestParam Integer aid){
+    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser, @RequestBody Integer aid){
         User user=currentUser.getUser();
         Long uid=user.getUid();
         if(addressService.updateDefaultAddress(uid,aid))
