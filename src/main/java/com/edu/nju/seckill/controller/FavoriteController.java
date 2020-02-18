@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -38,7 +39,8 @@ public class FavoriteController {
 
     @ApiOperation(value = "添加收藏夹",notes = "addFavorite")
     @PostMapping("/favorite")
-    public CommonResult<String> addFavorite(CurrentUser currentUser, @RequestParam long gid){
+    public CommonResult<String> addFavorite(CurrentUser currentUser, @RequestBody Map<String,Long>map){
+        Long gid=map.get("gid");
         User user=currentUser.getUser();
         if(favoriteService.addFavorite(user.getUid(),gid)) {
             return CommonResult.success(null, "添加成功");
