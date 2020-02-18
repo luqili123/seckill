@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -127,7 +128,9 @@ public class AddressController {
     */
     @ApiOperation(value = "设置默认地址")
     @PutMapping("/address/default")
-    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser, @RequestBody Integer aid){
+    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser,
+                                                     @RequestBody Map<String, Integer> map){
+        Integer aid=map.get("aid");
         User user=currentUser.getUser();
         Long uid=user.getUid();
         if(addressService.updateDefaultAddress(uid,aid))
