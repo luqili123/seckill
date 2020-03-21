@@ -92,23 +92,6 @@ public class RedisUtil {
     }
 
     /**
-     * 普通缓存放入
-     * @param key 键
-     * @param value 值
-     * @return true成功 false失败
-     */
-    public boolean set(String key,Object value) {
-        try {
-            redisTemplate.opsForValue().set(key, value);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
-    /**
      * 普通缓存放入并设置时间
      * @param key 键
      * @param value 值
@@ -127,6 +110,23 @@ public class RedisUtil {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 普通缓存放入
+     * @param key 键
+     * @param value 值
+     * @return true成功 false失败
+     */
+    public boolean set(String key,Object value) {
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     /**
