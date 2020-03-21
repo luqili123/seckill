@@ -250,7 +250,7 @@ public class UserController {
     @GetMapping("/test/redis/{token}")
     public CommonResult<?> testRedis(@PathVariable String token) {
         User user = redisUtil.getUser(token);
-        redisUtil.set(UUID.randomUUID().toString(), "i am robot", 60 * 30);
+        redisUtil.set(UUID.randomUUID().toString(), "i am robot ", 60 * 30);
         return CommonResult.success(user);
     }
 
