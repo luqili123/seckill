@@ -105,14 +105,12 @@ public class OrderIdUtils {
         // 下面是说假设在同一个毫秒内，又发送了一个请求生成一个id
         // 这个时候就得把seqence序号给递增1，最多就是4096
         if (lastTimestamp == timestamp) {
-
             // 这个意思是说一个毫秒内最多只能有4096个数字，无论你传递多少进来，
             //这个位运算保证始终就是在4096这个范围内，避免你自己传递个sequence超过了4096这个范围
             sequence = (sequence + 1) & sequenceMask;
             if (sequence == 0) {
                 timestamp = tilNextMillis(lastTimestamp);
             }
-
         } else {
             sequence = 0;
         }
