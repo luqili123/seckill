@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.locks.ReentrantLock;
 
 
@@ -244,6 +245,13 @@ public class UserController {
             return CommonResult.unauthorized();
         }
 
+    }
+
+    @GetMapping("/test/redis/{token}")
+    public CommonResult<?> testRedis(@PathVariable String token) {
+        User user = redisUtil.getUser(token);
+        redisUtil.set(UUID.randomUUID().toString(), "i am robot", 60 * 30);
+        return CommonResult.success(user);
     }
 
 
