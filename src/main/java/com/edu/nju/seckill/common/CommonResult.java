@@ -112,6 +112,9 @@ public class CommonResult<T> {
     public static <T> CommonResult<T> databaseError(){
         return new CommonResult<T>(ResultCode.DATABASE_ERROR.getCode(), ResultCode.DATABASE_ERROR.getMessage(), null);
     }
+    public static <T> CommonResult<T> bindingArgsError(String message) {
+        return new CommonResult<>(ResultCode.BINDING_ARGS_ERROR.getCode(), message, null);
+    }
 
 
     public long getCode() {

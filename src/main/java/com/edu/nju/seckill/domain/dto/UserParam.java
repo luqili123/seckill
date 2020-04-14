@@ -2,6 +2,8 @@ package com.edu.nju.seckill.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -19,7 +21,7 @@ public class UserParam implements Serializable {
     private String phone;
 
     @ApiModelProperty(value = "密码",required = true,example = "123456")
-    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     public String getPassword() {

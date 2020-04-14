@@ -1,0 +1,41 @@
+package com.edu.nju.seckill.exception;
+
+import com.edu.nju.seckill.common.CommonResult;
+import com.edu.nju.seckill.exception.TokenException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+/**
+ * 全局异常处理类
+ * @author lql
+ * @date 2020/1/17 13:42
+ */
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    /***
+     * 捕获因没有token或token无法解析的异常
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public CommonResult<?> tokenExceptionHandler(Exception e){
+        if (e instanceof MethodArgumentNotValidException) {
+            BindingResult result = ((MethodArgumentNotValidException) e).getBindingResult();
+            List<ObjectError> errors = result.getAllErrors();
+            ObjectError error = errors.get(0);
+            return CommonResult.bindingArgsError(error.getDefaultMessage());
+        } else if (e instanceof TokenException) {
+            // TODO 要改TokenException
+            return CommonResult.unauthorized(((TokenException) e).getCommonResult().getData());
+        }
+        return null;
+    }
+}

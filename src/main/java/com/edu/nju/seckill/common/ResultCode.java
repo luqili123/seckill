@@ -14,7 +14,11 @@ public enum ResultCode implements IErrorCode {
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限"),
     HAS_EXIST(405,"该号码已经被注册"),
-    DATABASE_ERROR(406,"数据库异常");
+    DATABASE_ERROR(406,"数据库异常"),
+    /**
+     * 1000 - 1999 参数相关错误
+     */
+    BINDING_ARGS_ERROR(1002, "参数格式错误");
 
 
     private long code;
