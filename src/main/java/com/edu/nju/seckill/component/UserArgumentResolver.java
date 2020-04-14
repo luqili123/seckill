@@ -46,7 +46,6 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     public boolean supportsParameter(MethodParameter methodParameter) {
         boolean flag=methodParameter.getParameterType().isAssignableFrom(CurrentUser.class);
         return flag;
-
     }
 
     /**
@@ -65,7 +64,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                                   WebDataBinderFactory webDataBinderFactory) throws TokenException {
         CurrentUser currentUser=null;
         String header=nativeWebRequest.getHeader(Authorization);
-        if(header!=null&&!"".equals(header)){
+        if(header!=null&&!"".equals(header)) {
             if(header.startsWith(StartWith)) {
                 currentUser=new CurrentUser();
                 String token = header.substring(7);

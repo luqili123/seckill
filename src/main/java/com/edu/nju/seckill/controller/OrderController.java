@@ -8,7 +8,9 @@ import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderParam;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.service.OrderService;
+import com.edu.nju.seckill.utils.GuardThread;
 import com.edu.nju.seckill.utils.OrderIdUtils;
+import com.edu.nju.seckill.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author lql
@@ -32,6 +35,10 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
 
     /**
     * @Description: 订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单
@@ -70,6 +77,24 @@ public class OrderController {
     @ApiOperation("创建秒杀订单")
     @PostMapping("/order/create")
     public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam){
+        // 抢夺锁
+//        String lockVal = UUID.randomUUID().toString();
+//        String lockKey = "myLock" + orderParam.getGid();
+//        boolean res = redisUtil.set(lockKey, lockVal, 10);
+//        if (!res) {
+//            return CommonResult.failed("秒杀失败了哦~");
+//        }
+//        GuardThread guardThread = new GuardThread(10, lockKey, redisUtil);
+//        guardThread.setDaemon(true);
+//        guardThread.start();
+//        try {
+//            // TODO 对redis库存进行操作
+//        } finally {
+//            if (lockVal.equals(redisUtil.get(lockKey))) {
+//                // 释放锁
+//                redisUtil.del(lockKey);
+//            }
+//        }
         //生成订单id
         OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
         Long oid= orderIdUtils.nextId();

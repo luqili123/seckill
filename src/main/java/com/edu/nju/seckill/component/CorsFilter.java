@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author lql
  * @date 2020/2/11 20:35
  */
-@WebFilter(filterName = "CorsFilter ")
+@WebFilter(filterName = "CorsFilter")
 @Configuration
 public class CorsFilter implements Filter {
     @Override

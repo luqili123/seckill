@@ -9,8 +9,9 @@ import java.net.UnknownHostException;
 import java.util.Date;
 
 /**
- *  利用雪花算法，获取全局id
- *  @author lql
+ * 利用雪花算法，获取全局id
+ *
+ * @author lql
  * @date 2020/1/30 16:26
  */
 public class OrderIdUtils {
@@ -25,22 +26,22 @@ public class OrderIdUtils {
     /***
      * // 这个就是代表了一毫秒内生成的多个id的最新序号
      */
-    private long sequence=0L;
+    private long sequence = 0L;
 
     /***
      * 构造函数设为私有，外部无法使用new方法创建对象
      */
     private OrderIdUtils() {
 
-        this.workerId=1;
+        this.workerId = 1;
         try {
             String hostAddress = Inet4Address.getLocalHost().getHostAddress();
             int[] ints = StringUtils.toCodePoints(hostAddress);
             int sums = 0;
-            for(int b : ints){
+            for (int b : ints) {
                 sums += b;
             }
-            this.datacenterId=(long) sums%32;
+            this.datacenterId = (long) sums % 32;
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -77,12 +78,14 @@ public class OrderIdUtils {
     private long sequenceMask = -1L ^ (-1L << sequenceBits);
     private long lastTimestamp = -1L;
 
-    public long getWorkerId(){
+    public long getWorkerId() {
         return workerId;
     }
+
     public long getDatacenterId() {
         return datacenterId;
     }
+
     public long getTimestamp() {
         return System.currentTimeMillis();
     }
@@ -123,6 +126,7 @@ public class OrderIdUtils {
                 (datacenterId << datacenterIdShift) |
                 (workerId << workerIdShift) | sequence;
     }
+
     private long tilNextMillis(long lastTimestamp) {
 
         long timestamp = timeGen();
@@ -132,17 +136,18 @@ public class OrderIdUtils {
         }
         return timestamp;
     }
-    private long timeGen(){
+
+    private long timeGen() {
         return System.currentTimeMillis();
     }
 
     /***
      * 调用私有构造函数
      */
-    private static final OrderIdUtils INSTANCE=new OrderIdUtils();
+    private static final OrderIdUtils INSTANCE = new OrderIdUtils();
 
     //获取单一实例
-    public static OrderIdUtils getInstance(){
+    public static OrderIdUtils getInstance() {
         return INSTANCE;
     }
 }

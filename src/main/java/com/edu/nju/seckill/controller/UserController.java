@@ -12,6 +12,7 @@ import com.edu.nju.seckill.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -59,7 +60,7 @@ public class UserController {
     @PostMapping("/user/signUp")
     public CommonResult<Boolean> register(@RequestBody  @Validated UserParam userParam, BindingResult bindingResult){
 
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()) {
             return CommonResult.validateFailed("手机号格式错误");
         }
 
@@ -75,7 +76,12 @@ public class UserController {
             }
         }
     }
-
+    @GetMapping("/test/redis/{token}")
+    public CommonResult<?> testRedis(@PathVariable String token) {
+        User user = redisUtil.getUser(token);
+        redisUtil.set(UUID.randomUUID().toString(), "i am robot", 60 * 30);
+        return CommonResult.success(user);
+    }
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
     @PostMapping("/user/login")

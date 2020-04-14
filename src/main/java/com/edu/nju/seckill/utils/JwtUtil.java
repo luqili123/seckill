@@ -6,12 +6,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
+
 import java.util.HashMap;
 import java.util.Map;
 
 
 /**
- *  Jwt工具类
+ * Jwt工具类
+ *
  * @author lql
  * @date 2020/1/15 14:32
  */
@@ -20,12 +22,12 @@ public class JwtUtil {
     /***
      * 签名
      */
-    private static final String secert="seckill";
+    private static final String SECRET = "seckill";
 
     /***
-     *  设置算法种类
+     * 设置算法种类
      */
-    private static final Algorithm ALGORITHM=Algorithm.HMAC256(secert);
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
 
 
     /***
@@ -33,23 +35,21 @@ public class JwtUtil {
      * @param user
      * @return
      */
-    public  String generate(User user){
-        Map<String,Object> header=new HashMap<String, Object>(2) ;
+    public String generate(User user) {
+        Map<String, Object> header = new HashMap<String, Object>(2);
         header.put("alg", "HS256");
         header.put("typ", "JWT");
-        String token= JWT.create()
+        return JWT.create()
                 .withHeader(header)
                 .withSubject("login")
                 .withAudience("client")
-                .withClaim("name",user.getName())
-                .withClaim("phone",user.getPhone())
-                .withClaim("email",user.getEmail())
-                .withClaim("addressId",user.getAddressId())
-                .withClaim("role",user.getRole())
+                .withClaim("name", user.getName())
+                .withClaim("phone", user.getPhone())
+                .withClaim("email", user.getEmail())
+                .withClaim("addressId", user.getAddressId())
+                .withClaim("role", user.getRole())
                 .sign(ALGORITHM);
-        return token;
     }
-
 
 
     /***
@@ -57,17 +57,17 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static HashMap<String, String > verifier(String token) throws Exception{
+    public static HashMap<String, String> verifier(String token) throws Exception {
 
-            JWTVerifier jwtVerifier=JWT.require(ALGORITHM)
-                    .build();
-            DecodedJWT decodedJWT=jwtVerifier.verify(token);
-            Map<String, Claim> map=decodedJWT.getClaims();
-            HashMap<String,String> hashMap=new HashMap<>();
-            for (Map.Entry<String, Claim> entry : map.entrySet()) {
-                hashMap.put(entry.getKey(),entry.getValue().asString());
-            }
-            return hashMap;
+        JWTVerifier jwtVerifier = JWT.require(ALGORITHM)
+                .build();
+        DecodedJWT decodedJWT = jwtVerifier.verify(token);
+        Map<String, Claim> map = decodedJWT.getClaims();
+        HashMap<String, String> hashMap = new HashMap<>();
+        for (Map.Entry<String, Claim> entry : map.entrySet()) {
+            hashMap.put(entry.getKey(), entry.getValue().asString());
+        }
+        return hashMap;
 
     }
 }

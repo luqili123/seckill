@@ -69,8 +69,10 @@ public class Order implements Serializable {
     private Integer status;
 
     @ApiModelProperty(value = "订单是否为秒杀订单（0代表不是，1代表是）",required = true)
-
     private Integer seckillFlag;
+
+    @ApiModelProperty(value = "是否被推荐，如果为2，则会出现在首页轮播")
+    private Short recommend;
 
 
     public Order() {
@@ -94,6 +96,13 @@ public class Order implements Serializable {
         this.seckillFlag=1;//秒杀商品
     }
 
+    public Short getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Short recommend) {
+        this.recommend = recommend;
+    }
 
     public Long getUid() {
         return uid;
