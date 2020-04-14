@@ -76,12 +76,6 @@ public class UserController {
             }
         }
     }
-    @GetMapping("/test/redis/{token}")
-    public CommonResult<?> testRedis(@PathVariable String token) {
-        User user = redisUtil.getUser(token);
-        redisUtil.set(UUID.randomUUID().toString(), "i am robot", 60 * 30);
-        return CommonResult.success(user);
-    }
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
     @PostMapping("/user/login")
