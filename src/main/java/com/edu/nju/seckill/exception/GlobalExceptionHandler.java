@@ -35,6 +35,14 @@ public class GlobalExceptionHandler {
         } else if (e instanceof TokenException) {
             // TODO 要改TokenException
             return CommonResult.unauthorized(((TokenException) e).getCommonResult().getData());
+        } else if (e instanceof PhoneNotFoundException) {
+            return CommonResult.phoneNotFound(e.getMessage());
+        } else if (e instanceof PasswordErrorException) {
+            return CommonResult.passwordError(e.getMessage());
+        } else if (e instanceof PhoneUsedException) {
+            return CommonResult.phoneUsed(e.getMessage());
+        } else if (e instanceof DataBaseException) {
+            return CommonResult.databaseError(e.getMessage());
         }
         return null;
     }
