@@ -47,7 +47,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/user/login","/user/signUp"
                         ,"/menu/tabItems","/menu/navItems"
                         ,"/goods/**"
-                        ,"/seckill/list","/seckill/slide","/seckill/{sgid}");
+                        ,"/seckill/list","/seckill/slide","/seckill/{sgid}", "/test/redis/{token}");
     }
 
     @Override

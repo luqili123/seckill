@@ -59,7 +59,7 @@
   <select id="selectSeckillList" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="SeckillGoodsList">
     select start_time,end_time,sgid,name,description,price,image,count,remain_count
     from seckill_goods
-    where start_time>(select now())
+    where start_time > now()
     group by start_time,end_time,sgid,name,description,price,image,count,remain_count;
   </select>
     <select id="selectLatest" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="LatestSeckillGoodsList">

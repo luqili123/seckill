@@ -22,6 +22,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TokenException.class)
     @ResponseBody
     public CommonResult<?> tokenExceptionHandler(TokenException e){
-        return CommonResult.unauthorized(e.getCommonResult().getData());
+        return e.getCommonResult();
     }
 }

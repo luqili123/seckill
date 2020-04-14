@@ -30,6 +30,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -235,6 +237,17 @@ class SeckillApplicationTests {
     @Test
     public void testGetOrderByStatus(){
         System.out.println( orderService.getOrderByStatus(1));
+
+    }
+
+    @Test
+    public void test() {
+        // OOM: out of memory
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        for (int i = 0; i < 10; i++) {
+//            threadPool.submit();
+        }
+        threadPool.shutdown();
 
     }
 }
