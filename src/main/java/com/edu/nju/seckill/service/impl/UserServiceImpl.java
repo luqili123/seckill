@@ -1,11 +1,20 @@
 package com.edu.nju.seckill.service.impl;
 
+import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.dao.UserMapper;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
+import com.edu.nju.seckill.domain.dto.UserResult;
+import com.edu.nju.seckill.exception.DataBaseException;
+import com.edu.nju.seckill.exception.PasswordErrorException;
+import com.edu.nju.seckill.exception.PhoneNotFoundException;
+import com.edu.nju.seckill.exception.PhoneUsedException;
 import com.edu.nju.seckill.service.UserService;
+import com.edu.nju.seckill.utils.JwtUtil;
+import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +32,16 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    BCryptPasswordEncoder encoder;
+    private BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Value("${redis.expire}")
+    private long expire;
 
     /***
      * 判断该手机号是否已经存在（注册）
@@ -33,7 +50,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean hasPhone(String phone) {
-        return userMapper.selectByPhone(phone)==null?false:true;
+        return userMapper.selectByPhone(phone) == null ? false : true;
     }
 
     /***
@@ -43,9 +60,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean add(UserParam userParam) {
-        User user=new User();
+        User user = new User();
         //1.生成随机8位字母的用户名
-        user.setName(UUID.randomUUID().toString().substring(0,8));
+        user.setName(UUID.randomUUID().toString().substring(0, 8));
         //2.对密码进行加密
         user.setPassword(encoder.encode(userParam.getPassword()));
         //3.设置密码
@@ -54,33 +71,69 @@ public class UserServiceImpl implements UserService {
         user.setRole(1);
         user.setDeleteFlag(0);
         //4.存入数据库
-        if(userMapper.insert(user)!=0){
+        if (userMapper.insert(user) != 0) {
             //5.将用户信息存入缓存中
             //to do......
-           return true;
+            return true;
         }
-        return  false;
+        return false;
     }
 
     @Override
     public User getUserByPhone(String phone) {
-        User user=userMapper.selectByPhone(phone);
-        if(user!=null&&user.getPassword()!=null) {
-            return user;
-        }else {
-            return null;
-        }
+        return userMapper.selectByPhone(phone);
     }
 
     @Override
     public boolean updatePwd(UserParam userParam) {
-        return  userMapper.updatePwd(userParam)==1;
+        return userMapper.updatePwd(userParam) == 1;
     }
 
     @Override
     public boolean updateInfo(UserInfo userInfo) {
-        return userMapper.updateInfo(userInfo)==1;
+        return userMapper.updateInfo(userInfo) == 1;
     }
 
+    /**
+     * 登录
+     * @param userParam 前端传来的登录用户信息
+     * @return 返回登录用户信息+Token
+     */
+    @Override
+    public UserResult login(UserParam userParam) {
+        User user = getUserByPhone(userParam.getPhone());
+        if (user != null) {
+            //1.1密码匹配
+            if (encoder.matches(userParam.getPassword(), user.getPassword())) {
+                //将用户信息存入redis,有效期为半小时
+                String token = jwtUtil.generate(user);
+                redisUtil.saveUser(user, token, expire);
+                UserResult userResult = new UserResult();
+                userResult.setUser(user);
+                userResult.setToken(token);
+                return userResult;
+            }
+            //1.2密码不匹配
+            throw new PasswordErrorException("登录密码错误");
+        }
+        //2.用户不存在
+        throw new PhoneNotFoundException("手机号不存在");
+    }
 
+    /**
+     * 用户注册
+     * @param userParam 前端传来的用户信息
+     * @return true/false
+     */
+    @Override
+    public boolean register(UserParam userParam) {
+        //1.查询数据库，看该手机号是否存在
+        if(hasPhone(userParam.getPhone()))
+            throw new PhoneUsedException("该手机号码已被注册");
+        //2.数据库不存在，则插入用户数据
+        if(add(userParam)){
+            return true;
+        }
+        throw new DataBaseException("数据库开小差啦，请稍后重试");
+    }
 }

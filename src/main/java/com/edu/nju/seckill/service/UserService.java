@@ -3,6 +3,7 @@ package com.edu.nju.seckill.service;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
+import com.edu.nju.seckill.domain.dto.UserResult;
 
 /**
  * @author lql
@@ -29,7 +30,7 @@ public interface UserService {
      * @param phone
      * @return
      */
-    public User getUserByPhone(String phone);
+    User getUserByPhone(String phone);
 
     /***
      * 更新用户密码
@@ -44,4 +45,8 @@ public interface UserService {
      * @return
      */
     boolean updateInfo(UserInfo userInfo);
+
+    UserResult login(UserParam userParam);
+
+    boolean register(UserParam userParam);
 }

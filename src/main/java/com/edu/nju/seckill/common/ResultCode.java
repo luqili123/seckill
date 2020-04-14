@@ -13,8 +13,18 @@ public enum ResultCode implements IErrorCode {
     VALIDATE_FAILED(404, "参数检验失败"),
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限"),
-    HAS_EXIST(405,"该号码已经被注册"),
-    DATABASE_ERROR(406,"数据库异常");
+    /**
+     * 1000 - 1999 参数相关错误
+     */
+    BINDING_ARGS_ERROR(1002, "参数格式错误"),
+    PASSWORD_ERROR(1003, "登录密码错误"),
+    /**
+     * 2000 - 2999 数据库相关错误
+     */
+    PHONE_NOT_FOUND(2001, "手机号不存在"),
+    HAS_EXIST(2002,"该号码已被注册"),
+    DATABASE_ERROR(2003,"数据库异常")
+    ;
 
 
     private long code;

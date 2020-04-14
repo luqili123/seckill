@@ -1,7 +1,10 @@
 package com.edu.nju.seckill.domain.dto;
 
+import com.edu.nju.seckill.annotation.Mobile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -14,12 +17,11 @@ import java.io.Serializable;
 public class UserParam implements Serializable {
 
     @ApiModelProperty(value = "电话号码",required = true,example = "15651879552")
-    @Pattern(regexp = "^[1](([3|5|8][\\d])|([4][4,5,6,7,8,9])|([6][2,5,6,7])|([7][^9])|([9][1,8,9]))[\\d]{8}$"
-            ,message = "手机号格式错误")
+    @Mobile
     private String phone;
 
     @ApiModelProperty(value = "密码",required = true,example = "123456")
-    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     public String getPassword() {

@@ -102,17 +102,27 @@ public class CommonResult<T> {
     /***
      * 信息已经存在返回结果
      */
-    public static <T> CommonResult<T> exist(){
-        return new CommonResult<T>(ResultCode.HAS_EXIST.getCode(), ResultCode.HAS_EXIST.getMessage(), null);
+    public static <T> CommonResult<T> phoneUsed(String message){
+        return new CommonResult<T>(ResultCode.HAS_EXIST.getCode(), message, null);
     }
 
     /***
      * 数据库异常
      */
-    public static <T> CommonResult<T> databaseError(){
-        return new CommonResult<T>(ResultCode.DATABASE_ERROR.getCode(), ResultCode.DATABASE_ERROR.getMessage(), null);
+    public static <T> CommonResult<T> databaseError(String message){
+        return new CommonResult<T>(ResultCode.DATABASE_ERROR.getCode(), message, null);
+    }
+    public static <T> CommonResult<T> bindingArgsError(String message) {
+        return new CommonResult<>(ResultCode.BINDING_ARGS_ERROR.getCode(), message, null);
     }
 
+    public static <T> CommonResult<T> phoneNotFound(String message) {
+        return new CommonResult<>(ResultCode.PHONE_NOT_FOUND.getCode(), message, null);
+    }
+
+    public static <T> CommonResult<T> passwordError(String message) {
+        return new CommonResult<>(ResultCode.PASSWORD_ERROR.getCode(), message, null);
+    }
 
     public long getCode() {
         return code;

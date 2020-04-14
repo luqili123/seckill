@@ -12,7 +12,6 @@ import com.edu.nju.seckill.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,11 +30,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
- * @author lql
+ * @author lql & Kelvin
  * @date 2020/1/11 20:25
  */
-@RestController
 @Api(tags = "用户控制类")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -57,65 +57,21 @@ public class UserController {
 
 
     @ApiOperation(value = "用户注册",notes = "传入User对象，存入phone以及password")
-    @PostMapping("/user/signUp")
-    public CommonResult<Boolean> register(@RequestBody  @Validated UserParam userParam, BindingResult bindingResult){
-
-        if(bindingResult.hasErrors()) {
-            return CommonResult.validateFailed("手机号格式错误");
-        }
-
-         //1.查询数据库，看该手机号是否存在
-        if(userService.hasPhone(userParam.getPhone())){
-            return CommonResult.exist();
-        }else{
-            //2.数据库不存在，则插入用户数据
-            if(userService.add(userParam)){
-                return CommonResult.success(true);
-            }else {
-                return CommonResult.databaseError();
-            }
-        }
+    @PostMapping("/register")
+    public CommonResult<Boolean> register(@RequestBody  @Validated UserParam userParam){
+        boolean res = userService.register(userParam);
+        return CommonResult.success(res);
     }
 
     @ApiOperation(value = "用户登录",notes = "传入用户手机号和密码")
-    @PostMapping("/user/login")
-    public CommonResult<UserResult> login(@RequestBody @Validated UserParam userParam
-            , BindingResult bindingResult){
-
-        if(bindingResult.hasErrors()){
-            List<ObjectError> list = bindingResult.getAllErrors();
-            for (ObjectError error : list) {
-                System.out.println(error.toString());
-            }
-            return CommonResult.validateFailed("手机号格式错误");
-        }
-
-        //1.根据手机号码，查询数据库
-        User user=userService.getUserByPhone(userParam.getPhone());
-        if(user!=null){
-            //1.1密码匹配
-            if(encoder.matches(userParam.getPassword(),user.getPassword())) {
-                //将用户信息存入redis,有效期为半小时
-                String token=jwtUtil.generate(user);
-                redisUtil.saveUser(user,token,expire);
-                System.out.println("登录成功！");
-                UserResult userResult =new UserResult();
-                userResult.setUser(user);
-                userResult.setToken(token);
-                return CommonResult.success(userResult);
-            }else{
-                //1.2密码不匹配
-                return CommonResult.validateFailed("密码错误");
-            }
-        }else {
-            //2.用户不存在
-            return CommonResult.validateFailed("手机号不存在");
-        }
-
+    @PostMapping("/login")
+    public CommonResult<UserResult> login(@RequestBody @Validated UserParam userParam){
+        UserResult userResult = userService.login(userParam);
+        return CommonResult.success(userResult);
     }
 
     @ApiOperation(value = "用户退出登录")
-    @GetMapping("/user/logout")
+    @GetMapping("/logout")
     public CommonResult<?> logout(CurrentUser currentUser){
         //1.先判断用户是否已经登录
         if(currentUser!=null){
@@ -133,14 +89,14 @@ public class UserController {
 
 
     }
-    @GetMapping("/user/test/{token}")
+    @GetMapping("/test/{token}")
     public String test(@PathVariable(value = "token") String token){
         User user=redisUtil.getUser(token);
         return user.toString();
     }
 
     @ApiOperation(value = "修改密码")
-    @PatchMapping("/user/resetpwd")
+    @PatchMapping("/resetpwd")
     public CommonResult<?> changePwdWthPwd(@RequestBody UserParam userParam,CurrentUser currentUser){
         //改进：数据库和redis都要操作成功，这里应该加事务防止部分成功,若失败则抛出全局异常
         if(currentUser!=null) {
@@ -172,7 +128,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据手机号，发送验证码短信")
-    @PostMapping("/user/chkCode")
+    @PostMapping("/chkCode")
     public CommonResult<?> sendMessage(@RequestBody String phone){
         if(userService.hasPhone(phone)){
             //发送验证码
@@ -183,13 +139,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "验证验证码是否正确")
-    @PostMapping("/user/verify")
+    @PostMapping("/verify")
     public CommonResult<?> verify(@RequestBody String phone,@RequestBody String chkCode){
         return CommonResult.success("输入正确！");
     }
 
     @ApiOperation("重置密码,这是个危险方法，后面解决")
-    @PatchMapping("/user/sendpwd")
+    @PatchMapping("/sendpwd")
     public CommonResult<?> resetPassword(@RequestBody UserParam userParam,CurrentUser currentUser){
         try{
 
@@ -214,7 +170,7 @@ public class UserController {
 
 
     @ApiOperation("修改用户信息（邮箱，昵称）")
-    @PatchMapping("/user/info")
+    @PatchMapping("/info")
     public CommonResult<?> resetPassword(@RequestBody @Validated UserInfo userInfo, CurrentUser currentUser
             , BindingResult bindingResult){
         if(bindingResult.hasErrors()){
