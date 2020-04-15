@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.domain.dto.UserResult;
@@ -49,4 +50,8 @@ public interface UserService {
     UserResult login(UserParam userParam);
 
     boolean register(UserParam userParam);
+
+    boolean logout(String token);
+
+    String sendMessage(String phone);
 }

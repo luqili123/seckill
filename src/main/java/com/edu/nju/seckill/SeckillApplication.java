@@ -14,11 +14,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.edu.nju.seckill.dao")
 @EnableSwagger2
 public class SeckillApplication {
-
     public static void main(String[] args) {
-
         SpringApplication.run(SeckillApplication.class, args);
-        //test
     }
 
 }

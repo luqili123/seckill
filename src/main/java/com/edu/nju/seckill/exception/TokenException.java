@@ -8,21 +8,14 @@ import com.edu.nju.seckill.common.CommonResult;
  * @date 2020/1/17 13:42
  */
 public class TokenException extends RuntimeException {
+    private String message;
 
-    private CommonResult<?> commonResult;
-
-    public TokenException(CommonResult<?> commonResult) {
-        super();
-        this.commonResult=commonResult;
+    public TokenException(String message) {
+        this.message = message;
     }
 
-    public CommonResult<?> getCommonResult() {
-        return commonResult;
+    @Override
+    public String getMessage() {
+        return message;
     }
-
-    public void setCommonResult(CommonResult<String> commonResult) {
-        this.commonResult = commonResult;
-    }
-
-
 }

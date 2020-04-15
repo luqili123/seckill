@@ -81,6 +81,11 @@ public class RedisUtil {
         }
     }
 
+    public boolean delete(String key) {
+        Boolean res = redisTemplate.delete(key);
+        return res == null ? false : res;
+    }
+
     //============================String=============================
     /**
      * 普通缓存获取
@@ -90,6 +95,12 @@ public class RedisUtil {
     public Object get(String key){
         return key==null?null:redisTemplate.opsForValue().get(key);
     }
+
+    public boolean setIfAbsent(String key, String value, long expireTime) {
+        Boolean res = redisTemplate.opsForValue().setIfAbsent(key, value, expireTime, TimeUnit.SECONDS);
+        return res == null ? false : res;
+    }
+
 
     /**
      * 普通缓存放入并设置时间

@@ -44,8 +44,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**","/error")
-                .excludePathPatterns("/user/login","/user/signUp"
+                .excludePathPatterns("/user/login","/user/register"
                         ,"/menu/tabItems","/menu/navItems"
+                        ,"/user/chkCode", "/user/verify"
                         ,"/goods/**"
                         ,"/seckill/list","/seckill/slide","/seckill/{sgid}","/test/redis/{token}");
     }

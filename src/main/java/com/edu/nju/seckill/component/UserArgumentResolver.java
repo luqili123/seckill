@@ -74,10 +74,10 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 System.out.println(currentUser);
             }
         }else {
-            throw new TokenException(CommonResult.unauthorized("header为空"));
+            throw new TokenException("header为空");
         }
         if(null==currentUser){
-            throw new TokenException(CommonResult.unauthorized("token错误没有获取用户信息"));
+            throw new TokenException("token错误没有获取用户信息");
         }
         return currentUser;
     }
