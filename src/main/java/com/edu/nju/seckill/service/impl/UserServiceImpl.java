@@ -3,6 +3,7 @@ package com.edu.nju.seckill.service.impl;
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.dao.UserMapper;
 import com.edu.nju.seckill.domain.User;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.UserInfo;
 import com.edu.nju.seckill.domain.dto.UserParam;
 import com.edu.nju.seckill.domain.dto.UserResult;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean hasPhone(String phone) {
-        return userMapper.selectByPhone(phone) == null ? false : true;
+        return userMapper.selectByPhone(phone) != null;
     }
 
     /***
@@ -135,5 +136,31 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         throw new DataBaseException("数据库开小差啦，请稍后重试");
+    }
+
+    /**
+     * 退出登录
+     * @param token 登录令牌
+     * @return true/false
+     */
+    @Override
+    public boolean logout(String token) {
+        if (redisUtil.delete(token))
+            return true;
+        throw new DataBaseException("服务器开小差啦，请稍后重试");
+    }
+
+    /**
+     * 发送验证码
+     * @param phone 手机号
+     * @return true/false
+     */
+    @Override
+    public String sendMessage(String phone) {
+        if (hasPhone(phone)) {
+            //发送验证码
+            return "验证码发送成功";
+        }
+        throw new PhoneNotFoundException("该手机号码未注册");
     }
 }

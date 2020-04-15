@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
             return CommonResult.bindingArgsError(error.getDefaultMessage());
         } else if (e instanceof TokenException) {
             // TODO 要改TokenException
-            return CommonResult.unauthorized(((TokenException) e).getCommonResult().getData());
+            return CommonResult.unauthorized(e.getMessage());
         } else if (e instanceof PhoneNotFoundException) {
             return CommonResult.phoneNotFound(e.getMessage());
         } else if (e instanceof PasswordErrorException) {

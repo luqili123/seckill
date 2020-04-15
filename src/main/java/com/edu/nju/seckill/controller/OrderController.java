@@ -80,7 +80,7 @@ public class OrderController {
         // 抢夺锁
 //        String lockVal = UUID.randomUUID().toString();
 //        String lockKey = "myLock" + orderParam.getGid();
-//        boolean res = redisUtil.set(lockKey, lockVal, 10);
+//        boolean res = redisUtil.setIfAbsent(lockKey, lockVal, 10);
 //        if (!res) {
 //            return CommonResult.failed("秒杀失败了哦~");
 //        }

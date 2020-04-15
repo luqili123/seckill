@@ -12,7 +12,7 @@
     <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    uid, name, password, email, phone, address_id, role, delete_flag
+    uid, `name`, password, email, phone, address_id, role, delete_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
@@ -24,7 +24,7 @@
   <select id="selectByPhone" resultType="com.edu.nju.seckill.domain.User">
     select
     <include refid="Base_Column_List" />
-    from user where phone=#{phone}
+    from user where phone = #{phone}
    </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

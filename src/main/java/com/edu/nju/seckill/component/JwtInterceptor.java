@@ -60,11 +60,11 @@ public class JwtInterceptor implements HandlerInterceptor {
                     System.out.println("匹配成功！");
                     return true;
                 }else {
-                    throw new TokenException(CommonResult.unauthorized("token错误"));
+                    throw new TokenException("token错误");
                 }
             }
         }else{
-            throw new TokenException(CommonResult.unauthorized("token为空"));
+            throw new TokenException("token为空");
         }
         return false;
     }
