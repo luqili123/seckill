@@ -156,11 +156,35 @@ public class UserServiceImpl implements UserService {
      * @return true/false
      */
     @Override
-    public String sendMessage(String phone) {
+    public boolean sendMessage(String phone) {
         if (hasPhone(phone)) {
-            //发送验证码
-            return "验证码发送成功";
+            // TODO 发送验证码
+            return true;
         }
         throw new PhoneNotFoundException("该手机号码未注册");
+    }
+
+    /**
+     * 校验验证码
+     * @param phone
+     * @param chkCode
+     * @return
+     */
+    @Override
+    public boolean verifyCode(String phone, String chkCode) {
+        if (hasPhone(phone)) {
+            // TODO 校验验证码逻辑
+            return true;
+        }
+        throw new PhoneNotFoundException("该手机号码未注册");
+    }
+
+    @Override
+    public boolean resetPassword(UserParam userParam) {
+        if (hasPhone(userParam.getPhone())) {
+            userParam.setPassword(encoder.encode(userParam.getPassword()));
+            return updatePwd(userParam);
+        }
+        throw new PhoneNotFoundException("非法请求！");
     }
 }
