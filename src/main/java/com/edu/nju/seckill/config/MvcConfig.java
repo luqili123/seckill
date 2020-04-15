@@ -46,7 +46,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**","/error")
                 .excludePathPatterns("/user/login","/user/register"
                         ,"/menu/tabItems","/menu/navItems"
-                        ,"/user/chkCode", "/user/verify"
+                        ,"/user/chkCode", "/user/verify","/user/password/reset"
                         ,"/goods/**"
                         ,"/seckill/list","/seckill/slide","/seckill/{sgid}","/test/redis/{token}");
     }

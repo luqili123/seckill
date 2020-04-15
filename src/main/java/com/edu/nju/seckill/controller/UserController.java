@@ -119,39 +119,23 @@ public class UserController {
 
     @ApiOperation(value = "根据手机号，发送验证码短信")
     @PostMapping("/chkCode")
-    public CommonResult<String> sendMessage(@RequestParam("phone") String phone) {
-        String res = userService.sendMessage(phone);
-        return CommonResult.success(null, res);
+    public CommonResult<Boolean> sendMessage(@RequestParam("phone") String phone) {
+        boolean res = userService.sendMessage(phone);
+        return CommonResult.success(res, "验证码发送成功");
     }
 
     @ApiOperation(value = "验证验证码是否正确")
     @PostMapping("/verify")
-    public CommonResult<?> verify(@RequestBody String phone, @RequestBody String chkCode) {
-        return CommonResult.success("输入正确！");
+    public CommonResult<?> verify(@RequestParam String phone, @RequestParam String chkCode) {
+        boolean res = userService.verifyCode(phone, chkCode);
+        return CommonResult.success(res, "验证成功");
     }
 
     @ApiOperation("重置密码,这是个危险方法，后面解决")
-    @PatchMapping("/sendpwd")
-    public CommonResult<?> resetPassword(@RequestBody UserParam userParam, CurrentUser currentUser) {
-        try {
-
-            //1.修改数据库
-            userParam.setPassword(encoder.encode(userParam.getPassword()));
-            if (userService.updatePwd(userParam)) {
-                if (redisUtil.hasKey(currentUser.getToken())) {
-                    //2.删除redis缓存
-                    redisUtil.del(currentUser.getToken());
-                }
-                return CommonResult.success("修改成功！");
-
-            } else {
-                return CommonResult.validateFailed();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return CommonResult.failed();
-        }
+    @PatchMapping("/password/reset")
+    public CommonResult<?> resetPassword(@RequestBody UserParam userParam) {
+        boolean res = userService.resetPassword(userParam);
+        return CommonResult.success(res, "密码重置成功");
     }
 
 

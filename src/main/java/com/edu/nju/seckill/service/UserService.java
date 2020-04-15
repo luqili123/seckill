@@ -53,5 +53,14 @@ public interface UserService {
 
     boolean logout(String token);
 
-    String sendMessage(String phone);
+    boolean sendMessage(String phone);
+
+    boolean verifyCode(String phone, String chkCode);
+
+    /**
+     * 重置密码
+     * @param userParam 重置密码的用户
+     * @return true/false
+     */
+    boolean resetPassword(UserParam userParam);
 }
