@@ -57,7 +57,7 @@
     where sgid = #{sgid,jdbcType=BIGINT}
   </select>
   <select id="selectSeckillList" resultType="com.edu.nju.seckill.domain.dto.SeckillGoodsList" resultMap="SeckillGoodsList">
-    select start_time,end_time,sgid,name,description,price,image,count,remain_count
+    select start_time,end_time,sgid,name,description,price,image,count,remain_count, seckill_price
     from seckill_goods
     where start_time > now()
     group by start_time,end_time,sgid,name,description,price,image,count,remain_count;
