@@ -4,6 +4,7 @@ import com.edu.nju.seckill.dao.SeckillGoodsMapper;
 import com.edu.nju.seckill.domain.SeckillGoods;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
+import com.edu.nju.seckill.exception.DataBaseException;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,10 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
     @Override
     public List<SeckillGoodsList> getSeckillList() {
         List<SeckillGoodsList> seckillGoodsLists = seckillGoodsMapper.selectSeckillList();
-        if (seckillGoodsLists != null && seckillGoodsLists.size() > 0) {
+        if (seckillGoodsLists.size() > 0) {
             return seckillGoodsLists;
         }
-        return null;
+        throw new DataBaseException("暂时没有秒杀活动哦");
     }
 
     @Override

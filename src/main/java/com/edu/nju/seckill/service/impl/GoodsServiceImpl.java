@@ -29,8 +29,8 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public List<CarouselItems> getHotProductCarousel() {
+        // TODO 商品首页轮播图的SQL是有逻辑问题的
         return goodsMapper.selectHotProductCarousel();
-//        return null;
     }
 
     @Override

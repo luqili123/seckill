@@ -10,6 +10,7 @@
         <result column="image" property="image" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
         <result column="display_time" property="displayTime" jdbcType="TIMESTAMP"/>
+        <result column="recommend" property="recommend" jdbcType="TINYINT"/>
     </resultMap>
 
     <resultMap id="CarouselItems" type="com.edu.nju.seckill.domain.dto.CarouselItems">
@@ -164,13 +165,10 @@
     where gid = #{gid,jdbcType=BIGINT}
   </update>
     <select id="selectHotProductCarousel" resultMap="CarouselItems">
-    select goods.gid,image
-    from seckill.goods as goods,
-		(select gid as id,sum(count) as sale
-		from  seckill.order
-		group by gid) as sales
-    where goods.gid=sales.id
-    order by goods.count-sales.sale desc limit 5
+    select gid, image
+    from goods
+    where goods.recommend = 2
+    order by gid desc limit 5
   </select>
     <select id="getGoodsList" resultMap="GoodsListResult">
     select good.gid as gid ,good.name as name,good.price as price ,good.description as description ,good.image as image ,(case when temp.sales is null then 0 else temp.sales end) as count

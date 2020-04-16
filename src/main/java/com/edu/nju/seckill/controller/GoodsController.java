@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -21,8 +22,9 @@ import java.util.Map;
  * @author lql
  * @date 2020/1/11 20:25
  */
-@RestController
 @Api(tags = "普通商品控制类")
+@RestController
+@RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
@@ -33,14 +35,14 @@ public class GoodsController {
      * @return
      */
     @ApiOperation(value = "获取重点商品轮播图列表",notes = "返回轮播列表list")
-    @GetMapping("/goods/carouselItems")
+    @GetMapping("/carouselItems")
     public CommonResult<List<CarouselItems>> getHotProductCarousel(){
         return CommonResult.success(goodsService.getHotProductCarousel(),"操作成功");
     }
 
     @ApiOperation(value="获取普通商品列表按type分类 以orderby排序 以keyword搜索",notes="返回商品表")
-    @GetMapping(value = {"/goods/{type}/list/{orderby}/{pageNum}/{pageSize}/{keyword}",
-                        "/goods/{type}/list/{orderby}/{pageNum}/{pageSize}"})
+    @GetMapping(value = {"/{type}/list/{orderby}/{pageNum}/{pageSize}/{keyword}",
+                        "/{type}/list/{orderby}/{pageNum}/{pageSize}"})
     public CommonResult<List<GoodsListResult>> getGoodsList(
             @PathVariable String type,
             @PathVariable(required = false) String keyword,
@@ -65,7 +67,7 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "通过gid获取显示商品详情",notes = "返回轮播列表list")
-    @GetMapping("/goods/show/{gid}")
+    @GetMapping("/show/{gid}")
     public CommonResult<List<GoodsDetailResult>> getGoodDetail(@PathVariable long gid){
         List<GoodsDetailResult> res=goodsService.getGoodDetail(gid);
         if(res.size()>0)
@@ -76,7 +78,7 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "商品搜索-获取商城首页商品列表。参数（可选）：keyword")
-    @GetMapping({"/goods/list/{keyword}","/goods/list"})
+    @GetMapping({"/list/{keyword}","/list"})
     public CommonResult<Map> searchGoodForIndex(
             @PathVariable(required = false) String keyword){
         Map<String,List<GoodsSearchResult>> map=new HashMap<>();
@@ -91,7 +93,7 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "商品搜索-获取首页商品搜索框的搜索提示")
-    @GetMapping(value = {"/goods/tips/{keyword}","/goods/tips"})
+    @GetMapping(value = {"/tips/{keyword}","/goods/tips"})
     public CommonResult<Map> getGoodsIndexTips(@PathVariable(required = false)String keyword){
         if(null==keyword)
             return CommonResult.success(null,"操作成功数据为空");
