@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -34,13 +35,7 @@ public class NavigationController {
     @ApiOperation(value = "获取导航栏条目下的主要商品")
     @GetMapping("/menu/tabItems")
     public CommonResult<?> getNavTableItems() {
-        List<TableItem> tableItemList = navigationService.getTableItems();
-        if (tableItemList != null) {
-            TableItems tableItems = new TableItems(tableItemList);
-            return CommonResult.success(tableItems);
-        }
-        return CommonResult.failed("没有商品！");
-
+        Map<String, List<TableItem>> res = navigationService.getTableItems();
+        return CommonResult.success(res);
     }
-
 }

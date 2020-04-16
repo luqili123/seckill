@@ -27,6 +27,17 @@ public class Goods implements Serializable {
     @ApiModelProperty(value = "上架时间",required = true)
     private Date displayTime;
 
+    @ApiModelProperty(value = "是否上首页推荐，1不推荐；2推荐")
+    private Short recommend;
+
+    public Short getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Short recommend) {
+        this.recommend = recommend;
+    }
+
     public Long getGid() {
         return gid;
     }

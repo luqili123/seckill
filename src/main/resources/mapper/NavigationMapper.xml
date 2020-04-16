@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.edu.nju.seckill.dao.NavigationMapper" >
-  <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Navigation" >
-    <id column="nid" property="nid" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-  </resultMap>
-<!--自定义的TableItem结果集映射-->
-  <resultMap id="TableItem" type="com.edu.nju.seckill.domain.dto.TableItem">
-    <id property="type" column="type"></id>
-    <collection property="goodsResults" ofType="com.edu.nju.seckill.domain.dto.GoodsResult">
-      <id column="gid" property="goods_id"></id>
-      <result column="image" property="imageUrl"></result>
-      <result property="goods_name" column="name"></result>
-      <result property="goods_price" column="price"></result>
-    </collection>
-
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.edu.nju.seckill.dao.NavigationMapper">
+    <resultMap id="BaseResultMap" type="com.edu.nju.seckill.domain.Navigation">
+        <id column="nid" property="nid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--自定义的TableItem结果集映射-->
+    <resultMap id="TableItem" type="com.edu.nju.seckill.domain.dto.TableItem">
+        <id property="type" column="type"></id>
+        <collection property="goodsResults" ofType="com.edu.nju.seckill.domain.dto.GoodsResult">
+            <id column="gid" property="goods_id"></id>
+            <result column="image" property="imageUrl"></result>
+            <result property="goods_name" column="name"></result>
+            <result property="goods_price" column="price"></result>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
     nid, name, type, sort
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from navigation
-    where nid = #{nid,jdbcType=INTEGER}
-  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from navigation
+        where nid = #{nid,jdbcType=INTEGER}
+    </select>
 
     <select id="selectAll" resultType="com.edu.nju.seckill.domain.dto.NavigationResult">
       select name,type
@@ -37,72 +36,72 @@
     <select id="selectByType" resultType="java.lang.String">
       select name from navigation where type =#{type}
     </select>
-  <select id="selectTableItems" resultType="com.edu.nju.seckill.domain.dto.TableItem" resultMap="TableItem">
+    <select id="selectTableItems" resultMap="TableItem">
         select gid,name,image,price,type
         from(select goods.gid ,goods.name,image,price,type from navigation as nav
         left join goods using(nid) where nav.nid=goods.nid) as temp
         group by type,gid,name,image,price
-  </select>
+    </select>
 
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from navigation
     where nid = #{nid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.edu.nju.seckill.domain.Navigation" >
+    <insert id="insert" parameterType="com.edu.nju.seckill.domain.Navigation">
 
     insert into navigation (nid, name, type, 
       sort)
     values (#{nid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{sort,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Navigation" >
-    insert into navigation
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="nid != null" >
-        nid,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="sort != null" >
-        sort,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="nid != null" >
-        #{nid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        #{sort,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Navigation" >
-    update navigation
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-    </set>
-    where nid = #{nid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Navigation" >
+    <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Navigation">
+        insert into navigation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nid != null">
+                nid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nid != null">
+                #{nid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.edu.nju.seckill.domain.Navigation">
+        update navigation
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where nid = #{nid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.edu.nju.seckill.domain.Navigation">
     update navigation
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},

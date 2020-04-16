@@ -4,6 +4,7 @@ import com.edu.nju.seckill.domain.dto.NavigationResult;
 import com.edu.nju.seckill.domain.dto.TableItem;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -21,5 +22,5 @@ public interface NavigationService {
      * 获取获取所有商品的信息，并按类型分组
      * @return
      */
-    List<TableItem> getTableItems();
+    Map<String, List<TableItem>> getTableItems();
 }
