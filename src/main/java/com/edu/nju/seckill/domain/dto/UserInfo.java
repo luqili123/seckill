@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.domain.dto;
 
+import com.edu.nju.seckill.annotation.Mobile;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.Email;
@@ -13,16 +14,15 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
 
     @ApiModelProperty(value = "电话号码")
-    @Pattern(regexp = "^[1](([3|5|8][\\d])|([4][4,5,6,7,8,9])|([6][2,5,6,7])|([7][^9])|([9][1,8,9]))[\\d]{8}$"
-            ,message = "手机号格式错误")
+    @Mobile
     private String phone;
 
     @ApiModelProperty(value = "用户名")
     private String name;
 
+//    ,regexp = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$"
     @ApiModelProperty(value = "邮箱")
-    @Email(message = "邮箱格式错误"
-            ,regexp = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$")
+    @Email(message = "邮箱格式错误")
     private String email;
 
     public String getPhone() {
