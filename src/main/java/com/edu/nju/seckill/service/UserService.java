@@ -34,13 +34,6 @@ public interface UserService {
     User getUserByPhone(String phone);
 
     /***
-     * 更新用户密码
-     * @param userParam
-     * @return
-     */
-    boolean updatePwd(UserParam userParam);
-
-    /***
      * 更新用户名和邮箱
      * @param userInfo
      * @return
@@ -63,4 +56,10 @@ public interface UserService {
      * @return true/false
      */
     boolean resetPassword(UserParam userParam);
+
+    boolean updateInfo(User user, String token, String name, String email);
+
+    boolean updatePwd(User user, String token, String password);
+
+    boolean updatePwd(UserParam userParam);
 }

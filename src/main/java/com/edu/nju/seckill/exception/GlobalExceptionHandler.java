@@ -2,6 +2,7 @@ package com.edu.nju.seckill.exception;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.exception.TokenException;
+import io.lettuce.core.RedisCommandTimeoutException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,6 +44,8 @@ public class GlobalExceptionHandler {
             return CommonResult.phoneUsed(e.getMessage());
         } else if (e instanceof DataBaseException) {
             return CommonResult.databaseError(e.getMessage());
+        } else if (e instanceof RedisCommandTimeoutException) {
+            return CommonResult.databaseError("网络超时，请稍后重试");
         }
         return null;
     }

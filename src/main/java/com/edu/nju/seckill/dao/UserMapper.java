@@ -22,7 +22,11 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    int updatePwd(UserParam userParam);
+    int updatePwd(Long uid, String password);
+
+    int updatePwd2(UserParam userParam);
 
     int updateInfo(UserInfo userInfo);
+
+    int updateUser(Long uid, String name, String email);
 }

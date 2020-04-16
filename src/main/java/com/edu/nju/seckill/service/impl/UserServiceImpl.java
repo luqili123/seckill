@@ -14,6 +14,7 @@ import com.edu.nju.seckill.exception.PhoneUsedException;
 import com.edu.nju.seckill.service.UserService;
 import com.edu.nju.seckill.utils.JwtUtil;
 import com.edu.nju.seckill.utils.RedisUtil;
+import jdk.nashorn.internal.parser.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updatePwd(UserParam userParam) {
-        return userMapper.updatePwd(userParam) == 1;
+        return userMapper.updatePwd2(userParam) == 1;
     }
 
     @Override
@@ -97,6 +98,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登录
+     *
      * @param userParam 前端传来的登录用户信息
      * @return 返回登录用户信息+Token
      */
@@ -123,16 +125,17 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户注册
+     *
      * @param userParam 前端传来的用户信息
      * @return true/false
      */
     @Override
     public boolean register(UserParam userParam) {
         //1.查询数据库，看该手机号是否存在
-        if(hasPhone(userParam.getPhone()))
+        if (hasPhone(userParam.getPhone()))
             throw new PhoneUsedException("该手机号码已被注册");
         //2.数据库不存在，则插入用户数据
-        if(add(userParam)){
+        if (add(userParam)) {
             return true;
         }
         throw new DataBaseException("数据库开小差啦，请稍后重试");
@@ -140,6 +143,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 退出登录
+     *
      * @param token 登录令牌
      * @return true/false
      */
@@ -152,6 +156,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 发送验证码
+     *
      * @param phone 手机号
      * @return true/false
      */
@@ -166,6 +171,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 校验验证码
+     *
      * @param phone
      * @param chkCode
      * @return
@@ -186,5 +192,30 @@ public class UserServiceImpl implements UserService {
             return updatePwd(userParam);
         }
         throw new PhoneNotFoundException("非法请求！");
+    }
+
+    @Override
+    public boolean updateInfo(User user, String token, String name, String email) {
+        if (userMapper.updateUser(user.getUid(), name, email) == 1) {
+            // 更新Redis用户信息
+            user.setName(name);
+            user.setEmail(email);
+            redisUtil.saveUser(user, token, expire);
+            return true;
+        }
+        throw new DataBaseException("用户信息更新失败");
+    }
+
+    @Override
+    public boolean updatePwd(User user, String token, String password) {
+        String encodePwd = encoder.encode(password);
+        if (encoder.matches(password, user.getPassword()))
+            throw new PasswordErrorException("新密码不能和原密码相同");
+        if (userMapper.updatePwd(user.getUid(), encoder.encode(password)) == 1) {
+            // 删除Redis信息
+            redisUtil.del(token);
+            return true;
+        }
+        throw new DataBaseException("数据库开小差了，请稍后重试");
     }
 }

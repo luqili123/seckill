@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class UserParam implements Serializable {
 
     @ApiModelProperty(value = "电话号码",required = true,example = "15651879552")
-    @Mobile
+    @Mobile(required = false)
     private String phone;
 
     @ApiModelProperty(value = "密码",required = true,example = "123456")
