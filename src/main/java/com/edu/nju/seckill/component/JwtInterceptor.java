@@ -1,8 +1,6 @@
 package com.edu.nju.seckill.component;
 
-import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.exception.TokenException;
-import com.edu.nju.seckill.utils.JwtUtil;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,9 +25,6 @@ public class JwtInterceptor implements HandlerInterceptor {
      * token以什么开头
      */
     private static final String StartWith="Bearer ";
-
-    @Autowired
-    private JwtUtil jwtUtil;
 
     @Autowired
     private RedisUtil redisUtil;

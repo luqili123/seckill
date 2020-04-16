@@ -1,9 +1,11 @@
 package com.edu.nju.seckill.service.impl;
 
+import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.dao.NavigationMapper;
 import com.edu.nju.seckill.domain.Navigation;
 import com.edu.nju.seckill.domain.dto.NavigationResult;
 import com.edu.nju.seckill.domain.dto.TableItem;
+import com.edu.nju.seckill.exception.DataBaseException;
 import com.edu.nju.seckill.service.NavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +24,10 @@ public class NavigationServiceImpl implements NavigationService {
 
     @Override
     public List<NavigationResult> getAllNavItems() {
-
-        return navigationMapper.selectAll() ;
+        List<NavigationResult> navigationResults = navigationMapper.selectAll();
+        if(navigationResults.size() > 0)
+            return navigationResults;
+        throw new DataBaseException("暂时还没有设置导航栏哦O(∩_∩)O");
     }
 
     @Override

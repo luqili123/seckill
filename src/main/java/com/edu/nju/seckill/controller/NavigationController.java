@@ -26,23 +26,20 @@ public class NavigationController {
 
     @ApiOperation(value = "获取所有导航栏信息")
     @GetMapping("/menu/navItems")
-    public CommonResult<List<NavigationResult>> getNavItems(){
-        List<NavigationResult> navigationList=navigationService.getAllNavItems();
-        if(navigationList!=null&&navigationList.size()>0){
-            return CommonResult.success(navigationList);
-        }else {
-            return CommonResult.failed("没有导航栏");
-        }
+    public CommonResult<List<NavigationResult>> getNavItems() {
+        List<NavigationResult> navigationList = navigationService.getAllNavItems();
+        return CommonResult.success(navigationList);
     }
+
     @ApiOperation(value = "获取导航栏条目下的主要商品")
     @GetMapping("/menu/tabItems")
-    public CommonResult<?> getNavTableItems(){
-        List<TableItem> tableItemList=navigationService.getTableItems();
-        if(tableItemList!=null){
-            TableItems tableItems=new TableItems(tableItemList);
+    public CommonResult<?> getNavTableItems() {
+        List<TableItem> tableItemList = navigationService.getTableItems();
+        if (tableItemList != null) {
+            TableItems tableItems = new TableItems(tableItemList);
             return CommonResult.success(tableItems);
         }
-        return CommonResult.failed("没有商品！") ;
+        return CommonResult.failed("没有商品！");
 
     }
 
