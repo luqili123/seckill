@@ -131,7 +131,7 @@ public class UserController {
         return CommonResult.success(res, "验证成功");
     }
 
-    @ApiOperation("重置密码,这是个危险方法，后面解决")
+    @ApiOperation("重置密码")
     @PatchMapping("/password/reset")
     public CommonResult<?> resetPassword(@RequestBody UserParam userParam) {
         boolean res = userService.resetPassword(userParam);
