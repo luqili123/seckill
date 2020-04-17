@@ -10,10 +10,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -44,29 +46,13 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "获取普通商品列表按type分类 以orderby排序 以keyword搜索", notes = "返回商品表")
-    @GetMapping(value = {"/{type}/list/{orderby}/{pageNum}/{pageSize}/{keyword}",
-            "/{type}/list/{orderby}/{pageNum}/{pageSize}"})
-    public CommonResult<List<GoodsListResult>> getGoodsList(
-            @PathVariable String type,
-            @PathVariable(required = false) String keyword,
-            @PathVariable Integer pageNum,
-            @PathVariable Integer pageSize,
-            @PathVariable String orderby) {
-        Page page = PageHelper.startPage(pageNum, pageSize, true);
-        Object obj = page.getTotal();
-        if (null == keyword)
-            keyword = "";
-        //前端默认值为default
-        if ("default".equals(orderby))
-            orderby = "gid";
-            //前端传输salescount 但数据库中为count字段
-        else if (orderby.equals("salecount"))
-            orderby = "count";
-        List<GoodsListResult> res = goodsService.getGoodsList(type, orderby, keyword);
-        if (res.size() > 0)
-            return CommonResult.success(res, "操作成功");
-        else
-            return CommonResult.failed("无数据");
+    // /list?type=phone&orderby=default&keyword=xxx
+    @GetMapping("/list")
+    public CommonResult<List<GoodsListResult>> getGoodsList(@RequestParam("type") String typeName,
+                                                            @RequestParam String orderby,
+                                                            @RequestParam(required = false) String keyword) {
+        List<GoodsListResult> results =goodsService.getGoodsList(typeName, orderby, keyword);
+        return CommonResult.success(results);
     }
 
     @ApiOperation(value = "通过gid获取显示商品详情", notes = "返回轮播列表list")
@@ -81,7 +67,7 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "商品搜索-获取商城首页商品列表。参数（可选）：keyword")
-    @GetMapping({"/list", "/list/{keyword}"})
+    @GetMapping({"/list/hot", "/list/hot/{keyword}"})
     public CommonResult<Map<String, List<GoodsSearchResult>>> searchGoodForIndex(@PathVariable(required = false) String keyword) {
         List<GoodsSearchResult> goodsSearchResults = goodsService.searchGoodsForIndex(keyword);
         Map<String, List<GoodsSearchResult>> res = new HashMap<>();

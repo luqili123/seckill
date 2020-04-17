@@ -48,13 +48,13 @@ public class JwtInterceptor implements HandlerInterceptor {
         //1.1包含token，则进行解析
         if(header!=null&&!"".equals(header)){
             //1.2,若以 Bearer空格 开头，则进行解析
-            if(header.startsWith(StartWith)){
+            if(header.startsWith(StartWith)) {
                 String token=header.substring(7);
                 //1.3 获取token之后，与redis数据进行对比，查看是否存在该token
-                if(redisUtil.hasKey(token)){
+                if(redisUtil.hasKey(token)) {
                     System.out.println("匹配成功！");
                     return true;
-                }else {
+                } else {
                     throw new TokenException("token错误");
                 }
             }

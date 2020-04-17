@@ -19,6 +19,8 @@ import java.io.IOException;
 @WebFilter(filterName = "CorsFilter")
 @Configuration
 public class CorsFilter implements Filter {
+    // Cross Origin
+    // CORS Resource Sharing
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;

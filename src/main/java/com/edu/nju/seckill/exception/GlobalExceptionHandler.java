@@ -34,7 +34,6 @@ public class GlobalExceptionHandler {
             ObjectError error = errors.get(0);
             return CommonResult.bindingArgsError(error.getDefaultMessage());
         } else if (e instanceof TokenException) {
-            // TODO 要改TokenException
             return CommonResult.unauthorized(e.getMessage());
         } else if (e instanceof PhoneNotFoundException) {
             return CommonResult.phoneNotFound(e.getMessage());
@@ -48,6 +47,8 @@ public class GlobalExceptionHandler {
             return CommonResult.databaseError("网络超时，请稍后重试");
         } else if (e instanceof SecKillActivityNotFoundException) {
             return CommonResult.seckillNotFound(e.getMessage());
+        } else if (e instanceof  GoodsNotFoundException) {
+            return CommonResult.goodsNotFound(e.getMessage());
         }
         return null;
     }
