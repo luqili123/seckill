@@ -23,7 +23,8 @@ public enum ResultCode implements IErrorCode {
      */
     PHONE_NOT_FOUND(2001, "手机号不存在"),
     HAS_EXIST(2002,"该号码已被注册"),
-    DATABASE_ERROR(2003,"数据库异常")
+    DATABASE_ERROR(2003,"数据库异常"),
+    SECKILL_NOT_FOUND(2004, "暂时没有秒杀活动")
     ;
 
 

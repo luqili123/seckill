@@ -106,6 +106,10 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCode.HAS_EXIST.getCode(), message, null);
     }
 
+    public static <T> CommonResult<T> seckillNotFound(String message) {
+        return new CommonResult<>(ResultCode.SECKILL_NOT_FOUND.getCode(), message, null);
+    }
+
     /***
      * 数据库异常
      */
