@@ -195,18 +195,27 @@
         where gid =#{gid})as sales
     on goods.gid=sales.gid
     </select>
+    <!--每个类型下的商品最多5个-->
     <select id="searchGoodsForIndex" resultMap="SearchGoodsForIndex">
-    select good.gid,good.name as names,good.price,good.description,navi.type,navi.name
-    from
-        (select gid,name,price,description,image,nid
-        from seckill.goods
-        where name like CONCAT('%','${keyword}','%') or description like CONCAT('%','${keyword}','%') )as good
-    left join seckill.navigation as navi
-    on navi.nid=good.nid
+        select good.gid, good.name as `names`, good.price, good.image, good.description, nav.type, nav.name
+        from
+            (select gid, `name`, price, description, image, nid
+                from goods
+                <where>
+                    <if test="keyword != null">
+                        `name` like CONCAT('%',#{keyword},'%') or description like CONCAT('%',#{keyword},'%')
+                    </if>
+                </where>
+            ) as good, navigation as nav
+        where nav.nid = good.nid
     </select>
     <select id="getGoodsIndexTips" resultType="java.lang.String">
-        SELECT name FROM seckill.goods
-        where name like CONCAT('%','${keyword}','%')
+        select `name` from goods
+        <where>
+            <if test="keyword != null">
+                `name` like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
         limit 8
     </select>
 </mapper>
