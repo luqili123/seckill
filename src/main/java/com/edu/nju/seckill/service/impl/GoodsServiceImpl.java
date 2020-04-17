@@ -81,8 +81,8 @@ public class GoodsServiceImpl implements GoodsService {
     */
     @Override
     public List<String> getGoodsIndexTips(String keyword) {
-        return goodsMapper.getGoodsIndexTips(keyword);
+        if (keyword != null)
+            return goodsMapper.getGoodsIndexTips(keyword);
+        return null;
     }
-
-
 }
