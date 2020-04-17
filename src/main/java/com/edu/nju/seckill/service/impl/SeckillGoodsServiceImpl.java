@@ -5,6 +5,7 @@ import com.edu.nju.seckill.domain.SeckillGoods;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import com.edu.nju.seckill.exception.DataBaseException;
+import com.edu.nju.seckill.exception.SecKillActivityNotFoundException;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,13 +52,12 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
         SeckillGoodsList seckillGoodsList = seckillGoodsMapper.selectLatest();
         if (seckillGoodsList != null) {
             return seckillGoodsList;
-        } else {
-            //若当前没有秒杀活动，就返回未来会开始的秒杀
-            seckillGoodsList = seckillGoodsMapper.selectFuture();
-            if (seckillGoodsList != null) {
-                return seckillGoodsList;
-            }
-            return null;
         }
+        //若当前没有秒杀活动，就返回未来会开始的秒杀
+        seckillGoodsList = seckillGoodsMapper.selectFuture();
+        if (seckillGoodsList != null) {
+            return seckillGoodsList;
+        }
+        throw new SecKillActivityNotFoundException("近期没有秒杀活动哦＞﹏＜");
     }
 }

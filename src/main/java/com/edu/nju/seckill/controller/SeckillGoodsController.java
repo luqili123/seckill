@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,9 @@ import java.util.List;
  * @author lql
  * @date 2020/1/11 20:26
  */
-@RestController
 @Api(tags = "秒杀商品控制类")
+@RestController
+@RequestMapping("/seckill")
 public class SeckillGoodsController {
 
     @Autowired
@@ -38,7 +40,7 @@ public class SeckillGoodsController {
 
 
     @ApiOperation(value = "秒杀商品列表")
-    @GetMapping("/seckill/list")
+    @GetMapping("/list")
     public CommonResult<?> getSeckillGoods() {
         List<SeckillGoodsList> seckillGoodsLists = seckillGoodsService.getSeckillList();
         return CommonResult.success(seckillGoodsLists);
@@ -51,7 +53,7 @@ public class SeckillGoodsController {
 //    }
 
     @ApiOperation(value = "添加秒杀商品")
-    @PostMapping("/seckill")
+    @PostMapping("/")
     public CommonResult<?> addSeckillGoods(@RequestParam Long gid, @RequestParam double seckillPrice) {
         //根据gid对象，查询数据库，验证goods是否存在
         Goods goods = goodsService.getGoodsByGid(gid);
@@ -86,19 +88,14 @@ public class SeckillGoodsController {
     }
 
     @ApiOperation("获取最近一期的秒杀商品列表")
-    @GetMapping("/seckill/slide")
-    public CommonResult<?> getLatestSeckillGoods() {
+    @GetMapping("/slide")
+    public CommonResult<SeckillGoodsList> getLatestSeckillGoods() {
         SeckillGoodsList seckillGoodsList = seckillGoodsService.getLatestSeckillGoods();
-        if (seckillGoodsList != null) {
-            return CommonResult.success(seckillGoodsList);
-        } else {
-            return CommonResult.failed("没有秒杀商品！");
-        }
-
+        return CommonResult.success(seckillGoodsList);
     }
 
     @ApiOperation("显示秒杀商品详情")
-    @GetMapping("/seckill/show/{sgid}")
+    @GetMapping("/show/{sgid}")
     public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid) {
         SeckillGoods seckillGoods = seckillGoodsService.getSeckillBySgid(sgid);
         if (seckillGoods != null) {

@@ -46,6 +46,8 @@ public class GlobalExceptionHandler {
             return CommonResult.databaseError(e.getMessage());
         } else if (e instanceof RedisCommandTimeoutException) {
             return CommonResult.databaseError("网络超时，请稍后重试");
+        } else if (e instanceof SecKillActivityNotFoundException) {
+            return CommonResult.seckillNotFound(e.getMessage());
         }
         return null;
     }
