@@ -171,17 +171,35 @@
     order by gid desc limit 5
   </select>
     <select id="getGoodsList" resultMap="GoodsListResult">
-    select good.gid as gid ,good.name as name,good.price as price ,good.description as description ,good.image as image ,(case when temp.sales is null then 0 else temp.sales end) as count
-    from((select good.gid as gid ,good.name as name,good.price as price ,good.description as description ,good.image as image ,good.count as count
-            from seckill.goods as good
-            left join
-                (select nid,type
-                from seckill.navigation)as navi on good.nid=navi.nid where type = #{type}) as good
-                left join (SELECT gid, sum(count) as sales from seckill.order group by gid) as temp
-                on good.gid=temp.gid)
-    where good.name like CONCAT('%','${keyword}','%') or good.description like CONCAT('%','${keyword}','%')
-    order by ${order}
-  </select>
+        select sum(`order`.count) as salecount, goods.gid, goods.name, goods.price, goods.description, goods.image
+        from goods, navigation as nav, `order`
+        <where>
+            <choose>
+                <when test="typeName eq 'all'">
+                    goods.gid = `order`.gid
+                </when>
+                <otherwise>
+                    nav.type = #{typeName} and nav.nid = goods.nid and goods.gid = `order`.gid
+                </otherwise>
+            </choose>
+            <if test="keyword != null">
+                and (goods.name like CONCAT('%',#{keyword},'%') or goods.description like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        group by `order`.gid
+        <choose>
+            <when test="orderby eq 'salecount'">
+                order by salecount desc;
+            </when>
+            <when test="orderby eq 'price'">
+                order by goods.price desc
+            </when>
+            <otherwise>
+                order by goods.gid
+            </otherwise>
+        </choose>
+    </select>
+
     <select id="getGoodDetail" resultMap="GoodsDetailResult">
     select goods.gid as gid,goods.name as name,goods.price as price,goods.description as description,
         goods.image as image, goods.count-sales.count as rest, sales.count as count,goods.display_time

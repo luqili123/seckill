@@ -24,9 +24,14 @@ public enum ResultCode implements IErrorCode {
     PHONE_NOT_FOUND(2001, "手机号不存在"),
     HAS_EXIST(2002,"该号码已被注册"),
     DATABASE_ERROR(2003,"数据库异常"),
-    SECKILL_NOT_FOUND(2004, "暂时没有秒杀活动")
-    ;
+    SECKILL_NOT_FOUND(2004, "暂时没有秒杀活动"),
+    GOODS_NOT_FOUND(2005, "没找到相关商品"),
 
+    /**
+     * 3000 - 3999 收藏商品相关的错误
+     */
+    FAV_EXIST(3001, "该商品已被收藏")
+    ;
 
     private long code;
     private String message;

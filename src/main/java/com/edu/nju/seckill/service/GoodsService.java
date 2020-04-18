@@ -23,40 +23,40 @@ public interface GoodsService {
     Goods getGoodsByGid(long gid);
 
     /**
-    * @Description: 获取普通商品列表
-    * @Param: [type, orderby, keyword]
-    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsListResult>
-    * @Author: whn
-    * @Date: 2020/2/1
-    */
-    List<GoodsListResult> getGoodsList(String type,String orderby,String keyword);
+     * @Description: 获取普通商品列表
+     * @Param: [type, orderby, keyword]
+     * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsListResult>
+     * @Author: whn
+     * @Date: 2020/2/1
+     */
+    List<GoodsListResult> getGoodsList(String typeName, String orderby, String keyword);
 
 
     /**
-    * @Description: 获取商品详情页
-    * @Param: [gid]
-    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsDetailResult>
-    * @Author: whn
-    * @Date: 2020/2/1
-    */
+     * @Description: 获取商品详情页
+     * @Param: [gid]
+     * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsDetailResult>
+     * @Author: whn
+     * @Date: 2020/2/1
+     */
     List<GoodsDetailResult> getGoodDetail(long gid);
 
-    
+
     /**
-    * @Description: 首页搜索商品（按分类）
-    * @Param: [keyword]
-    * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsSearchResult>
-    * @Author: whn
-    * @Date: 2020/2/7
-    */
+     * @Description: 首页搜索商品（按分类）
+     * @Param: [keyword]
+     * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsSearchResult>
+     * @Author: whn
+     * @Date: 2020/2/7
+     */
     List<GoodsSearchResult> searchGoodsForIndex(String keyword);
-    
+
     /**
-    * @Description: 商品搜索-获取首页商品搜索框的搜索提示
-    * @Param: [keyword]
-    * @return: java.util.List<java.lang.String>
-    * @Author: whn
-    * @Date: 2020/2/8
-    */
+     * @Description: 商品搜索-获取首页商品搜索框的搜索提示
+     * @Param: [keyword]
+     * @return: java.util.List<java.lang.String>
+     * @Author: whn
+     * @Date: 2020/2/8
+     */
     List<String> getGoodsIndexTips(String keyword);
 }

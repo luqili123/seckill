@@ -27,7 +27,8 @@ public interface GoodsMapper {
 
     List<CarouselItems> selectHotProductCarousel();
 
-    List<GoodsListResult> getGoodsList(@Param("type") String type, @Param("order") String orderby, @Param("keyword") String keyword);
+    List<GoodsListResult> getGoodsList(@Param("typeName") String typeName,@Param("orderby") String orderby,
+                                       @Param("keyword") String keyword);
 
     List<GoodsDetailResult> getGoodDetail(@Param("gid") Long gid);
 

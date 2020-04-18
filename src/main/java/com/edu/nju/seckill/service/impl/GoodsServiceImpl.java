@@ -6,6 +6,7 @@ import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
+import com.edu.nju.seckill.exception.GoodsNotFoundException;
 import com.edu.nju.seckill.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,17 +44,20 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
 
-
     /**
      * 获取商品列表
      */
     @Override
-    public List<GoodsListResult> getGoodsList(String type, String orderby, String keyword) {
-        return goodsMapper.getGoodsList(type,orderby,keyword);
+    public List<GoodsListResult> getGoodsList(String typeName, String orderby, String keyword) {
+        List<GoodsListResult> goodsList = goodsMapper.getGoodsList(typeName, orderby, keyword);
+        if (goodsList.size() > 0)
+            return goodsList;
+        throw new GoodsNotFoundException("没找到相关的商品");
     }
 
     /**
      * 获取商品详情页
+     *
      * @param gid
      */
     @Override
@@ -64,6 +68,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 商品分类搜索--首页
+     *
      * @param keyword
      * @return
      */
@@ -73,12 +78,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
-    * @Description: 商品搜索-获取首页商品搜索框的搜索提示
-    * @Param: [keyword]
-    * @return: java.util.List<java.lang.String>
-    * @Author: whn
-    * @Date: 2020/2/8
-    */
+     * @Description: 商品搜索-获取首页商品搜索框的搜索提示
+     * @Param: [keyword]
+     * @return: java.util.List<java.lang.String>
+     * @Author: whn
+     * @Date: 2020/2/8
+     */
     @Override
     public List<String> getGoodsIndexTips(String keyword) {
         if (keyword != null)

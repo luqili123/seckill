@@ -2,6 +2,7 @@ package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.FavoriteMapper;
 import com.edu.nju.seckill.domain.dto.FavoriteResult;
+import com.edu.nju.seckill.exception.FavExistException;
 import com.edu.nju.seckill.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,14 +29,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public boolean addFavorite(long uid, long gid) {
         if (favoriteMapper.findFavoriteByUidGid(uid, gid) > 0)
-            return false;
-        else {
-            int res = favoriteMapper.addFavorite(uid, gid);
-            if (res > 0)
-                return true;
-            else
-                return false;
-        }
+            throw new FavExistException("该商品已被您收藏啦^o^");
+        return favoriteMapper.addFavorite(uid, gid) == 1;
     }
 
     /**

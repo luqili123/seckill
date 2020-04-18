@@ -128,6 +128,14 @@ public class CommonResult<T> {
         return new CommonResult<>(ResultCode.PASSWORD_ERROR.getCode(), message, null);
     }
 
+    public static <T> CommonResult<T> goodsNotFound(String message) {
+        return new CommonResult<>(ResultCode.GOODS_NOT_FOUND.getCode(), message, null);
+    }
+
+    public static <T> CommonResult<T> favHasExist(String message) {
+        return new CommonResult<>(ResultCode.FAV_EXIST.getCode(), message, null);
+    }
+
     public long getCode() {
         return code;
     }
