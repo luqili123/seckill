@@ -49,6 +49,8 @@ public class GlobalExceptionHandler {
             return CommonResult.seckillNotFound(e.getMessage());
         } else if (e instanceof  GoodsNotFoundException) {
             return CommonResult.goodsNotFound(e.getMessage());
+        } else if (e instanceof FavExistException) {
+            return CommonResult.favHasExist(e.getMessage());
         }
         return null;
     }
