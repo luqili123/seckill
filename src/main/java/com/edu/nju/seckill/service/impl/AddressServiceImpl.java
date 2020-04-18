@@ -3,6 +3,7 @@ package com.edu.nju.seckill.service.impl;
 import com.edu.nju.seckill.dao.AddressMapper;
 import com.edu.nju.seckill.domain.dto.AddressOperationParam;
 import com.edu.nju.seckill.domain.dto.GetAddressResult;
+import com.edu.nju.seckill.exception.DataBaseException;
 import com.edu.nju.seckill.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public boolean addAddress(Long uid, String postcode, String address, String receiver_name, String receiver_phone) {
-        int res = addressMapper.addAddress(uid, postcode, address,
-                receiver_name, receiver_phone);
-        if (res > 0)
-            return true;
-        else
-            return false;
-
+       return addressMapper.addAddress(uid, postcode, address, receiver_name, receiver_phone) == 1;
     }
 
     /**
@@ -95,5 +90,14 @@ public class AddressServiceImpl implements AddressService {
             if (addressMapper.updateDefaultAddress(uid, aid) == 1)
                 return true;
         return false;
+    }
+
+    @Override
+    public boolean addAddress(Long uid, AddressOperationParam param) {
+        if (addAddress(uid,param.getPostcode(),param.getAddress(),
+                param.getReceiver_name(),param.getReceiver_phone())){
+            return true;
+        }
+        throw new DataBaseException("地址添加失败，请稍后重试");
     }
 }

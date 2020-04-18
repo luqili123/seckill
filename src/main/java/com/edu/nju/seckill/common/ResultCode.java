@@ -30,8 +30,8 @@ public enum ResultCode implements IErrorCode {
     /**
      * 3000 - 3999 收藏商品相关的错误
      */
-    FAV_EXIST(3001, "该商品已被收藏")
-    ;
+    FAV_EXIST(3001, "该商品已被收藏"),
+    FAV_NOT_FOUND(3002,"没有相关收藏");
 
     private long code;
     private String message;

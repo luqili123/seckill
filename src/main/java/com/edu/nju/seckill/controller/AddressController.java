@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author lql
+ * @author beverly lql
+ *
  * @date 2020/1/11 20:25
  */
 @RestController
@@ -39,21 +40,10 @@ public class AddressController {
     */
     @ApiOperation(value = "添加收货地址")
     @PostMapping("/address/add")
-    public CommonResult<String> addAddress(CurrentUser currentUser, @Validated @RequestBody AddressOperationParam param, BindingResult bindingResult){
-        User user=currentUser.getUser();
-        if(bindingResult.hasErrors()){
-            String errorInfo="";
-            List<ObjectError> list = bindingResult.getAllErrors();
-            for (ObjectError error : list) {
-                System.out.println(error.toString());
-                errorInfo+=error.toString();
-            }
-            return CommonResult.validateFailed(errorInfo);
-        }
-        if(addressService.addAddress(user.getUid(),param.getPostcode(),param.getAddress(),param.getReceiver_name(),param.getReceiver_phone()))
-            return CommonResult.success(null,"新增地址成功");
-        else
-            return CommonResult.failed("新增地址失败");
+    public CommonResult<Boolean> addAddress(CurrentUser currentUser, @Validated @RequestBody AddressOperationParam param){
+        User user = currentUser.getUser();
+        boolean res = addressService.addAddress(user.getUid(), param);
+        return CommonResult.success(res,"地址添加成功");
     }
 
     /**
