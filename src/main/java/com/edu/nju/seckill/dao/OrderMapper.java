@@ -3,7 +3,7 @@ package com.edu.nju.seckill.dao;
 import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
-import com.sun.org.apache.xpath.internal.operations.Or;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

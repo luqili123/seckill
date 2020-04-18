@@ -1,12 +1,9 @@
 package com.edu.nju.seckill.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.Date;
 
 /**
  * 利用雪花算法，获取全局id

@@ -55,12 +55,8 @@ public class FavoriteController {
      */
     @ApiOperation(value = "从收藏夹删除", notes = "addFavorite")
     @DeleteMapping("/favorite/{fid}")
-    public CommonResult<String> deleteFavorite(@PathVariable int fid) {
-        if (favoriteService.deleteFavorite(fid)) {
-            return CommonResult.success(null, "删除成功");
-        } else {
-            return CommonResult.failed("删除失败或无该记录");
-        }
+    public CommonResult<Boolean> deleteFavorite(@PathVariable int fid) {
+        return CommonResult.success(favoriteService.deleteFavorite(fid),"删除成功");
     }
 
     /**
@@ -74,12 +70,8 @@ public class FavoriteController {
     @GetMapping(value = {"/favorite/list/{keyword}", "/favorite/list"})
     public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(CurrentUser currentUser, @PathVariable(required = false) String keyword) {
         User user = currentUser.getUser();
-        if (null == keyword)
-            keyword = "";
         List<FavoriteResult> res = favoriteService.searchFavoriteByKeyword(user.getUid(), keyword);
-        if (res.size() > 0)
-            return CommonResult.success(res);
-        else
-            return CommonResult.failed("无对应收藏商品");
+        return CommonResult.success(res);
+
     }
 }

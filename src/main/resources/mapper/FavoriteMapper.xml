@@ -96,13 +96,15 @@
     where gid=#{gid} and uid=#{uid}
   </select>
   <delete id="deleteFavorite" parameterType="java.lang.Integer">
-    delete from seckill.favorite
+    delete from favorite
     where fid=#{fid}
   </delete>
   <select id="searchFavoriteByKeyword" resultMap="FavoriteResult">
     SELECT b.fid,b.gid,a.image,a.name,a.price
-    from seckill.goods as a,seckill.favorite as b
-    where a.gid=b.gid and (a.name like CONCAT('%','${keyword}','%') or a.description like CONCAT('%','${keyword}','%'))
-    and b.uid=#{uid}
+    from goods as a,favorite as b
+    where a.gid=b.gid and b.uid=#{uid}
+    <if test="keyword != null">
+      and (a.name like CONCAT('%',#{keyword},'%') or a.description like CONCAT('%',#{keyword},'%'))
+    </if>
   </select>
 </mapper>
