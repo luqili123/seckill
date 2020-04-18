@@ -56,4 +56,6 @@ public interface AddressService {
     * @Date: 2020/2/7
     */
     public boolean updateDefaultAddress(Long uid,Integer aid);
+
+    boolean addAddress(Long uid, AddressOperationParam param);
 }

@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.domain.dto;
 
+import com.edu.nju.seckill.annotation.Mobile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -54,9 +55,6 @@ public class AddressOperationParam {
     private String receiver_name;
 
     @ApiModelProperty(value = "收货人电话")
-    @Pattern(regexp = "^[1](([3|5|8][\\d])|([4][4,5,6,7,8,9])|([6][2,5,6,7])|([7][^9])|([9][1,8,9]))[\\d]{8}$||" +
-            "(?:(\\(\\+?86\\))(0[0-9]{2,3}\\-?)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?)|" +
-            "(?:(86-?)?(0[0-9]{2,3}\\-?)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?)"
-            ,message = "电话格式错误")
+    @Mobile
     private String receiver_phone;
 }
