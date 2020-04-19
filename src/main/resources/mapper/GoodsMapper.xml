@@ -24,7 +24,7 @@
         <result column="description" property="desc" jdbcType="VARCHAR"/>
         <result column="price" property="goods_price" jdbcType="DOUBLE"/>
         <result column="image" property="imgUrl" jdbcType="VARCHAR"/>
-        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="salecount" property="count" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="GoodsDetailResult" type="com.edu.nju.seckill.domain.dto.GoodsDetailResult">
@@ -171,31 +171,64 @@
     order by gid desc limit 5
   </select>
     <select id="getGoodsList" resultMap="GoodsListResult">
-        select sum(`order`.count) as salecount, goods.gid, goods.name, goods.price, goods.description, goods.image
-        from goods, navigation as nav, `order`
-        <where>
-            <choose>
-                <when test="typeName eq 'all'">
-                    goods.gid = `order`.gid
-                </when>
-                <otherwise>
-                    nav.type = #{typeName} and nav.nid = goods.nid and goods.gid = `order`.gid
-                </otherwise>
-            </choose>
-            <if test="keyword != null">
-                and (goods.name like CONCAT('%',#{keyword},'%') or goods.description like CONCAT('%',#{keyword},'%'))
-            </if>
-        </where>
-        group by `order`.gid
+        SELECT c.*
+        FROM (
+        SELECT
         <choose>
-            <when test="orderby eq 'salecount'">
-                order by salecount desc;
-            </when>
-            <when test="orderby eq 'price'">
-                order by goods.price desc
+            <when test="orderby == 'salecount'">
+                SUM(o.count) as salecount,
             </when>
             <otherwise>
-                order by goods.gid
+                IFNULL(NULL,0) as salecount,
+            </otherwise>
+        </choose>
+         g.gid, g.`name`, g.price, g.description, g.image
+        FROM goods as g
+        <if test="typeName neq 'all'">
+            ,navigation as n
+        </if>
+        <if test="orderby == 'salecount'">
+            , `order` as o
+        </if>
+        <where>
+        <if test="typeName neq 'all'">
+            and n.type = #{typeName} and n.nid = g.nid
+        </if>
+        <if test="orderby == 'salecount'">
+            and g.gid = o.gid
+        </if>
+        <if test="keyword != null">
+            and (g.`name` like CONCAT('%', #{keyword}, '%') or g.description like CONCAT('%', #{keyword}, '%'))
+        </if>
+        </where>
+        <if test="orderby == 'salecount'">
+            GROUP BY o.gid
+        </if>
+        UNION
+        SELECT IFNULL(NULL,0) as salecount, g.gid, g.`name`, g.price, g.description, g.image
+        FROM goods as g
+        <if test="typeName neq 'all'">
+            ,navigation as n
+        </if>
+        <where>
+        g.gid NOT IN (SELECT o.gid FROM `order` as o)
+        <if test="typeName neq 'all'">
+            and n.type = #{typeName} and n.nid = g.nid
+        </if>
+        <if test="keyword != null">
+            and (g.`name` like CONCAT('%', #{keyword}, '%') or g.description like CONCAT('%', #{keyword}, '%'))
+        </if>
+        </where>
+        ) as c
+        <choose>
+            <when test="orderby == 'salecount'">
+                ORDER BY c.salecount desc
+            </when>
+            <when test="orderby == 'price'">
+                ORDER BY c.price desc
+            </when>
+            <otherwise>
+                ORDER BY c.gid
             </otherwise>
         </choose>
     </select>
