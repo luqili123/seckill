@@ -73,7 +73,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 currentUser.setUser(redisUtil.getUser(token));
                 System.out.println(currentUser);
             }
-        }else {
+        }
+        else {
             throw new TokenException("header为空");
         }
         if(null==currentUser){

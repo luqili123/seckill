@@ -34,4 +34,8 @@ public interface FavoriteMapper {
     int findFavoriteByUidGid(@Param("uid") long uid, @Param("gid") long gid);
 
     List<FavoriteResult> searchFavoriteByKeyword(@Param("uid")long uid, @Param("keyword")String keyword);
+
+    Favorite getFavorite(Long uid, Long gid);
+
+    int deleteFavByGid(Long uid, Long gid);
 }

@@ -35,11 +35,11 @@ public interface GoodsService {
     /**
      * @Description: 获取商品详情页
      * @Param: [gid]
-     * @return: java.util.List<com.edu.nju.seckill.domain.dto.GoodsDetailResult>
+     * @return: GoodsDetailResult
      * @Author: whn
      * @Date: 2020/2/1
      */
-    List<GoodsDetailResult> getGoodDetail(long gid);
+    GoodsDetailResult getGoodDetail(Long uid, Long gid);
 
 
     /**

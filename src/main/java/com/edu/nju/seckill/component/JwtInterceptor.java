@@ -38,7 +38,7 @@ public class JwtInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     @Override
-    public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws TokenException {
         if(request.getMethod().equals("OPTIONS")){
             return true;
@@ -52,14 +52,12 @@ public class JwtInterceptor implements HandlerInterceptor {
                 String token=header.substring(7);
                 //1.3 获取token之后，与redis数据进行对比，查看是否存在该token
                 if(redisUtil.hasKey(token)) {
-                    System.out.println("匹配成功！");
                     return true;
-                } else {
-                    throw new TokenException("token错误");
                 }
+                throw new TokenException("登录失效啦，请重新登录");
             }
-        }else{
-            throw new TokenException("token为空");
+        } else {
+            throw new TokenException("请先登录");
         }
         return false;
     }

@@ -99,6 +99,10 @@
     delete from favorite
     where fid=#{fid}
   </delete>
+  <delete id="deleteFavByGid">
+    delete from favorite
+    where uid = #{uid} and gid = #{gid}
+  </delete>
   <select id="searchFavoriteByKeyword" resultMap="FavoriteResult">
     SELECT b.fid,b.gid,a.image,a.name,a.price
     from goods as a,favorite as b
@@ -106,5 +110,11 @@
     <if test="keyword != null">
       and (a.name like CONCAT('%',#{keyword},'%') or a.description like CONCAT('%',#{keyword},'%'))
     </if>
+  </select>
+  <select id="getFavorite" resultType="com.edu.nju.seckill.domain.Favorite">
+    select 
+    <include refid="Base_Column_List"></include>
+    from favorite
+    where uid = #{uid} and gid = #{gid}
   </select>
 </mapper>

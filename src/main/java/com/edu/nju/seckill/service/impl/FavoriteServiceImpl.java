@@ -51,4 +51,16 @@ public class FavoriteServiceImpl implements FavoriteService {
     public List<FavoriteResult> searchFavoriteByKeyword(long uid, String keyword) {
         return favoriteMapper.searchFavoriteByKeyword(uid,keyword);
     }
+
+    @Override
+    public boolean hasFavorite(Long uid, Long gid) {
+        return favoriteMapper.getFavorite(uid, gid) != null;
+    }
+
+    @Override
+    public boolean cancelFav(Long uid, Long gid) {
+        if (favoriteMapper.deleteFavByGid(uid, gid) == 1)
+            return true;
+        throw new DataBaseException("┗|｀O′|┛ 嗷~~，网络异常，请稍后重试");
+    }
 }

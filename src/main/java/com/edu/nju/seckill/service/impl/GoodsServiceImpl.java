@@ -7,6 +7,7 @@ import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
 import com.edu.nju.seckill.exception.GoodsNotFoundException;
+import com.edu.nju.seckill.service.FavoriteService;
 import com.edu.nju.seckill.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private FavoriteService favoriteService;
 
     /**
      * 查找获取重点商品轮播图列表
@@ -61,8 +65,14 @@ public class GoodsServiceImpl implements GoodsService {
      * @param gid
      */
     @Override
-    public List<GoodsDetailResult> getGoodDetail(long gid) {
-        return goodsMapper.getGoodDetail(gid);
+    public GoodsDetailResult getGoodDetail(Long uid, Long gid) {
+        GoodsDetailResult goodDetail = goodsMapper.getGoodDetail(gid);
+        if (goodDetail != null) {
+            boolean res = favoriteService.hasFavorite(uid, gid);
+            goodDetail.setFavorited(res);
+            return goodDetail;
+        }
+        throw new GoodsNotFoundException("您查询的商品不存在");
     }
 
 

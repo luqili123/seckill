@@ -20,30 +20,31 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "收藏夹控制类")
+@RequestMapping("/favorite")
 public class FavoriteController {
 
     @Autowired
     private FavoriteService favoriteService;
 
     @ApiOperation(value = "get参数解析器测试", notes = "testGet")
-    @GetMapping("/favorite/get")
+    @GetMapping("/get")
     public String getTest(User user) {
         return user.toString();
     }
 
     @ApiOperation(value = "post参数解析器测试", notes = "testPost")
-    @PostMapping("/favorite/post")
+    @PostMapping("/post")
     public String postTest(User user, @RequestParam String string) {
         return user.getName() + string;
     }
 
     @ApiOperation(value = "添加收藏夹", notes = "addFavorite")
-    @PostMapping("/favorite")
+    @PostMapping("")
     public CommonResult<Boolean> addFavorite(CurrentUser currentUser, @RequestBody Map<String, Long> map) {
         Long gid = map.get("gid");
         User user = currentUser.getUser();
         boolean res = favoriteService.addFavorite(user.getUid(), gid);
-        return CommonResult.success(res);
+        return CommonResult.success(res, "添加收藏成功");
     }
 
     /**
@@ -54,9 +55,16 @@ public class FavoriteController {
      * @Date: 2020/1/29
      */
     @ApiOperation(value = "从收藏夹删除", notes = "addFavorite")
-    @DeleteMapping("/favorite/{fid}")
+    @DeleteMapping("/{fid}")
     public CommonResult<Boolean> deleteFavorite(@PathVariable int fid) {
         return CommonResult.success(favoriteService.deleteFavorite(fid),"删除成功");
+    }
+
+    @ApiOperation(value = "取消收藏")
+    @DeleteMapping("/cancel")
+    public CommonResult<Boolean> cancelFavorite(CurrentUser currentUser, @RequestParam("gid") Long gid) {
+        boolean res = favoriteService.cancelFav(currentUser.getUser().getUid(), gid);
+        return CommonResult.success(res, "已取消商品收藏");
     }
 
     /**
@@ -67,7 +75,7 @@ public class FavoriteController {
      * @Date: 2020/1/30
      */
     @ApiOperation(value = "从收藏夹通过keyword搜索", notes = "searchFavoriteByKeyword")
-    @GetMapping(value = {"/favorite/list/{keyword}", "/favorite/list"})
+    @GetMapping(value = {"/list/{keyword}", "/list"})
     public CommonResult<List<FavoriteResult>> searchFavoriteByKeyword(CurrentUser currentUser, @PathVariable(required = false) String keyword) {
         User user = currentUser.getUser();
         List<FavoriteResult> res = favoriteService.searchFavoriteByKeyword(user.getUid(), keyword);

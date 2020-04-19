@@ -30,7 +30,7 @@ public interface GoodsMapper {
     List<GoodsListResult> getGoodsList(@Param("typeName") String typeName,@Param("orderby") String orderby,
                                        @Param("keyword") String keyword);
 
-    List<GoodsDetailResult> getGoodDetail(@Param("gid") Long gid);
+    GoodsDetailResult getGoodDetail(@Param("gid") Long gid);
 
     List<GoodsSearchResult> searchGoodsForIndex(String keyword);
 
