@@ -58,11 +58,7 @@ public class AddressController {
     public CommonResult<List<GetAddressResult>> getAddress(CurrentUser currentUser){
         User user=currentUser.getUser();
         List<GetAddressResult> res = addressService.getAddress(user.getUid());
-        if(res.size()>0)
-            return CommonResult.success(res,"获取收货地址成功");
-        else {
-            return CommonResult.failed("您似乎还没有可用的收藏地址");
-        }
+        return CommonResult.success(res);
     }
 
 
@@ -75,21 +71,10 @@ public class AddressController {
     */
     @ApiOperation(value = "修改收货地址")
     @PostMapping("/address/update/{aid}")
-    public CommonResult<String> updateAddress(CurrentUser currentUser,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param,BindingResult bindingResult){
+    public CommonResult<Boolean> updateAddress(CurrentUser currentUser,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param){
         User user=currentUser.getUser();
-        if(bindingResult.hasErrors()){
-            String errorInfo="";
-            List<ObjectError> list = bindingResult.getAllErrors();
-            for (ObjectError error : list) {
-                System.out.println(error.toString());
-                errorInfo+=error.toString();
-            }
-            return CommonResult.validateFailed(errorInfo);
-        }
-        if(addressService.updateAddress(aid,user.getUid(),param.getPostcode(),param.getAddress(),param.getReceiver_name(),param.getReceiver_phone()))
-            return CommonResult.success(null,"修改成功");
-        else
-            return CommonResult.failed("修改失败");
+        boolean res=addressService.updateAddress(aid,user.getUid(),param);
+        return CommonResult.success(res,"修改地址成功");
     }
 
     /**
@@ -118,14 +103,12 @@ public class AddressController {
     */
     @ApiOperation(value = "设置默认地址")
     @PutMapping("/address/default")
-    public CommonResult<String> updateDefaultAddress(CurrentUser currentUser,
+    public CommonResult<Boolean> updateDefaultAddress(CurrentUser currentUser,
                                                      @RequestBody Map<String, Integer> map){
         Integer aid=map.get("aid");
         User user=currentUser.getUser();
         Long uid=user.getUid();
-        if(addressService.updateDefaultAddress(uid,aid))
-            return CommonResult.success("修改成功");
-        else
-            return CommonResult.failed("修改失败");
+        boolean res=addressService.updateDefaultAddress(uid,aid);
+        return CommonResult.success(res,"修改默认地址成功");
     }
 }

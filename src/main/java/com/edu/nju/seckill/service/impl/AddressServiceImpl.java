@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author lql
+ * @author  lql
  * @date 2020/1/11 20:20
  */
 @Service
@@ -53,11 +53,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public boolean updateAddress(Integer aid, Long uid, String postcode, String address, String receiver_name, String receiver_phone) {
-        int res = addressMapper.updateAddress(aid, uid, postcode, address, receiver_name, receiver_phone);
-        if (res > 0)
-            return true;
-        else
-            return false;
+        return addressMapper.updateAddress(aid, uid, postcode, address, receiver_name, receiver_phone) == 1;
     }
 
     /**
@@ -86,10 +82,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public boolean updateDefaultAddress(Long uid, Integer aid) {
         //先判断该uid是否持有该aid
-        if (addressMapper.isBelongToCurrentUser(uid, aid) == 1)
-            if (addressMapper.updateDefaultAddress(uid, aid) == 1)
+        if (addressMapper.isBelongToCurrentUser(uid, aid) == 1 &&
+                addressMapper.updateDefaultAddress(uid, aid) == 1)
                 return true;
-        return false;
+        throw new DataBaseException("修改默认地址失败，请稍后重试");
     }
 
     @Override
@@ -99,5 +95,21 @@ public class AddressServiceImpl implements AddressService {
             return true;
         }
         throw new DataBaseException("地址添加失败，请稍后重试");
+    }
+
+    /**
+     *
+     * @param aid
+     * @param uid
+     * @author beverly
+     * @return
+     */
+    @Override
+    public boolean updateAddress(Integer aid, Long uid, AddressOperationParam param) {
+        if (updateAddress(aid,uid,param.getPostcode(),param.getAddress(),
+                param.getReceiver_name(),param.getReceiver_phone())){
+            return true;
+        }
+        throw new DataBaseException("地址修改失败，请稍后再试");
     }
 }
