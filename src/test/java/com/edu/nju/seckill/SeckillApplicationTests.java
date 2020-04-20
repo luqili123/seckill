@@ -250,4 +250,10 @@ class SeckillApplicationTests {
         threadPool.shutdown();
 
     }
+
+    @Test
+    public void testUpdateRemainCountBySgid(){
+        System.out.println(seckillGoodsService.updateSeckillGoodsRemainCount(10,1));
+
+    }
 }

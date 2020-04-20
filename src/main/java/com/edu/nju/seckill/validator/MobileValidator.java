@@ -22,7 +22,6 @@ public class MobileValidator implements ConstraintValidator<Mobile, String> {
         }
         return true;
     }
-
     @Override
     public void initialize(Mobile constraintAnnotation) {
         required = constraintAnnotation.required();

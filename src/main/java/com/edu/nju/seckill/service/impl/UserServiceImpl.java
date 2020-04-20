@@ -131,8 +131,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean register(UserParam userParam) {
         //1.查询数据库，看该手机号是否存在
-        if (hasPhone(userParam.getPhone()))
+        if (hasPhone(userParam.getPhone())) {
             throw new PhoneUsedException("该手机号码已被注册");
+        }
         //2.数据库不存在，则插入用户数据
         if (add(userParam)) {
             return true;
@@ -148,8 +149,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean logout(String token) {
-        if (redisUtil.delete(token))
+        if (redisUtil.delete(token)) {
             return true;
+        }
         throw new DataBaseException("服务器开小差啦，请稍后重试");
     }
 
@@ -208,8 +210,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updatePwd(User user, String token, String password) {
         String encodePwd = encoder.encode(password);
-        if (encoder.matches(password, user.getPassword()))
+        if (encoder.matches(password, user.getPassword())) {
             throw new PasswordErrorException("新密码不能和原密码相同");
+        }
         if (userMapper.updatePwd(user.getUid(), encoder.encode(password)) == 1) {
             // 删除Redis信息
             redisUtil.del(token);

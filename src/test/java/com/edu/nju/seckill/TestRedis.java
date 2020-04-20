@@ -1,9 +1,14 @@
 package com.edu.nju.seckill;
 
+import com.edu.nju.seckill.service.SeckillGoodsService;
 import com.edu.nju.seckill.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author LiuWen
@@ -16,10 +21,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestRedis {
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    RedisTemplate<String, Object>  redisTemplate;
+    @Autowired
+    private SeckillGoodsService seckillGoodsService;
     @Test
     void test1() {
-        boolean res = redisUtil.delete("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2dpbiIsImF1ZCI6ImNsaWVudCIsInJvbGUiOjEsInBob" +
-                "25lIjoiMTU4NTA2ODI4NzciLCJuYW1lIjoiOGUyZGU1OTQifQ.rsjsp1RM6HnkCYJhXa3KEH-d4YW5q5k0cjX_tPbsgCA");
-        System.out.println("res: " + res);
+
+    }
+
+    @Test
+    void test2() {
+        //redis命令模糊查找
+        System.out.print(redisTemplate);
+        Set<String> set= redisTemplate.keys("secGood_"+"*");
+        for (String s : set) {
+            Object sgid=redisUtil.hget(s,"sgid");
+            Object remainCount=redisUtil.hget(s,"remain_count");
+            seckillGoodsService.updateSeckillGoodsRemainCount((int)remainCount,(int)sgid);
+            System.out.println(sgid+" "+remainCount);
+        }
+        redisUtil.del(set);
     }
 }
