@@ -86,12 +86,10 @@ public class AddressController {
     */
     @ApiOperation(value="删除收货地址")
     @DeleteMapping("/address/deleteaddress/{aid}")
-    public CommonResult<String> deleteAddress(CurrentUser currentUser,@PathVariable Integer aid){
+    public CommonResult<Boolean> deleteAddress(CurrentUser currentUser,@PathVariable Integer aid){
         User user=currentUser.getUser();
-        if(addressService.deleteAddress(aid,user.getUid()))
-            return CommonResult.success(null,"删除成功");
-        else
-            return CommonResult.failed("删除失败或不存在该地址id");
+        boolean res = addressService.deleteAddress(aid,user.getUid());
+        return CommonResult.success(res,"删除地址成功");
     }
 
     /**
