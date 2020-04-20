@@ -58,4 +58,14 @@ public interface AddressService {
     public boolean updateDefaultAddress(Long uid,Integer aid);
 
     boolean addAddress(Long uid, AddressOperationParam param);
+
+    /**
+     * @description:重载修改地址方法
+     * @param aid
+     * @param uid
+     * @param param
+     * @Author: beverly
+     * @return
+     */
+    boolean updateAddress(Integer aid, Long uid, AddressOperationParam param);
 }
