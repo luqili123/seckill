@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.edu.nju.seckill.domain.User;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +69,5 @@ public class JwtUtil {
             hashMap.put(entry.getKey(), entry.getValue().asString());
         }
         return hashMap;
-
     }
 }

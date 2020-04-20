@@ -1,0 +1,78 @@
+package com.edu.nju.seckill.component;
+
+import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
+import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
+import com.edu.nju.seckill.service.SeckillGoodsService;
+import com.edu.nju.seckill.utils.RedisUtil;
+import javafx.scene.layout.CornerRadii;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * 定时器任务
+ * @author lql
+ * @date 2020/4/20 14:41
+ */
+@Component
+public class ScheduleTask {
+
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private SeckillGoodsService seckillGoodsService;
+
+
+    /***
+     * 定时执行，将上一期秒杀商品结果写回数据库，再将新一期开始秒杀的商品放入redis中.
+     *cron ="0 0 0/1 * * *":表示每天0点开始，每隔一个小时执行一次
+     */
+    @Scheduled(cron ="0 0 0/1 * * *")
+    public void getStartSecGoodsInfo2Redis(){
+        System.out.println(new Date(System.currentTimeMillis())+" 定时任务开启!");
+        //将上一期秒杀商品信息写回数据库（主要是remain_count的变化)
+        String prefix="secGood_";
+        Set<String> goodsId=redisUtil.getByPattern(prefix+"*");
+        if(goodsId!=null){
+            //更新数据
+            for (String s : goodsId) {
+                Object sgid=redisUtil.hget(s,"sgid");
+                Object remainCount=redisUtil.hget(s,"remain_count");
+                seckillGoodsService.updateSeckillGoodsRemainCount((int)remainCount,(int)sgid);
+            }
+            //删除redis中的数据
+            redisUtil.del(goodsId);
+        }
+
+        //查询已经开始的秒杀商品
+        SeckillGoodsList seckillGoodsLists = seckillGoodsService.getStartSeckillGoods();
+        if(seckillGoodsLists!=null) {
+            //存储每个秒杀商品详细信息
+            Map<String,Object> goodsInfo = new HashMap<>();
+            List<SeckillGoodsResult> goodsList = seckillGoodsLists.getSeckillGoodsList();
+            for (SeckillGoodsResult seckillGoodsResult : goodsList) {
+                goodsInfo.put("sgid",seckillGoodsResult.getSgid());
+                goodsInfo.put("name",seckillGoodsResult.getGoods_name());
+                goodsInfo.put("price",seckillGoodsResult.getGoods_price());
+                goodsInfo.put("seckill_price",seckillGoodsResult.getSeckill_price());
+                goodsInfo.put("description",seckillGoodsResult.getDesc());
+                goodsInfo.put("image",seckillGoodsResult.getImgUrl());
+                goodsInfo.put("count",seckillGoodsResult.getCount());
+                goodsInfo.put("remain_count",seckillGoodsResult.getRemain_count());
+                goodsInfo.put("start_time",seckillGoodsLists.getStartTime());
+                goodsInfo.put("end_time",seckillGoodsLists.getEndTime());
+                //将开始秒杀的商品信息存入redis
+                redisUtil.hmset(prefix+seckillGoodsResult.getSgid(),goodsInfo);
+            }
+//            System.out.println(goodsInfo.toString());
+        }
+    }
+
+}

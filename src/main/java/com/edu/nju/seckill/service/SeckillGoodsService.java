@@ -26,4 +26,12 @@ public interface SeckillGoodsService {
      * @return
      */
     SeckillGoodsList getLatestSeckillGoods();
+
+    /***
+     * 获取以及开始秒杀的秒杀商品
+     * @return
+     */
+    SeckillGoodsList getStartSeckillGoods();
+
+    boolean updateSeckillGoodsRemainCount(int remainCount,int sgid);
 }
