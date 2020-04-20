@@ -1,14 +1,14 @@
 package com.edu.nju.seckill.exception;
 
 import com.edu.nju.seckill.common.CommonResult;
-import com.edu.nju.seckill.exception.TokenException;
 import io.lettuce.core.RedisCommandTimeoutException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    private static Logger logger= LoggerFactory.getLogger(GlobalExceptionHandler.class);
     /***
      * 捕获因没有token或token无法解析的异常
      * @return
@@ -28,6 +28,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public CommonResult<?> tokenExceptionHandler(Exception e){
+        logger.debug(e.getMessage());
         if (e instanceof MethodArgumentNotValidException) {
             BindingResult result = ((MethodArgumentNotValidException) e).getBindingResult();
             List<ObjectError> errors = result.getAllErrors();
