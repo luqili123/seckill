@@ -65,11 +65,8 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public boolean deleteAddress(Integer aid, Long uid) {
-        int res = addressMapper.deleteAddress(aid, uid);
-        if (res > 0)
-            return true;
-        else
-            return false;
+        if(addressMapper.deleteAddress(aid, uid) == 1) return true;
+        throw new DataBaseException("删除地址失败");
     }
 
     /**
