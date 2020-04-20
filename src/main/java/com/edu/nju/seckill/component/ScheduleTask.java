@@ -4,12 +4,11 @@ import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import com.edu.nju.seckill.utils.RedisUtil;
-import javafx.scene.layout.CornerRadii;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +20,7 @@ import java.util.Set;
  * @author lql
  * @date 2020/4/20 14:41
  */
+
 @Component
 public class ScheduleTask {
 
@@ -29,6 +29,7 @@ public class ScheduleTask {
     @Autowired
     private SeckillGoodsService seckillGoodsService;
 
+    private static Logger logger= LoggerFactory.getLogger(ScheduleTask.class);
 
     /***
      * 定时执行，将上一期秒杀商品结果写回数据库，再将新一期开始秒杀的商品放入redis中.
@@ -36,7 +37,7 @@ public class ScheduleTask {
      */
     @Scheduled(cron ="0 0 0/1 * * *")
     public void getStartSecGoodsInfo2Redis(){
-        System.out.println(new Date(System.currentTimeMillis())+" 定时任务开启!");
+        logger.info("定时任务开启!");
         //将上一期秒杀商品信息写回数据库（主要是remain_count的变化)
         String prefix="secGood_";
         Set<String> goodsId=redisUtil.getByPattern(prefix+"*");
@@ -50,7 +51,7 @@ public class ScheduleTask {
             //删除redis中的数据
             redisUtil.del(goodsId);
         }
-
+        logger.info("Redis秒杀商品更新完成！");
         //查询已经开始的秒杀商品
         SeckillGoodsList seckillGoodsLists = seckillGoodsService.getStartSeckillGoods();
         if(seckillGoodsLists!=null) {
@@ -71,8 +72,10 @@ public class ScheduleTask {
                 //将开始秒杀的商品信息存入redis
                 redisUtil.hmset(prefix+seckillGoodsResult.getSgid(),goodsInfo);
             }
+            logger.info("Redis载入新一轮秒杀商品！");
 //            System.out.println(goodsInfo.toString());
         }
     }
+
 
 }
