@@ -34,7 +34,6 @@
         <result column="description" property="desc" jdbcType="VARCHAR"/>
         <result column="image" property="imgurl" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
-        <result column="rest" property="rest" jdbcType="INTEGER"/>
         <result column="display_time" property="displaytime" jdbcType="TIMESTAMP"/>
     </resultMap>
 

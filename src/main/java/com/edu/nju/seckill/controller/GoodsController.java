@@ -2,6 +2,7 @@ package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.dto.CarouselItems;
+import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
@@ -54,13 +55,9 @@ public class GoodsController {
 
     @ApiOperation(value = "通过gid获取显示商品详情", notes = "返回轮播列表list")
     @GetMapping("/show/{gid}")
-    public CommonResult<List<GoodsDetailResult>> getGoodDetail(@PathVariable long gid) {
-        List<GoodsDetailResult> res = goodsService.getGoodDetail(gid);
-        if (res.size() > 0)
-            return CommonResult.success(res, "操作成功");
-        else {
-            return CommonResult.failed("无此商品");
-        }
+    public CommonResult<GoodsDetailResult> getGoodDetail(CurrentUser currentUser, @PathVariable Long gid) {
+        GoodsDetailResult res = goodsService.getGoodDetail(currentUser.getUser().getUid(), gid);
+        return CommonResult.success(res);
     }
 
     @ApiOperation(value = "商品搜索-获取商城首页商品列表。参数（可选）：keyword")

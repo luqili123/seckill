@@ -22,21 +22,20 @@ public class GoodsDetailResult {
     private String desc;
     @ApiModelProperty(value = "商品图片地址")
     private String imgurl;
-    @ApiModelProperty(value = "商品销量")
-    private Integer count;
     @ApiModelProperty(value = "商品库存")
-    private Integer rest;
+    private Integer count;
     @ApiModelProperty(value = "上架时间")
     private Date displaytime;
-    public Integer getRest() {
-        return rest;
+    @ApiModelProperty(value = "该商品是否被收藏")
+    private Boolean favorited;
+
+    public Boolean getFavorited() {
+        return favorited;
     }
 
-    public void setRest(Integer rest) {
-        this.rest = rest;
+    public void setFavorited(Boolean favorited) {
+        this.favorited = favorited;
     }
-
-
 
     public Long getGid() {
         return gid;
