@@ -1,14 +1,12 @@
 package com.edu.nju.seckill.exception;
 
 import com.edu.nju.seckill.common.CommonResult;
-import com.edu.nju.seckill.exception.TokenException;
-import io.lettuce.core.RedisCommandTimeoutException;
+import io.lettuce.core.RedisException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -43,7 +41,7 @@ public class GlobalExceptionHandler {
             return CommonResult.phoneUsed(e.getMessage());
         } else if (e instanceof DataBaseException) {
             return CommonResult.databaseError(e.getMessage());
-        } else if (e instanceof RedisCommandTimeoutException) {
+        } else if (e instanceof RedisException) {
             return CommonResult.databaseError("网络超时，请稍后重试");
         } else if (e instanceof SecKillActivityNotFoundException) {
             return CommonResult.seckillNotFound(e.getMessage());
