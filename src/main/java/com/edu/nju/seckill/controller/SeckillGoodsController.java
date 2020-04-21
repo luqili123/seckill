@@ -3,10 +3,12 @@ package com.edu.nju.seckill.controller;
 import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.NavigationResult;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.service.GoodsService;
 import com.edu.nju.seckill.service.NavigationService;
 import com.edu.nju.seckill.service.SeckillGoodsService;
+import com.edu.nju.seckill.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author lql
@@ -37,6 +40,9 @@ public class SeckillGoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
 
     @ApiOperation(value = "秒杀商品列表")
@@ -103,5 +109,12 @@ public class SeckillGoodsController {
         } else {
             return CommonResult.failed("没有该秒杀商品");
         }
+    }
+    @GetMapping("/redis")
+    public CommonResult<?> redisTest() {
+        System.out.println("RedisTest");
+        Set<String> res= redisUtil.getByPattern("test*");
+        System.out.println(res.toString());
+        return CommonResult.success("查询成功");
     }
 }

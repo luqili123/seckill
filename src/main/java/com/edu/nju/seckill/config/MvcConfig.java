@@ -48,7 +48,7 @@ public class MvcConfig implements WebMvcConfigurer {
                         ,"/menu/tabItems","/menu/navItems"
                         ,"/user/chkCode", "/user/verify","/user/password/reset"
                         ,"/goods/**"
-                        ,"/seckill/list","/seckill/slide","/seckill/{sgid}","/test/redis/{token}");
+                        ,"/seckill/list","/seckill/slide","/seckill/{sgid}","/test/redis/{token}", "/seckill/redis");
     }
 
     @Override
