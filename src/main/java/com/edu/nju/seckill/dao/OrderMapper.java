@@ -33,4 +33,6 @@ public interface OrderMapper {
     List<Order> selectByStatus(int status);
 
     OrderInfoResult selectOrderDetailInfo(@Param("uid") Long uid,@Param("oid") String oid);
+
+    List<OrderSearchResult> selectOrderList(Long uid, Integer status, String keyword);
 }

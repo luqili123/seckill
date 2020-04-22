@@ -274,4 +274,26 @@
     left join ( select gid,name,image from seckill.goods ) as b
     on a.gid=b.gid
   </select>
+    <select id="selectOrderList" resultMap="SearchOrder">
+        SELECT orders.oid, orders.gid, goods.image, goods.name, orders.price, orders.receiver_name,
+           orders.count, orders.status, orders.pay_type
+        FROM goods
+            RIGHT JOIN
+             (SELECT oid, gid, price, receiver_name, `count`, `status`, pay_type FROM `order`
+             <where>
+                 uid = #{uid}
+                 <choose>
+                     <when test="status neq 5">
+                         AND status =#{status}
+                     </when>
+                 </choose>
+             </where>
+            ) as orders
+            ON goods.gid = orders.gid
+        <where>
+            <if test="keyword != null">
+                goods.name LIKE CONCAT('%',#{keyword},'%') OR goods.description LIKE CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

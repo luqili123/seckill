@@ -10,6 +10,7 @@ import com.edu.nju.seckill.domain.dto.Order2Param;
 import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.exception.CreateOrderException;
+import com.edu.nju.seckill.exception.OrderNotFoundException;
 import com.edu.nju.seckill.service.OrderService;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,5 +99,34 @@ public class OrderServiceImpl implements OrderService {
             throw new CreateOrderException("创建订单失败，请稍后重试");
         }
         throw new CreateOrderException("商品库存不足，无法购买");
+    }
+
+    private String getStatus(Integer status) {
+        String res;
+        switch (status) {
+            case 1:
+                res = "待付款";
+                break;
+            case 2:
+                res = "待发货";
+                break;
+            case 3:
+                res = "待收货";
+                break;
+            case 4:
+                res = "已收货";
+                break;
+            default:
+                res = "";
+        }
+        return res;
+    }
+
+    @Override
+    public List<OrderSearchResult> getOrderList(Long uid, Integer status, String keyword) {
+        List<OrderSearchResult> results = orderMapper.selectOrderList(uid, status, keyword);
+        if (results.size() > 0)
+            return results;
+        throw new OrderNotFoundException("当前没有" + getStatus(status) + "订单");
     }
 }

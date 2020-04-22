@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.rmi.server.UID;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,22 +55,13 @@ public class OrderController {
     */
     @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
     @GetMapping({"/list/{status}/{keyword}","/list/{status}"})
-    public CommonResult<Map> searchOrder(CurrentUser currentUser,
-                                         @PathVariable int status,
-                                         @PathVariable(required = false) String keyword) {
-        if (null == keyword) {
-            keyword = "";
-        }
-        User user = currentUser.getUser();
-        List<OrderSearchResult> res = orderService.searchOrder(user.getUid(),status, keyword);
-        Map<String,List> map=new HashMap<>();
-        map.put("ordItems",res);
-        if (res.size() > 0) {
-            return CommonResult.success(map, "操作成功");
-        }
-        else {
-            return CommonResult.failed("无有效订单数据");
-        }
+    public CommonResult<Map<String, List<OrderSearchResult>>> searchOrder(CurrentUser currentUser,
+                                                                          @PathVariable Integer status,
+                                                                          @PathVariable(required = false) String keyword) {
+        List<OrderSearchResult> orderList = orderService.getOrderList(currentUser.getUser().getUid(), status, keyword);
+        Map<String, List<OrderSearchResult>> res = new HashMap<>();
+        res.put("ordItems", orderList);
+        return CommonResult.success(res);
     }
 
     @ApiModelProperty("创建普通订单")
