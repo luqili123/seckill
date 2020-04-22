@@ -68,7 +68,7 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "订单状态")
     private Integer status;
 
-    @ApiModelProperty(value = "订单是否为秒杀订单（0代表不是，1代表是）",required = true)
+    @ApiModelProperty(value = "订单是否为秒杀订单（1代表不是，2代表是）",required = true)
     private Integer seckillFlag;
 
     /**

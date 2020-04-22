@@ -64,19 +64,13 @@
     delete from seckill.order
     where oid = #{oid,jdbcType=VARCHAR}
   </delete>
-
     <insert id="insert" parameterType="com.edu.nju.seckill.domain.Order">
-   insert into order (oid, uid, gid, receiver_phone,
-      receiver_name, address, postcode,
-      `count`, price, create_time,
-      pay_time, pay_type, send_time,
-      status, seckill_flag)
-    values (#{oid}, #{uid}, #{gid}, #{receiverPhone},
-      #{receiverName}, #{address}, #{postcode},
-      #{count}, #{price}, #{createTime},
-      #{payTime}, #{payType}, #{sendTime},
-      #{status}, #{seckillFlag})
-  </insert>
+        INSERT INTO `order` (oid, uid, gid, receiver_phone, receiver_name, address,
+        postcode, `count`, price, create_time, pay_time, pay_type, send_time, `status`, seckill_flag)
+        VALUES (#{oid}, #{uid}, #{gid}, #{receiverPhone}, #{receiverName}, #{address},
+        #{postcode}, #{count}, #{price}, #{createTime}, #{payTime}, #{payType}, #{sendTime},
+        #{status}, #{seckillFlag})
+    </insert>
 
     <insert id="insertSelective" parameterType="com.edu.nju.seckill.domain.Order">
         insert into seckill.order
