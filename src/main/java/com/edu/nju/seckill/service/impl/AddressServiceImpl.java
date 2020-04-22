@@ -1,8 +1,10 @@
 package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.AddressMapper;
+import com.edu.nju.seckill.domain.Address;
 import com.edu.nju.seckill.domain.dto.AddressOperationParam;
 import com.edu.nju.seckill.domain.dto.GetAddressResult;
+import com.edu.nju.seckill.exception.AddressNotFoundException;
 import com.edu.nju.seckill.exception.DataBaseException;
 import com.edu.nju.seckill.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +110,14 @@ public class AddressServiceImpl implements AddressService {
             return true;
         }
         throw new DataBaseException("地址修改失败，请稍后再试");
+    }
+
+    @Override
+    public Address getAddressById(Long uid, Integer aid) {
+        Address address = addressMapper.selectAddress(uid, aid);
+        if (address != null) {
+            return address;
+        }
+        throw new AddressNotFoundException("地址异常，请刷新后重试");
     }
 }

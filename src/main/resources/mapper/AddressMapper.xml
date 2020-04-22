@@ -141,4 +141,10 @@
     set address_id = #{aid}
     where uid=#{uid}
   </update>
+  <select id="selectAddress" resultType="com.edu.nju.seckill.domain.Address">
+    select
+    <include refid="Base_Column_List"></include>
+    from address
+    where aid = #{aid} and uid = #{uid}
+  </select>
 </mapper>

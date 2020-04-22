@@ -66,9 +66,9 @@
   </delete>
 
     <insert id="insert" parameterType="com.edu.nju.seckill.domain.Order">
-   insert into seckill.order (oid, uid, gid, receiver_phone,
+   insert into order (oid, uid, gid, receiver_phone,
       receiver_name, address, postcode,
-      count, price, create_time,
+      `count`, price, create_time,
       pay_time, pay_type, send_time,
       status, seckill_flag)
     values (#{oid}, #{uid}, #{gid}, #{receiverPhone},
