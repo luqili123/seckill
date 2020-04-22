@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.dto.Order2Param;
 import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 
@@ -47,4 +48,11 @@ public interface OrderService {
      */
     List<Order> getOrderByStatus(int status);
 
+    /**
+     * 创建普通商品的订单
+     * @param uid 用户id
+     * @param order2Param 订单信息
+     * @return true/false
+     */
+    boolean createOrder(Long uid, Order2Param order2Param);
 }

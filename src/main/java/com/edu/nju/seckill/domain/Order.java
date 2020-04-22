@@ -71,7 +71,22 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "订单是否为秒杀订单（0代表不是，1代表是）",required = true)
     private Integer seckillFlag;
 
-    public Order() {
+    public Order(String oid, Long uid, Integer num, String payWay, Goods goods, Address address, Integer seckillFlag) {
+        this.oid = oid;
+        this.uid = uid;
+        this.gid = goods.getGid();
+        this.receiverPhone = address.getReceiverPhone();
+        this.receiverName = address.getReceiverName();
+        this.address = address.getAddress();
+        this.postcode = address.getPostcode();
+        this.count = num;
+        this.price = goods.getPrice();
+        this.createTime = new Date();
+        this.payTime = new Date();
+        this.payType = payWay;
+        this.sendTime = new Date();
+        this.status = 2; // 已付款
+        this.seckillFlag = seckillFlag;
     }
 
     public Order(OrderParam orderParam,long uid,String oid) {

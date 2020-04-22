@@ -136,6 +136,10 @@ public class CommonResult<T> {
         return new CommonResult<>(ResultCode.FAV_EXIST.getCode(), message, null);
     }
 
+    public static <T> CommonResult<T> createOrderError(String message) {
+        return new CommonResult<>(ResultCode.CREATE_ORDER_ERROR.getCode(), message, null);
+    }
+
     public long getCode() {
         return code;
     }

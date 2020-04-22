@@ -74,8 +74,8 @@ public class OrderController {
     @ApiModelProperty("创建普通订单")
     @PostMapping("/")
     public CommonResult<?> createOrder(CurrentUser currentUser, @RequestBody Order2Param order2Param) {
-        orderService.createOrder(null);
-        return null;
+        boolean res = orderService.createOrder(currentUser.getUser().getUid(), order2Param);
+        return CommonResult.success(res, "订单创建成功");
     }
 
     /**

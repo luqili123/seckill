@@ -268,4 +268,9 @@
         </where>
         limit 8
     </select>
+
+    <update id="updateGoodsCount">
+        update goods set `count` = `count` - #{num}
+        where gid = #{gid} and `count` >= #{num}
+    </update>
 </mapper>

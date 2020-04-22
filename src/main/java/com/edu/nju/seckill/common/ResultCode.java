@@ -26,6 +26,7 @@ public enum ResultCode implements IErrorCode {
     DATABASE_ERROR(2003,"数据库异常"),
     SECKILL_NOT_FOUND(2004, "暂时没有秒杀活动"),
     GOODS_NOT_FOUND(2005, "没找到相关商品"),
+    CREATE_ORDER_ERROR(2006, "创建订单异常"),
 
     /**
      * 3000 - 3999 收藏商品相关的错误

@@ -35,4 +35,6 @@ public interface GoodsMapper {
     List<GoodsSearchResult> searchGoodsForIndex(String keyword);
 
     List<String> getGoodsIndexTips(String keyword);
+
+    int updateGoodsCount(Long gid, Integer num);
 }
