@@ -57,7 +57,7 @@
             <scope>runtime</scope>
         </dependency>
 
-<!--        JJwt-->
+<!--        Jwt-->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
@@ -84,9 +84,7 @@
             <version>1.2.62</version>
         </dependency>
 
-
 <!--        Swagger-->
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>

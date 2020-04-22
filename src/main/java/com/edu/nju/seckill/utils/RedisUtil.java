@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +81,27 @@ public class RedisUtil {
                 redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
+    }
+    /**
+     * 删除缓存
+     * @param keys 可以传一个集合
+     */
+    @SuppressWarnings("unchecked")
+    public void del(Collection<String> keys){
+        if(keys!=null&&keys.size()>0){
+            redisTemplate.delete(keys);
+        }
+    }
+    /**
+     *
+     * 模糊查询
+     * @return 所有与模式匹配的键
+     * @author lql
+     * @date 2020/4/20 17:20
+     */
+    public Set<String> getByPattern(String pattern){
+        Set<String> res=redisTemplate.keys(pattern);
+        return res == null ? null : res;
     }
 
     public boolean delete(String key) {

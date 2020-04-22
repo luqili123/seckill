@@ -27,4 +27,6 @@ public interface SeckillGoodsMapper {
     SeckillGoodsList selectLatest();
 
     SeckillGoodsList selectFuture();
+
+    int updateRemainCountBySgid(int remainCount,int sgid);
 }

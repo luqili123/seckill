@@ -17,6 +17,7 @@ import java.util.List;
  * @date 2020/1/11 20:21
  */
 @Service
+
 public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Autowired
@@ -59,5 +60,21 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
             return seckillGoodsList;
         }
         throw new SecKillActivityNotFoundException("近期没有秒杀活动哦＞﹏＜");
+    }
+
+    @Override
+    public SeckillGoodsList getStartSeckillGoods() {
+        //获取结束时间没有超过当前时间的商品
+        SeckillGoodsList seckillGoodsList = seckillGoodsMapper.selectLatest();
+        if (seckillGoodsList != null) {
+            return seckillGoodsList;
+        }
+        throw new SecKillActivityNotFoundException("近期没有秒杀活动哦＞﹏＜");
+    }
+
+    @Override
+    public boolean updateSeckillGoodsRemainCount(int remainCount,int sgid) {
+
+        return seckillGoodsMapper.updateRemainCountBySgid(remainCount,sgid)!=0;
     }
 }
