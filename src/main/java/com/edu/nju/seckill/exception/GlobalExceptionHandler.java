@@ -55,6 +55,8 @@ public class GlobalExceptionHandler {
             return CommonResult.favHasExist(e.getMessage());
         } else if (e instanceof CreateOrderException) {
             return CommonResult.createOrderError(e.getMessage());
+        } else if (e instanceof AddressNotFoundException) {
+            return CommonResult.addressNotFound(e.getMessage());
         }
         return null;
     }

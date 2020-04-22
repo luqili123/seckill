@@ -40,4 +40,6 @@ public interface AddressMapper {
     int deleteAddress(@Param("aid") Integer aid,@Param("uid") Long uid);
 
     int updateDefaultAddress(@Param("uid") Long uid,@Param("aid") Integer aid);
+
+    Address selectAddress(Long uid, Integer aid);
 }

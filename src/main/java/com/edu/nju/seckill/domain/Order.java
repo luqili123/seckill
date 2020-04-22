@@ -71,6 +71,16 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "订单是否为秒杀订单（0代表不是，1代表是）",required = true)
     private Integer seckillFlag;
 
+    /**
+     * 订单构造函数
+     * @param oid 订单号
+     * @param uid 用户id
+     * @param num 购买商品数量
+     * @param payWay 支付方式
+     * @param goods 商品信息
+     * @param address 收货地址
+     * @param seckillFlag 是否是秒杀
+     */
     public Order(String oid, Long uid, Integer num, String payWay, Goods goods, Address address, Integer seckillFlag) {
         this.oid = oid;
         this.uid = uid;

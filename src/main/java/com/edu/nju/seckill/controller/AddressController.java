@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.controller;
 
 import com.edu.nju.seckill.common.CommonResult;
+import com.edu.nju.seckill.domain.Address;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.AddressOperationParam;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
@@ -25,12 +26,12 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "收货地址控制类")
+@RequestMapping("/address")
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
-    private final String msg = "";
     /**
     * @Description: 新增收货地址 并对邮编和电话号码进行验证
     * @Param: [user, param, bindingResult]
@@ -39,7 +40,7 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value = "添加收货地址")
-    @PostMapping("/address/add")
+    @PostMapping("/add")
     public CommonResult<Boolean> addAddress(CurrentUser currentUser, @Validated @RequestBody AddressOperationParam param){
         User user = currentUser.getUser();
         boolean res = addressService.addAddress(user.getUid(), param);
@@ -54,13 +55,19 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value = "获取收货地址列表")
-    @GetMapping("/address/list")
+    @GetMapping("/list")
     public CommonResult<List<GetAddressResult>> getAddress(CurrentUser currentUser){
         User user=currentUser.getUser();
         List<GetAddressResult> res = addressService.getAddress(user.getUid());
         return CommonResult.success(res);
     }
 
+    @ApiOperation("根据id获取收货地址")
+    @GetMapping("/{aid}")
+    public CommonResult<Address> getAddressById(CurrentUser currentUser, @PathVariable("aid") Integer aid) {
+        Address address = addressService.getAddressById(currentUser.getUser().getUid(), aid);
+        return CommonResult.success(address);
+    }
 
     /**
     * @Description: 修改收货地址
@@ -70,7 +77,7 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value = "修改收货地址")
-    @PostMapping("/address/update/{aid}")
+    @PostMapping("/update/{aid}")
     public CommonResult<Boolean> updateAddress(CurrentUser currentUser,@PathVariable Integer aid,@Validated @RequestBody AddressOperationParam param){
         User user=currentUser.getUser();
         boolean res=addressService.updateAddress(aid,user.getUid(),param);
@@ -85,7 +92,7 @@ public class AddressController {
     * @Date: 2020/2/3
     */
     @ApiOperation(value="删除收货地址")
-    @DeleteMapping("/address/deleteaddress/{aid}")
+    @DeleteMapping("/deleteaddress/{aid}")
     public CommonResult<Boolean> deleteAddress(CurrentUser currentUser,@PathVariable Integer aid){
         User user=currentUser.getUser();
         boolean res = addressService.deleteAddress(aid,user.getUid());
@@ -100,7 +107,7 @@ public class AddressController {
     * @Date: 2020/2/7
     */
     @ApiOperation(value = "设置默认地址")
-    @PutMapping("/address/default")
+    @PutMapping("/default")
     public CommonResult<Boolean> updateDefaultAddress(CurrentUser currentUser,
                                                      @RequestBody Map<String, Integer> map){
         Integer aid=map.get("aid");

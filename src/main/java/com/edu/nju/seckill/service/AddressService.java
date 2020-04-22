@@ -1,5 +1,6 @@
 package com.edu.nju.seckill.service;
 
+import com.edu.nju.seckill.domain.Address;
 import com.edu.nju.seckill.domain.dto.AddressOperationParam;
 import com.edu.nju.seckill.domain.dto.GetAddressResult;
 
@@ -68,4 +69,12 @@ public interface AddressService {
      * @return
      */
     boolean updateAddress(Integer aid, Long uid, AddressOperationParam param);
+
+    /**
+     * 根据id获取地址信息
+     * @param uid 用户id
+     * @param aid 地址id
+     * @return 地址信息
+     */
+    Address getAddressById(Long uid, Integer aid);
 }
