@@ -83,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean createOrder(Long uid, Order2Param order2Param) {
+        //int res = goodsMapper.updateGoodsCount(order2Param.getGoodsId(), order2Param.getNum());
         // 1. 减库存
         if (goodsMapper.updateGoodsCount(order2Param.getGoodsId(), order2Param.getNum()) == 1) {
             // 2.1 查询商品信息

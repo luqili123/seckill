@@ -21,11 +21,11 @@
   <sql id="Base_Column_List" >
     aid, uid, postcode, address, receiver_name, receiver_phone
   </sql>
-  <select id="selectByPrimaryKey" resultMap="GetAddressResult" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultType="com.edu.nju.seckill.domain.Address">
     select 
     <include refid="Base_Column_List" />
     from address
-    where aid = #{aid,jdbcType=INTEGER}
+    where aid = #{aid}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from address
