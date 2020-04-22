@@ -30,11 +30,11 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-
+    private final String msg = "";
     /**
     * @Description: 新增收货地址 并对邮编和电话号码进行验证
     * @Param: [user, param, bindingResult]
-    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @return: com.edu.nju.seckill.common.CommonResult
     * @Author: whn
     * @Date: 2020/2/3
     */
@@ -65,7 +65,7 @@ public class AddressController {
     /**
     * @Description: 修改收货地址
     * @Param: [user, aid, param, bindingResult]
-    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @return: com.edu.nju.seckill.common.CommonResult
     * @Author: whn
     * @Date: 2020/2/3
     */
@@ -80,7 +80,7 @@ public class AddressController {
     /**
     * @Description: 删除收货地址
     * @Param: [user, aid]
-    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @return: com.edu.nju.seckill.common.CommonResult
     * @Author: whn
     * @Date: 2020/2/3
     */
@@ -95,7 +95,7 @@ public class AddressController {
     /**
     * @Description: 修改默认收货地址
     * @Param: [currentUser, aid]
-    * @return: com.edu.nju.seckill.common.CommonResult<java.lang.String>
+    * @return: com.edu.nju.seckill.common.CommonResult
     * @Author: whn
     * @Date: 2020/2/7
     */

@@ -4,6 +4,7 @@ import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Order;
 import com.edu.nju.seckill.domain.User;
 import com.edu.nju.seckill.domain.dto.CurrentUser;
+import com.edu.nju.seckill.domain.dto.Order2Param;
 import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderParam;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
@@ -12,6 +13,7 @@ import com.edu.nju.seckill.utils.GuardThread;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.edu.nju.seckill.utils.RedisUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,7 @@ import java.util.UUID;
  */
 @RestController
 @Api(tags = "订单控制类")
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
@@ -48,7 +52,7 @@ public class OrderController {
     * @Date: 2020/2/7
     */
     @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
-    @GetMapping({"/order/list/{status}/{keyword}","/order/list/{status}"})
+    @GetMapping({"/list/{status}/{keyword}","/list/{status}"})
     public CommonResult<Map> searchOrder(CurrentUser currentUser,
                                          @PathVariable int status,
                                          @PathVariable(required = false) String keyword) {
@@ -67,6 +71,13 @@ public class OrderController {
         }
     }
 
+    @ApiModelProperty("创建普通订单")
+    @PostMapping("/")
+    public CommonResult<?> createOrder(CurrentUser currentUser, @RequestBody Order2Param order2Param) {
+        orderService.createOrder(null);
+        return null;
+    }
+
     /**
     * @Description:
     * @Param: [currentUser, orderParam]
@@ -75,7 +86,7 @@ public class OrderController {
     * @Date: 2020/2/12
     */
     @ApiOperation("创建秒杀订单")
-    @PostMapping("/order/create")
+    @PostMapping("/create")
     public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam){
         // 抢夺锁
 //        String lockVal = UUID.randomUUID().toString();
@@ -111,7 +122,7 @@ public class OrderController {
 
     }
     @ApiOperation("根据oid删除订单")
-    @DeleteMapping("/order/{oid}")
+    @DeleteMapping("/{oid}")
     public CommonResult<?> deleteOrder(@PathVariable(name = "oid",required = true) String oid){
 
         if(orderService.deleteByOid(oid)){
@@ -121,7 +132,7 @@ public class OrderController {
         }
     }
     @ApiOperation("根据oid获取订单详情")
-    @GetMapping("/order/info/{oid}")
+    @GetMapping("/info/{oid}")
     public CommonResult<?> getOrderInfo(CurrentUser user,@PathVariable(name = "oid") String oid){
         Long uid=user.getUser().getUid();
         Map<String ,OrderInfoResult> map=new HashMap<>();

@@ -54,6 +54,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 if(redisUtil.hasKey(token)) {
                     return true;
                 }
+                // TODO 无法被全局异常处理器捕获异常
                 throw new TokenException("登录失效啦，请重新登录");
             }
         } else {

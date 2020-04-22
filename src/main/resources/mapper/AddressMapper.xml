@@ -133,17 +133,12 @@
   </delete>
   <select id="isBelongToCurrentUser" resultType="java.lang.Integer">
     select count(*)
-    from seckill.address
+    from address
     where aid=#{aid} and uid=#{uid}
   </select>
   <update id="updateDefaultAddress">
-    update seckill.user as user
-    set user.address_id =
-    (
-        select aid
-        from seckill.address
-        where aid=#{aid} and uid = #{uid}
-    )
-    where user.uid=#{uid}
+    update user
+    set address_id = #{aid}
+    where uid=#{uid}
   </update>
 </mapper>

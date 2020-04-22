@@ -80,6 +80,5 @@ public class FavoriteController {
         User user = currentUser.getUser();
         List<FavoriteResult> res = favoriteService.searchFavoriteByKeyword(user.getUid(), keyword);
         return CommonResult.success(res);
-
     }
 }
