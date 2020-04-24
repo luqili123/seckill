@@ -55,4 +55,13 @@ public interface OrderService {
      * @return true/false
      */
     boolean createOrder(Long uid, Order2Param order2Param);
+
+    /**
+     * 获取订单列表
+     * @param uid 用户id
+     * @param status 订单状态
+     * @param keyword 查询关键字
+     * @return 订单信息列表
+     */
+    List<OrderSearchResult> getOrderList(Long uid, Integer status, String keyword);
 }

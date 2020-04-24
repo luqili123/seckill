@@ -144,6 +144,10 @@ public class CommonResult<T> {
         return new CommonResult<>(ResultCode.ADDRESS_NOT_FOUND.getCode(), message, null);
     }
 
+    public static <T> CommonResult<T> orderNotFound(String message) {
+        return new CommonResult<>(ResultCode.ORDER_NOT_FOUND.getCode(), message, null);
+    }
+
     public long getCode() {
         return code;
     }

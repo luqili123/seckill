@@ -233,17 +233,9 @@
     </select>
 
     <select id="getGoodDetail" resultMap="GoodsDetailResult">
-    select goods.gid as gid,goods.name as name,goods.price as price,goods.description as description,
-        goods.image as image, goods.count-sales.count as rest, sales.count as count,goods.display_time
-    from
-    (select *
-        from seckill.goods
-        where gid=#{gid})as goods
-    left join
-    (select (case when gid is null then #{gid} else gid end)as gid,(case when sum(count) is null then 0 else sum(count) end)as count
-        from seckill.order
-        where gid =#{gid})as sales
-    on goods.gid=sales.gid
+        SELECT gid, `name`, price, description, image, `count`, display_time
+        FROM goods
+        WHERE gid = #{gid}
     </select>
     <!--每个类型下的商品最多5个-->
     <select id="searchGoodsForIndex" resultMap="SearchGoodsForIndex">

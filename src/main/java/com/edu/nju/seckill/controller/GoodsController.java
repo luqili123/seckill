@@ -53,7 +53,7 @@ public class GoodsController {
         return CommonResult.success(results);
     }
 
-    @ApiOperation(value = "通过gid获取显示商品详情", notes = "返回轮播列表list")
+    @ApiOperation(value = "通过gid获取显示商品详情")
     @GetMapping("/show/{gid}")
     public CommonResult<GoodsDetailResult> getGoodDetail(CurrentUser currentUser, @PathVariable Long gid) {
         GoodsDetailResult res = goodsService.getGoodDetail(currentUser.getUser().getUid(), gid);
