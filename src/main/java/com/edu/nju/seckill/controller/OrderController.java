@@ -47,14 +47,14 @@ public class OrderController {
 
 
     /**
-    * @Description: 订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单
-    * @Param: [currentUser, keyword]
-    * @return: com.edu.nju.seckill.common.CommonResult<java.util.Map>
-    * @Author: whn
-    * @Date: 2020/2/7
-    */
+     * @Description: 订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单
+     * @Param: [currentUser, keyword]
+     * @return: com.edu.nju.seckill.common.CommonResult<java.util.Map>
+     * @Author: whn
+     * @Date: 2020/2/7
+     */
     @ApiOperation(value = "订单页-搜索订单项，根据keyword查询用户的订单，如果keyword为空，则显示全部订单")
-    @GetMapping({"/list/{status}/{keyword}","/list/{status}"})
+    @GetMapping({"/list/{status}/{keyword}", "/list/{status}"})
     public CommonResult<Map<String, List<OrderSearchResult>>> searchOrder(CurrentUser currentUser,
                                                                           @PathVariable Integer status,
                                                                           @PathVariable(required = false) String keyword) {
@@ -72,15 +72,15 @@ public class OrderController {
     }
 
     /**
-    * @Description:
-    * @Param: [currentUser, orderParam]
-    * @return: com.edu.nju.seckill.common.CommonResult<?>
-    * @Author: lql
-    * @Date: 2020/2/12
-    */
+     * @Description:
+     * @Param: [currentUser, orderParam]
+     * @return: com.edu.nju.seckill.common.CommonResult<?>
+     * @Author: lql
+     * @Date: 2020/2/12
+     */
     @ApiOperation("创建秒杀订单")
     @PostMapping("/create")
-    public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam){
+    public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam) {
         // 抢夺锁
 //        String lockVal = UUID.randomUUID().toString();
 //        String lockKey = "myLock" + orderParam.getGid();
@@ -100,41 +100,38 @@ public class OrderController {
 //            }
 //        }
         //生成订单id
-        OrderIdUtils orderIdUtils=OrderIdUtils.getInstance();
-        Long oid= orderIdUtils.nextId();
-        if(oid!=null&&currentUser.getUser().getUid()!=null&&orderParam!=null){
-            Order order=new Order(orderParam,currentUser.getUser().getUid(),oid.toString());
-            if( orderService.createOrder(order)){
+        OrderIdUtils orderIdUtils = OrderIdUtils.getInstance();
+        Long oid = orderIdUtils.nextId();
+        if (oid != null && currentUser.getUser().getUid() != null && orderParam != null) {
+            Order order = new Order(orderParam, currentUser.getUser().getUid(), oid.toString());
+            if (orderService.createOrder(order)) {
                 return CommonResult.success("订单创建成功！");
-            }else {
+            } else {
                 return CommonResult.failed("创建失败");
             }
-        }else {
+        } else {
             return CommonResult.validateFailed();
         }
 
     }
+
     @ApiOperation("根据oid删除订单")
     @DeleteMapping("/{oid}")
-    public CommonResult<?> deleteOrder(@PathVariable(name = "oid",required = true) String oid){
+    public CommonResult<?> deleteOrder(@PathVariable(name = "oid", required = true) String oid) {
 
-        if(orderService.deleteByOid(oid)){
+        if (orderService.deleteByOid(oid)) {
             return CommonResult.success("删除成功！");
-        }else {
+        } else {
             return CommonResult.validateFailed("该订单已被删除！");
         }
     }
+
     @ApiOperation("根据oid获取订单详情")
-    @GetMapping("/info/{oid}")
-    public CommonResult<?> getOrderInfo(CurrentUser user,@PathVariable(name = "oid") String oid){
-        Long uid=user.getUser().getUid();
-        Map<String ,OrderInfoResult> map=new HashMap<>();
-        OrderInfoResult order=orderService.getOrderInfo(uid,oid);
-        if(order!=null){
-            map.put("ordItemsInfo",order);
-            return CommonResult.success(map,"操作成功");
-        }else{
-            return CommonResult.failed("订单已被删除或订单不存在！");
-        }
+    @GetMapping("/{oid}")
+    public CommonResult<Map<String, OrderInfoResult>> getOrderInfo(CurrentUser currentUser, @PathVariable("oid") String oid) {
+        OrderInfoResult orderInfo = orderService.getOrderInfo(currentUser.getUser().getUid(), oid);
+        Map<String, OrderInfoResult> res = new HashMap<>();
+        res.put("ordItemsInfo", orderInfo);
+        return CommonResult.success(res);
     }
 }

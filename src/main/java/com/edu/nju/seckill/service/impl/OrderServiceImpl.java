@@ -65,11 +65,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderInfoResult getOrderInfo(Long uid, String oid) {
-        OrderInfoResult order = orderMapper.selectOrderDetailInfo(uid, oid);
-        if (order != null) {
-            return order;
+        OrderInfoResult orderInfoResult = orderMapper.selectOrderDetailInfo(uid, oid);
+        if (orderInfoResult != null) {
+            return orderInfoResult;
         }
-        return null;
+        throw new OrderNotFoundException("订单不存在或已被删除");
     }
 
     @Override
