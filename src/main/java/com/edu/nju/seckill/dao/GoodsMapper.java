@@ -6,6 +6,7 @@ import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

@@ -2,9 +2,11 @@ package com.edu.nju.seckill.service.impl;
 
 import com.edu.nju.seckill.dao.SeckillGoodsMapper;
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import com.edu.nju.seckill.exception.DataBaseException;
+import com.edu.nju.seckill.exception.GoodsNotFoundException;
 import com.edu.nju.seckill.exception.SecKillActivityNotFoundException;
 import com.edu.nju.seckill.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +79,15 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
         return seckillGoodsMapper.updateRemainCountBySgid(remainCount,sgid)!=0;
     }
+
+
+    @Override
+    public SecKillGoodsDetail getSecKillGoodsById(Long sgid) {
+        SecKillGoodsDetail secKillGoodsDetail = seckillGoodsMapper.getSecKillDetail(sgid);
+        // TODO 设计缺陷，导致秒杀商品无法收藏，QAQ
+        if (secKillGoodsDetail != null)
+            return secKillGoodsDetail;
+        throw new GoodsNotFoundException("您查询的商品不存在");
+    }
+
 }

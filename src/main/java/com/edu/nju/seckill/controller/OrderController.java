@@ -79,46 +79,15 @@ public class OrderController {
      * @Date: 2020/2/12
      */
     @ApiOperation("创建秒杀订单")
-    @PostMapping("/create")
-    public CommonResult<?> createSeckillOrder(CurrentUser currentUser, @RequestBody OrderParam orderParam) {
-        // 抢夺锁
-//        String lockVal = UUID.randomUUID().toString();
-//        String lockKey = "myLock" + orderParam.getGid();
-//        boolean res = redisUtil.setIfAbsent(lockKey, lockVal, 10);
-//        if (!res) {
-//            return CommonResult.failed("秒杀失败了哦~");
-//        }
-//        GuardThread guardThread = new GuardThread(10, lockKey, redisUtil);
-//        guardThread.setDaemon(true);
-//        guardThread.start();
-//        try {
-//            // TODO 对redis库存进行操作
-//        } finally {
-//            if (lockVal.equals(redisUtil.get(lockKey))) {
-//                // 释放锁
-//                redisUtil.del(lockKey);
-//            }
-//        }
-        //生成订单id
-        OrderIdUtils orderIdUtils = OrderIdUtils.getInstance();
-        Long oid = orderIdUtils.nextId();
-        if (oid != null && currentUser.getUser().getUid() != null && orderParam != null) {
-            Order order = new Order(orderParam, currentUser.getUser().getUid(), oid.toString());
-            if (orderService.createOrder(order)) {
-                return CommonResult.success("订单创建成功！");
-            } else {
-                return CommonResult.failed("创建失败");
-            }
-        } else {
-            return CommonResult.validateFailed();
-        }
-
+    @PostMapping("/seckill")
+    public CommonResult<Boolean> createSeckillOrder(CurrentUser currentUser, @RequestBody Order order) {
+       boolean res = orderService.createSecKillOrder(currentUser.getUser().getUid(), order);
+       return CommonResult.success(true);
     }
 
     @ApiOperation("根据oid删除订单")
     @DeleteMapping("/{oid}")
     public CommonResult<?> deleteOrder(@PathVariable(name = "oid", required = true) String oid) {
-
         if (orderService.deleteByOid(oid)) {
             return CommonResult.success("删除成功！");
         } else {

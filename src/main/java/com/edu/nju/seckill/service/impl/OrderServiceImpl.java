@@ -12,12 +12,18 @@ import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.exception.CreateOrderException;
 import com.edu.nju.seckill.exception.OrderNotFoundException;
 import com.edu.nju.seckill.service.OrderService;
+import com.edu.nju.seckill.utils.GuardThread;
 import com.edu.nju.seckill.utils.OrderIdUtils;
+import com.edu.nju.seckill.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author lql
@@ -34,6 +40,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * @Description: 通过状态以及关键字搜索订单
@@ -84,7 +93,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean createOrder(Long uid, Order2Param order2Param) {
-        //int res = goodsMapper.updateGoodsCount(order2Param.getGoodsId(), order2Param.getNum());
         // 1. 减库存
         if (goodsMapper.updateGoodsCount(order2Param.getGoodsId(), order2Param.getNum()) == 1) {
             // 2.1 查询商品信息
@@ -99,6 +107,90 @@ public class OrderServiceImpl implements OrderService {
             throw new CreateOrderException("创建订单失败，请稍后重试");
         }
         throw new CreateOrderException("商品库存不足，无法购买");
+    }
+
+    @Override
+    public boolean createSecKillOrder(Long uid, Order order) {
+        // 抢夺锁
+        String lockVal = UUID.randomUUID().toString();
+        String lockKey = "myLock" + order.getGid(); // 秒杀商品的id
+        boolean res = redisUtil.setIfAbsent(lockKey, lockVal, 10);
+        if (!res)
+            throw new CreateOrderException("您没有秒杀到商品");
+        // 守护线程，做续命操作
+        GuardThread guardThread = new GuardThread(10, lockKey, redisUtil);
+        guardThread.setDaemon(true);
+        guardThread.start();
+        try {
+            // TODO 缺少事务
+            // 1. 减库存
+            boolean res1 = setGoodsCountForRedis("secGood_" + order.getGid());
+            // 2. 创建订单
+            boolean res2 = createOrderForRedis(OrderIdUtils.getInstance().nextId().toString(), uid, order);
+            if (!res1 || !res2)
+                throw new CreateOrderException("创建订单失败，请稍后重试");
+            return true;
+        } finally {
+            if (lockVal.equals(redisUtil.get(lockKey))) {
+                // 释放锁
+                redisUtil.del(lockKey);
+            }
+        }
+    }
+
+    /**
+     * 在redis中插入订单信息
+     * @param oid
+     * @param uid
+     * @param order
+     * @return
+     */
+    private boolean createOrderForRedis(String oid, Long uid, Order order) {
+        // 创建订单
+        Map<String, Object> secOrder = new HashMap<>();
+        secOrder.put("oid", oid);
+        secOrder.put("uid", uid);
+        secOrder.put("gid", order.getGid());
+        secOrder.put("receiver_phone", order.getReceiverPhone());
+        secOrder.put("receiver_name", order.getReceiverName());
+        secOrder.put("address", order.getAddress());
+        secOrder.put("postcode", order.getPostcode());
+        secOrder.put("count", order.getCount());
+        secOrder.put("price", order.getPrice());
+        secOrder.put("create_time", new Date());
+        secOrder.put("pay_time", new Date());
+        secOrder.put("status", 2);
+        secOrder.put("seckill_flag", 2);
+        return redisUtil.hmset("secOrder_" + uid + "_" + order.getGid() + "_" + oid, secOrder);
+    }
+
+    private boolean setGoodsCountForRedis(String key) {
+        int remainCount = getGoodsCountForRedis(key);
+        return setGoodsCountForRedis(key, remainCount - 1);
+    }
+
+    /**
+     * 设置库存
+     *
+     * @param key 键-secGood-{sgid}
+     * @param val 库存值
+     * @return true/false
+     */
+    private boolean setGoodsCountForRedis(String key, int val) {
+        return redisUtil.hset(key, "remain_count", val);
+    }
+
+    /**
+     * 查询秒杀商品的库存
+     *
+     * @param key 键-secGood_{sgid}
+     * @return int
+     */
+    private int getGoodsCountForRedis(String key) {
+        int remainCount = (int) redisUtil.hget(key, "remain_count");
+        if (remainCount <= 0)
+            throw new CreateOrderException("商品库存不足，无法购买");
+        return remainCount;
     }
 
     private String getStatus(Integer status) {
