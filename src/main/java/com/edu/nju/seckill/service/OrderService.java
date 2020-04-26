@@ -6,6 +6,7 @@ import com.edu.nju.seckill.domain.dto.OrderInfoResult;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lql
@@ -72,4 +73,6 @@ public interface OrderService {
      * @return true/false
      */
     boolean createSecKillOrder(Long uid, Order order);
+
+    boolean insertSecOrder(Map<Object, Object> orderInfo);
 }

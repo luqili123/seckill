@@ -31,6 +31,17 @@ public class OrderParam {
     @ApiModelProperty(value = "商品单价",required = true)
     private Double price;
 
+    public OrderParam(Long gid, String receiverPhone, String receiverName, String address, String postcode, int count, Double price) {
+        this.gid = gid;
+        this.receiverPhone = receiverPhone;
+        this.receiverName = receiverName;
+        this.address = address;
+        this.postcode = postcode;
+        this.count = count;
+        this.price = price;
+    }
+    public OrderParam(){}
+
     public Long getGid() {
         return gid;
     }
