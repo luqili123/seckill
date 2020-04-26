@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.dao;
 
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsResult;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,12 @@ public interface SeckillGoodsMapper {
     SeckillGoodsList selectFuture();
 
     int updateRemainCountBySgid(int remainCount,int sgid);
+
+    /**
+     * 根据id查询秒杀商品
+     * @param sgid
+     * @return
+     */
+    SecKillGoodsDetail getSecKillDetail(Long sgid);
+
 }

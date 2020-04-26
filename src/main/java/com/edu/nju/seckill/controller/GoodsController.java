@@ -6,6 +6,7 @@ import com.edu.nju.seckill.domain.dto.CurrentUser;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import com.edu.nju.seckill.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

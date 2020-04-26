@@ -64,4 +64,12 @@ public interface OrderService {
      * @return 订单信息列表
      */
     List<OrderSearchResult> getOrderList(Long uid, Integer status, String keyword);
+
+    /**
+     * 创建秒杀订单
+     * @param uid 用户id
+     * @param order 订单信息
+     * @return true/false
+     */
+    boolean createSecKillOrder(Long uid, Order order);
 }

@@ -237,6 +237,7 @@
         FROM goods
         WHERE gid = #{gid}
     </select>
+
     <!--每个类型下的商品最多5个-->
     <select id="searchGoodsForIndex" resultMap="SearchGoodsForIndex">
         select good.gid, good.name as `names`, good.price, good.image, good.description, nav.type, nav.name

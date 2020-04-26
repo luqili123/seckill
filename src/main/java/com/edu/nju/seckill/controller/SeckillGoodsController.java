@@ -4,6 +4,7 @@ import com.edu.nju.seckill.common.CommonResult;
 import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.SeckillGoods;
 import com.edu.nju.seckill.domain.dto.NavigationResult;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 import com.edu.nju.seckill.service.GoodsService;
 import com.edu.nju.seckill.service.NavigationService;
@@ -58,6 +59,14 @@ public class SeckillGoodsController {
 //        return null;
 //    }
 
+
+    @ApiOperation(value = "获取秒杀商品的详情")
+    @GetMapping("/show/{sgid}")
+    public CommonResult<SecKillGoodsDetail> getSecKillGoodsDetail(@PathVariable("sgid") Long sgid) {
+        SecKillGoodsDetail secKillGoodsDetail = seckillGoodsService.getSecKillGoodsById(sgid);
+        return CommonResult.success(secKillGoodsDetail);
+    }
+
     @ApiOperation(value = "添加秒杀商品")
     @PostMapping("/")
     public CommonResult<?> addSeckillGoods(@RequestParam Long gid, @RequestParam double seckillPrice) {
@@ -100,16 +109,16 @@ public class SeckillGoodsController {
         return CommonResult.success(seckillGoodsList);
     }
 
-    @ApiOperation("显示秒杀商品详情")
-    @GetMapping("/show/{sgid}")
-    public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid) {
-        SeckillGoods seckillGoods = seckillGoodsService.getSeckillBySgid(sgid);
-        if (seckillGoods != null) {
-            return CommonResult.success(seckillGoods);
-        } else {
-            return CommonResult.failed("没有该秒杀商品");
-        }
-    }
+//    @ApiOperation("显示秒杀商品详情")
+//    @GetMapping("/show/{sgid}")
+//    public CommonResult<?> getSeckillInfo(@PathVariable(value = "sgid") Long sgid) {
+//        SeckillGoods seckillGoods = seckillGoodsService.getSeckillBySgid(sgid);
+//        if (seckillGoods != null) {
+//            return CommonResult.success(seckillGoods);
+//        } else {
+//            return CommonResult.failed("没有该秒杀商品");
+//        }
+//    }
     @GetMapping("/redis")
     public CommonResult<?> redisTest() {
         System.out.println("RedisTest");

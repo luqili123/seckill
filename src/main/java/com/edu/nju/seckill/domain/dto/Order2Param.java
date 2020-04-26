@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Order2Param {
     @ApiModelProperty(value = "收货地址id")
     private Integer addressId;
-    @ApiModelProperty(value = "商品id")
+    @ApiModelProperty(value = "商品id，如果seckill_flag=1，则表示普通商品id，如果=2，则表示秒杀商品的id")
     private Long goodsId;
     @ApiModelProperty(value = "付款方式")
     private String payWay;

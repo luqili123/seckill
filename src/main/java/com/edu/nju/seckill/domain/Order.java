@@ -117,6 +117,9 @@ public class Order implements Serializable {
         this.seckillFlag=1;//秒杀商品
     }
 
+    public Order() {
+    }
+
     public Long getUid() {
         return uid;
     }

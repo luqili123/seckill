@@ -202,4 +202,10 @@
       where sgid = #{sgid,jdbcType=BIGINT}
     </update>
 
+  <select id="getSecKillDetail" resultType="com.edu.nju.seckill.domain.dto.SecKillGoodsDetail">
+      SELECT sgid, `name`, price, seckill_price, description, image, `count`,
+          remain_count, start_time, end_time, display_time
+      FROM seckill_goods
+      WHERE sgid = #{sgid}
+  </select>
 </mapper>

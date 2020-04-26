@@ -5,6 +5,7 @@ import com.edu.nju.seckill.domain.dto.CarouselItems;
 import com.edu.nju.seckill.domain.dto.GoodsDetailResult;
 import com.edu.nju.seckill.domain.dto.GoodsListResult;
 import com.edu.nju.seckill.domain.dto.GoodsSearchResult;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 
 import java.util.List;
 

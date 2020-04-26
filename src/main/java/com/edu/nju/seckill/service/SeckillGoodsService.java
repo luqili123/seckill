@@ -1,6 +1,7 @@
 package com.edu.nju.seckill.service;
 
 import com.edu.nju.seckill.domain.SeckillGoods;
+import com.edu.nju.seckill.domain.dto.SecKillGoodsDetail;
 import com.edu.nju.seckill.domain.dto.SeckillGoodsList;
 
 import java.util.List;
@@ -34,4 +35,11 @@ public interface SeckillGoodsService {
     SeckillGoodsList getStartSeckillGoods();
 
     boolean updateSeckillGoodsRemainCount(int remainCount,int sgid);
+
+    /**
+     * 获取秒杀商品的信息
+     * @param sgid
+     * @return
+     */
+    SecKillGoodsDetail getSecKillGoodsById(Long sgid);
 }
