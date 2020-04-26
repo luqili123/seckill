@@ -1,272 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d82357e-daaa-4c63-8dad-efc423240c0e" name="Default Changelist" comment="改了设置默认地址功能">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_62.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_auth0_java_jwt_3_8_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_4_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_43_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_3_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_core_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_schema_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spi_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_20.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_models_1_5_20.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_18.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_13_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_18_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_2_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_3_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_3_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_cache_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_2_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_2_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_2_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/LRUCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/Singleton01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/Tedst04.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/pox/Hello.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/pox/HelloInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/pox/HelloProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/pox/Hellomain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/pox/ProxyHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/test01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/test02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/zhaoyue/test03.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/seckill.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application-dev.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/banner.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/SeckillApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/annotation/Mobile.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/common/CommonResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/common/IErrorCode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/common/ResultCode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/component/CorsFilter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/component/GlobalCorsConfig$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/component/GlobalCorsConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/component/JwtInterceptor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/component/UserArgumentResolver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/MvcConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/MyCacheConfig$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/MyCacheConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/RedisConfig$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/RedisConfig$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/RedisConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/SwaggerConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/config/WebSecurityConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/AddressController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/FavoriteController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/GoodsController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/NavigationController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/OrderController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/SeckillGoodsController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/AddressMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/FavoriteMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/GoodsMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/NavigationMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/OrderMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/SeckillGoodsMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/dao/UserMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/Address.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/Favorite.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/Goods.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/Navigation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/Order.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/SeckillGoods.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/AddressOperationParam.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/CarouselItems.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/CurrentUser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/FavoriteResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GetAddressResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GoodsDetailResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GoodsListResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GoodsResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GoodsSearchList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/GoodsSearchResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/NavigationResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/OrderInfoResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/OrderParam.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/OrderSearchResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/OrderStatusResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/SeckillGoodsList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/SeckillGoodsResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/TableItem.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/TableItems.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/UserInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/UserParam.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/domain/dto/UserResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/DataBaseException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/FavExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/GlobalExceptionHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/GoodsNotFoundException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/PasswordErrorException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/PhoneNotFoundException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/PhoneUsedException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/SecKillActivityNotFoundException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/exception/TokenException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/AddressService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/FavoriteService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/GoodsService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/NavigationService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/OrderService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/SeckillGoodsService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/AddressServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/FavoriteServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/GoodsServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/NavigationServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/OrderServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/SeckillGoodsServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/utils/GuardThread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/utils/JwtUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/utils/OrderIdUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/utils/RedisUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/utils/ValidatorUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/validator/MobileValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/LRUCache.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/Singleton01$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/Singleton01$Singleton01in.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/Singleton01.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/Tedst04.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/pox/Hello.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/pox/HelloInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/pox/HelloProxy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/pox/Hellomain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/pox/ProxyHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/test01.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/test02.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/edu/nju/seckill/zhaoyue/test03.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/generator/generatorConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/AddressMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/FavoriteMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/GoodsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/NavigationMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/OrderMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/SeckillGoodsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/UserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/edu/nju/seckill/SeckillApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/edu/nju/seckill/TestRedis.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/edu/nju/seckill/TestUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/controller/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/impl/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/impl/AddressServiceImpl.java" afterDir="false" />
+    <list default="true" id="32bef30e-4b75-4b25-8695-e4eda742ee3b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/component/ScheduleTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/component/ScheduleTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/domain/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/domain/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/domain/dto/OrderParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/domain/dto/OrderParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/edu/nju/seckill/TestOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/edu/nju/seckill/TestOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/edu/nju/seckill/TestRedis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/edu/nju/seckill/TestRedis.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -287,8 +39,9 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Download/apache-maven-3.6.3" />
-        <option name="userSettingsFile" value="D:\Download\apache-maven-3.6.3\conf\settings.xml" />
+        <option name="localRepository" value="D:\maven\repository" />
+        <option name="mavenHome" value="C:/Program Files/Maven/apache-maven-3.5.3" />
+        <option name="userSettingsFile" value="D:\MavenRepository\apache-maven-3.5.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -297,8 +50,13 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1Z6E4bndmCiSkMiOMyOVAWaEZir" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -313,13 +71,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunManager" selected="Spring Boot.SeckillApplication">
     <configuration name="Hellomain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -348,19 +107,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test01" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.edu.nju.seckill.zhaoyue.test01" />
-      <module name="seckill" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.edu.nju.seckill.zhaoyue.pox.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="test02" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.edu.nju.seckill.zhaoyue.test02" />
       <module name="seckill" />
@@ -374,6 +120,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestOrder.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="seckill" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.edu.nju.seckill.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.edu.nju.seckill" />
+      <option name="MAIN_CLASS_NAME" value="com.edu.nju.seckill.TestOrder" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRedis.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="seckill" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.edu.nju.seckill.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.edu.nju.seckill" />
+      <option name="MAIN_CLASS_NAME" value="com.edu.nju.seckill.TestRedis" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SeckillApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="seckill" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.edu.nju.seckill.SeckillApplication" />
@@ -383,10 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestOrder.test" />
+        <item itemvalue="JUnit.TestRedis.test2" />
         <item itemvalue="Application.Hellomain" />
         <item itemvalue="Application.Tedst04" />
         <item itemvalue="Application.test02" />
-        <item itemvalue="Application.test01" />
       </list>
     </recent_temporary>
   </component>
@@ -407,7 +186,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0d82357e-daaa-4c63-8dad-efc423240c0e" name="Default Changelist" comment="" />
+      <changelist id="32bef30e-4b75-4b25-8695-e4eda742ee3b" name="Default Changelist" comment="" />
       <created>1584150952529</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -432,6 +211,11 @@
       <workItem from="1587174739497" duration="10348000" />
       <workItem from="1587221692309" duration="5275000" />
       <workItem from="1587274465091" duration="21072000" />
+      <workItem from="1587880510976" duration="580000" />
+      <workItem from="1587881179092" duration="373000" />
+      <workItem from="1587881625230" duration="826000" />
+      <workItem from="1587886037504" duration="873000" />
+      <workItem from="1587888089782" duration="9285000" />
     </task>
     <task id="LOCAL-00001" summary="改了收藏功能">
       <created>1587195886095</created>
@@ -480,58 +264,78 @@
     <option name="LAST_COMMIT_MESSAGE" value="改了设置默认地址功能" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="486" y="82" key="#com.intellij.ide.util.MemberChooser" timestamp="1587302503476">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="-1374" y="93" key="#com.intellij.ide.util.MemberChooser" timestamp="1587893728102">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="486" y="82" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587302503476" />
-    <state x="467" y="231" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587290837401">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="-1374" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587893728102" />
+    <state x="-1305" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587795598912">
+      <screen x="-1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="-1305" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587795598912" />
+    <state x="-1395" y="261" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587892705512">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="231" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1587290837401" />
+    <state x="-1395" y="261" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587892705512" />
     <state x="262" y="0" key="CommitChangelistDialog2" timestamp="1587351330721">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="262" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587351330721" />
-    <state x="258" y="77" key="DiffContextDialog" timestamp="1587195833260">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="-1950" y="0" width="1536" height="824" key="DiffContextDialog" timestamp="1587890217642">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="258" y="77" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587195833260" />
-    <state width="1144" height="177" key="GridCell.Tab.0.bottom" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="-1950" y="0" width="1536" height="824" key="DiffContextDialog/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587890217642" />
+    <state x="-1337" y="151" key="FileChooserDialogImpl" timestamp="1587881513590">
+      <screen x="-1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="-1337" y="151" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587881513590" />
+    <state width="1493" height="279" key="GridCell.Tab.0.bottom" timestamp="1587900807082">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state width="1144" height="177" key="GridCell.Tab.0.center" timestamp="1587354650219">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807082" />
+    <state width="1493" height="279" key="GridCell.Tab.0.center" timestamp="1587900807082">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587354650219" />
-    <state width="1144" height="177" key="GridCell.Tab.0.left" timestamp="1587354650219">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807082" />
+    <state width="1493" height="279" key="GridCell.Tab.0.left" timestamp="1587900807082">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587354650219" />
-    <state width="1144" height="177" key="GridCell.Tab.0.right" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807082" />
+    <state width="1493" height="279" key="GridCell.Tab.0.right" timestamp="1587900807082">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state width="1144" height="177" key="GridCell.Tab.1.bottom" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807082" />
+    <state width="1493" height="279" key="GridCell.Tab.1.bottom" timestamp="1587900807083">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state width="1144" height="177" key="GridCell.Tab.1.center" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807083" />
+    <state width="1493" height="279" key="GridCell.Tab.1.center" timestamp="1587900807083">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state width="1144" height="177" key="GridCell.Tab.1.left" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807083" />
+    <state width="1493" height="279" key="GridCell.Tab.1.left" timestamp="1587900807083">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state width="1144" height="177" key="GridCell.Tab.1.right" timestamp="1587354650220">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807083" />
+    <state width="1493" height="279" key="GridCell.Tab.1.right" timestamp="1587900807083">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state width="1144" height="177" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587354650220" />
-    <state x="318" y="20" width="994" height="708" key="SettingsEditor" timestamp="1584362918101">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1493" height="279" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587900807083" />
+    <state x="-1562" y="22" width="994" height="708" key="SettingsEditor" timestamp="1587881544848">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="318" y="20" width="994" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584362918101" />
+    <state x="-1562" y="22" key="SettingsEditor/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587881544848" />
     <state x="355" y="116" key="Vcs.Push.Dialog.v2" timestamp="1587351346169">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -540,14 +344,23 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="723" y="291" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1587127477716" />
+    <state x="-1674" y="0" width="1304" height="677" key="dock-window-1" timestamp="1587892754402">
+      <screen x="-1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="-1674" y="0" width="1304" height="677" key="dock-window-1/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587892754402" />
+    <state x="594" y="333" width="1306" height="678" key="dock-window-2" timestamp="1587899801549">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="594" y="333" width="1306" height="678" key="dock-window-2/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587899801549" />
     <state x="53" y="0" width="759" height="728" key="find.popup" timestamp="1587005407471">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="53" y="0" width="759" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1587005407471" />
-    <state x="769" y="170" key="git4idea.merge.GitPullDialog" timestamp="1587351654497">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="-1055" y="192" key="git4idea.merge.GitPullDialog" timestamp="1587888951051">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="769" y="170" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1587351654497" />
+    <state x="-1055" y="192" key="git4idea.merge.GitPullDialog/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1587888951051" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1586445055843">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -563,7 +376,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/edu/nju/seckill/dao/AddressMapper.java</url>
           <line>12</line>
-          <properties class="com.edu.nju.seckill.dao.AddressMapper" method="deleteByPrimaryKey">
+          <properties class="com.edu.nju.seckill.dao.AddressMapper">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />

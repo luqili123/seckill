@@ -62,13 +62,18 @@ public class TestRedis {
     void test2() {
         //redis命令模糊查找
         System.out.print(redisTemplate);
-        Set<String> set= redisTemplate.keys("secGood_"+"*");
-        for (String s : set) {
-            Object sgid=redisUtil.hget(s,"sgid");
-            Object remainCount=redisUtil.hget(s,"remain_count");
-            seckillGoodsService.updateSeckillGoodsRemainCount((int)remainCount,(int)sgid);
-            System.out.println(sgid+" "+remainCount);
+//        Set<String> set= redisTemplate.keys("secGood_"+"*");
+//        for (String s : set) {
+//            Object sgid=redisUtil.hget(s,"sgid");
+//            Object remainCount=redisUtil.hget(s,"remain_count");
+//            seckillGoodsService.updateSeckillGoodsRemainCount((int)remainCount,(int)sgid);
+//            System.out.println(sgid+" "+remainCount);
+//        }
+//        redisUtil.del(set);
+        Set<String> secOrder=redisUtil.getByPattern("secOrder_"+"*");
+        for (String s : secOrder) {
+            Map<Object,Object> order=redisUtil.hmget(s);
+            System.out.println(order.get("gid")+" "+order.get("pay_time"));
         }
-        redisUtil.del(set);
     }
 }

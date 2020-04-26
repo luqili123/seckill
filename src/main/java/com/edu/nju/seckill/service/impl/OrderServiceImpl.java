@@ -6,15 +6,20 @@ import com.edu.nju.seckill.dao.OrderMapper;
 import com.edu.nju.seckill.domain.Address;
 import com.edu.nju.seckill.domain.Goods;
 import com.edu.nju.seckill.domain.Order;
+import com.edu.nju.seckill.domain.dto.NavigationResult;
 import com.edu.nju.seckill.domain.dto.Order2Param;
 import com.edu.nju.seckill.domain.dto.OrderInfoResult;
+import com.edu.nju.seckill.domain.dto.OrderParam;
 import com.edu.nju.seckill.domain.dto.OrderSearchResult;
 import com.edu.nju.seckill.exception.CreateOrderException;
+import com.edu.nju.seckill.exception.DataBaseException;
 import com.edu.nju.seckill.exception.OrderNotFoundException;
 import com.edu.nju.seckill.service.OrderService;
 import com.edu.nju.seckill.utils.GuardThread;
 import com.edu.nju.seckill.utils.OrderIdUtils;
 import com.edu.nju.seckill.utils.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    private Logger logger= LoggerFactory.getLogger(OrderServiceImpl.class);
 
     /**
      * @Description: 通过状态以及关键字搜索订单
@@ -138,6 +145,21 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean insertSecOrder(Map<Object, Object> orderInfo) {
+        Order order=new Order((String)orderInfo.get("oid"),Long.valueOf((Integer)orderInfo.get("uid"))
+                ,Long.valueOf((Integer)orderInfo.get("gid")),(String)orderInfo.get("receiver_phone"),(String)orderInfo.get("receiver_name")
+                ,(String)orderInfo.get("address"),(String)orderInfo.get("postcode"),(Integer)orderInfo.get("count")
+                ,(Double)orderInfo.get("price"),(Date)orderInfo.get("create_time"),(Date)orderInfo.get("pay_time")
+                ,"WeChat",(Date)orderInfo.get("send_time"),(Integer)orderInfo.get("status"),(Integer)orderInfo.get("seckill_flag"));
+        if(orderMapper.insertSelective(order)>0){
+            return true;
+        }
+
+        throw new DataBaseException("秒杀订单写入数据库失败！");
+    }
+
     /**
      * 在redis中插入订单信息
      * @param oid
@@ -215,6 +237,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+
     public List<OrderSearchResult> getOrderList(Long uid, Integer status, String keyword) {
         List<OrderSearchResult> results = orderMapper.selectOrderList(uid, status, keyword);
         if (results.size() > 0)

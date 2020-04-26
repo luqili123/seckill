@@ -117,6 +117,26 @@ public class Order implements Serializable {
         this.seckillFlag=1;//秒杀商品
     }
 
+    public Order(String oid, Long uid, Long gid, String receiverPhone, String receiverName
+            , String address, String postcode, Integer count, Double price, Date createTime
+            , Date payTime, String payType, Date sendTime, Integer status, Integer seckillFlag) {
+        this.oid = oid;
+        this.uid = uid;
+        this.gid = gid;
+        this.receiverPhone = receiverPhone;
+        this.receiverName = receiverName;
+        this.address = address;
+        this.postcode = postcode;
+        this.count = count;
+        this.price = price;
+        this.createTime = createTime;
+        this.payTime = payTime;
+        this.payType = payType;
+        this.sendTime = sendTime;
+        this.status = status;
+        this.seckillFlag = seckillFlag;
+    }
+
     public Order() {
     }
 
