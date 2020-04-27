@@ -38,6 +38,12 @@ public class TestRedis {
     }
 
     @Test
+    void test4() {
+        Long uid = Long.valueOf((Integer)redisUtil.hget("secOrder_8_4_1254316328409108480", "uid"));
+        System.out.println("uid: " + uid);
+    }
+
+    @Test
     void test3() {
         // 创建订单
         Map<String, Object> secOrder = new HashMap<>();
