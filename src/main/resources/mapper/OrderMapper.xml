@@ -275,17 +275,18 @@
     ON a.gid=b.gid
   </select>
     <select id="selectOrderList" resultMap="SearchOrder">
-        SELECT orders.oid, orders.gid, goods.image, goods.name, orders.price, orders.receiver_name,
-           orders.count, orders.status, orders.pay_type
+        SELECT *  FROM (
+        (SELECT orders.oid, orders.gid, goods.image, goods.name, orders.price, orders.receiver_name,
+        orders.count, orders.status, orders.pay_type
         FROM goods
-            RIGHT JOIN
-             (SELECT oid, gid, price, receiver_name, `count`, `status`, pay_type FROM `order`
-             <where>
-                 uid = #{uid}
-                 <choose>
-                     <when test="status neq 5">
-                         AND status =#{status}
-                     </when>
+        RIGHT JOIN
+        (SELECT oid, gid, price, receiver_name, `count`, `status`, pay_type FROM `order`
+        <where>
+            uid = #{uid} AND seckill_flag = 1
+            <choose>
+                <when test="
+                status neq 5">AND status = #{status}
+                </when>
                  </choose>
              </where>
             ) as orders
@@ -294,7 +295,30 @@
             <if test="keyword != null">
                 goods.name LIKE CONCAT('%',#{keyword},'%') OR goods.description LIKE CONCAT('%',#{keyword},'%')
             </if>
+        </where>)
+        UNION
+        (SELECT orders.oid, orders.gid, sg.image, sg.name, orders.price, orders.receiver_name,
+        orders.count, orders.status, orders.pay_type
+        FROM seckill_goods AS sg
+        RIGHT JOIN
+        (SELECT oid, gid, price, receiver_name, `count`, `status`, pay_type FROM `order`
+        <where>
+            uid = #{uid} AND seckill_flag = 2
+            <choose>
+                <when test="
+                status neq 5">
+                    AND status = #{status}
+                </when>
+            </choose>
         </where>
-        ORDER BY orders.oid desc
+        ) as orders
+        ON sg.sgid = orders.gid
+        <where>
+            <if test="keyword != null">
+                sg.name LIKE CONCAT('%',#{keyword},'%') OR sg.description LIKE CONCAT('%',#{keyword},'%')
+            </if>
+        </where>)
+        ) AS tmp
+        ORDER BY tmp.oid desc
     </select>
 </mapper>
