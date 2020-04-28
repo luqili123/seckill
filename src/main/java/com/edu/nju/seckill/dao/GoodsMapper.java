@@ -33,9 +33,9 @@ public interface GoodsMapper {
 
     GoodsDetailResult getGoodDetail(@Param("gid") Long gid);
 
-    List<GoodsSearchResult> searchGoodsForIndex(String keyword);
+    List<GoodsSearchResult> searchGoodsForIndex(@Param("keyword") String keyword);
 
-    List<String> getGoodsIndexTips(String keyword);
+    List<String> getGoodsIndexTips(@Param("keyword") String keyword);
 
     int updateGoodsCount(Long gid, Integer num);
 }
