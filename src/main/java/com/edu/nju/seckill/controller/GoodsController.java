@@ -72,7 +72,8 @@ public class GoodsController {
 
     @ApiOperation(value = "商品搜索-获取首页商品搜索框的搜索提示")
     @GetMapping({"/tips/{keyword}", "/tips"})
-    public CommonResult<Map<String, List<String>>> getGoodsIndexTips(@PathVariable(required = false) String keyword) {
+    public CommonResult<Map<String, List<String>>> getGoodsIndexTips(@PathVariable(value = "keyword", required = false)
+                                                                                 String keyword) {
         List<String> tips = goodsService.getGoodsIndexTips(keyword);
         Map<String, List<String>> res = new HashMap<>();
         res.put("results", tips);

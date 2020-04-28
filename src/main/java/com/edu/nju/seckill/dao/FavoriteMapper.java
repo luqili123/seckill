@@ -9,21 +9,21 @@ import java.util.List;
 
 @Repository
 public interface FavoriteMapper {
-    int deleteByPrimaryKey(Integer fid);
+    int deleteByPrimaryKey(@Param("fid") Integer fid);
 
-    int insert(Favorite record);
+    int insert(@Param("record") Favorite record);
 
-    int insertSelective(Favorite record);
+    int insertSelective(@Param("record") Favorite record);
 
-    Favorite selectByPrimaryKey(Integer fid);
+    Favorite selectByPrimaryKey(@Param("fid") Integer fid);
 
-    int updateByPrimaryKeySelective(Favorite record);
+    int updateByPrimaryKeySelective(@Param("record") Favorite record);
 
-    int updateByPrimaryKey(Favorite record);
+    int updateByPrimaryKey(@Param("record") Favorite record);
 
     int addFavorite(@Param("uid") long uid, @Param("gid") long gid);
 
-    int deleteFavorite(Integer fid);
+    int deleteFavorite(@Param("fid") Integer fid);
     /**
     * @Description: 通过uid gid查询收藏夹内是否已有该商品
     * @Param: [uid, gid]
@@ -35,7 +35,7 @@ public interface FavoriteMapper {
 
     List<FavoriteResult> searchFavoriteByKeyword(@Param("uid")long uid, @Param("keyword")String keyword);
 
-    Favorite getFavorite(Long uid, Long gid);
+    Favorite getFavorite(@Param("uid") Long uid, @Param("gid") Long gid);
 
-    int deleteFavByGid(Long uid, Long gid);
+    int deleteFavByGid(@Param("uid") Long uid, @Param("gid") Long gid);
 }

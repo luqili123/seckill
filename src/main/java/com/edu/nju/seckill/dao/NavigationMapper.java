@@ -4,6 +4,7 @@ import com.edu.nju.seckill.domain.Navigation;
 
 import com.edu.nju.seckill.domain.dto.NavigationResult;
 import com.edu.nju.seckill.domain.dto.TableItem;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface NavigationMapper {
 
     List<NavigationResult> selectAll();
 
-    String selectByType(String type);
+    String selectByType(@Param("type") String type);
 
     List<TableItem> selectTableItems();
 }
